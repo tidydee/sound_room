@@ -1,0 +1,14 @@
+<h1> <%= @room.name %> </h1>
+
+
+<div>
+<h2>Room's Playlist</h2>
+ 
+<h3>Add a new song to the playlist</h3>
+<% @songs.each do |song| %>
+  <%= song.url %><br />
+<% end %>
+</div>
+
+
+
