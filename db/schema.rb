@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423034020) do
+ActiveRecord::Schema.define(version: 20140424222244) do
 
   create_table "rooms", force: true do |t|
     t.string   "name"
@@ -28,15 +28,17 @@ ActiveRecord::Schema.define(version: 20140423034020) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "room_id"
+    t.integer  "soundcloud_track_id"
   end
 
   create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "username"
-    t.string   "password"
-    t.string   "token"
+    t.string   "soundcloud_access_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "soundcloud_user_id"
+    t.string   "soundcloud_username"
+    t.string   "soundcloud_refresh_token"
+    t.datetime "soundcloud_expired_at"
   end
 
 end
