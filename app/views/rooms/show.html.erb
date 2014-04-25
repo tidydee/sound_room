@@ -9,6 +9,32 @@
   <%= song.url %><br />
 <% end %>
 </div>
+<br />
+
+  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;">
+    <ol>  
+      <li>www.url01.com <%=button_to(songs_path(@room), method: "post") %></li>
+      <li>www.url02.com <button>Add</button></li>
+      <li>www.url03.com <button>Add</button></li>
+      <li>www.url04.com <button>Add</button></li>
+      <li>www.url05.com <button>Add</button></li>
+      <li>www.url06.com <button>Add</button></li>
+      <li>www.url07.com <button>Add</button></li>
+    </ol>    
+  </div>
+
+  =button_to('Send Notifications' , send_notifications_event_path(params), :action => 'send_notifications' , :class => 'button')
+
+  <%= form_tag({controller: "songs", action: "create"}, method: "post") do %>
+      <%= label_tag("Add your favourite song(s)") %>
+        <ol>  
+          <li>www.url01.com</li>
+        
+        </ol>  
+
+      <%= submit_tag("Add") %>
+    <% end %>
+
 
 
 
