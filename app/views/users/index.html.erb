@@ -1,4 +1,69 @@
+<<<<<<< HEAD
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script src="https://w.soundcloud.com/player/api.js"></script>
+
+<script>
+	
+	SC.initialize({
+	  client_id: '173c1924dc4e55b0db3b89a45bb71561'
+	});
+
+
+	function getUserFavoriteTracks() {
+		SC.get('/users/3206/favorites', function(favorites) {
+				for (var i=0; i<favorites.length; i++) {
+					var trackTitle = favorites[i].title;
+					var trackId = favorites[i].id;
+					var trackStreamUrl = favorites[i].stream_url;
+					$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+">"+trackTitle+"</p>")
+				}
+				$('.track').click(function(e) {
+					console.log('this click?');
+					playTrack($(this).data('track-id'));
+				});	
+      });
+	};
+
+
+    
+   function playTrack(id) {
+   	console.log(id);
+    SC.whenStreamingReady(function() {
+     	
+     	var sound = SC.stream(id, { autoPlay: false }, function(sound){
+     		console.log(sound);
+      	sound.play();
+    	});
+
+     	$('#pause').click(function(e){
+     			sound.pause();
+     	});
+
+  	});
+	}
+
+	getUserFavoriteTracks();
+
+</script>
+
+
+
 <h1>User's Page</h1>
+<div id="play">
 
+	Play
 
+</div>
+
+<div id="pause">
+
+	Pause
+
+</div>
+
+<div id="favorite_tracks">
+
+	<!-- document.write("<p>"+ +"</p>") -->
+
+</div>
 

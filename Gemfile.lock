@@ -73,6 +73,8 @@ GEM
     multi_json (1.9.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+<<<<<<< HEAD
+=======
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
       jwt (~> 0.1.8)
@@ -89,6 +91,7 @@ GEM
       omniauth (~> 1.2)
     omniauth-soundcloud (1.0.1)
       omniauth-oauth2 (~> 1.1.0)
+>>>>>>> master
     polyglot (0.3.4)
     populator (1.0.0)
     pry (0.9.12.6)

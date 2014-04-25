@@ -13,7 +13,13 @@
 require 'populator'
 require 'faker'
 
-Song.populate(10) do |song|
+
+User.populate(1) do |user|
+	user.email = Faker::Internet.email
+	user.username = Faker::Internet.user_name
+end
+
+Song.populate(1) do |song|
   song.user_id = 1
   song.title = Faker::Commerce.color
   song.artist = Faker::Name.first_name
@@ -21,3 +27,6 @@ Song.populate(10) do |song|
   song.url = Faker::Internet.url
   song.room_id = 1
 end
+
+
+# Song.create(title:'great_song', url:'www.yahoo.com')
