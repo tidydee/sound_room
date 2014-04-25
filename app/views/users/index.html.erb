@@ -1,3 +1,4 @@
+
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 
@@ -28,8 +29,8 @@
    function playTrack(id) {
    	console.log(id);
     SC.whenStreamingReady(function() {
-     	
-     	var sound = SC.stream(id, { autoPlay: false }, function(sound){
+     
+	     	var sound = SC.stream(id, { autoPlay: false }, function(sound){
      		console.log(sound);
       	sound.play();
     	});
