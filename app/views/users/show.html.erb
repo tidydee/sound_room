@@ -1,0 +1,10 @@
+<h1>User's Dashboard</h1>
+
+
+<div style="width:250px; border:solid 2px;">
+  <h3>Public Rooms Available</h3>
+  <% Room.all.each do |room| %>
+    <%= link_to room.name, room_path(room) %><br />
+  <% end %>
+</div><br />
+
