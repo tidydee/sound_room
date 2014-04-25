@@ -10,21 +10,38 @@
 
 	function getUserFavoriteTracks() {
 		SC.get('/users/3206/favorites', function(favorites) {
-        var trackId = favorites[0].id;
-        console.log(trackId);
-        playTrack(trackId);
+				for (var i=0; i<favorites.length; i++) {
+					var trackTitle = favorites[i].title;
+					var trackId = favorites[i].id;
+					var trackStreamUrl = favorites[i].stream_url;
+					$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+">"+trackTitle+"</p>")
+				}
+				$('.track').click(function(e) {
+					console.log('this click?');
+					playTrack($(this).data('track-id'));
+				});	
       });
 	};
 
-	getUserFavoriteTracks();
+	// $('.track').click(playTrack(document.getElementByClass('track').getAttribute('data-track-id')));
+	
+
+
+	// $('.track').on('click', function(e){
+	// 	console.log('init');
+	// 	playTrack(e.data('track-id'))
+	// });
     
    function playTrack(id) {
+   	console.log(id);
     SC.whenStreamingReady(function() {
      	var sound = SC.stream(id, { autoPlay: false }, function(sound){
       	sound.play();
     	});
   	});
 	}
+
+	getUserFavoriteTracks();
 
 </script>
 
@@ -37,7 +54,7 @@
 
 </div>
 
-<div id="favorite-tracks">
+<div id="favorite_tracks">
 
 	<!-- document.write("<p>"+ +"</p>") -->
 
