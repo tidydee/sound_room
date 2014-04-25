@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @songs = Song.where(room_id: @room.id)
+    @songs = @room.songs
   end
 
   def create

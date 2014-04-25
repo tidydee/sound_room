@@ -7,6 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user %>
+  Logged in as <%=current_user[:soundcloud_username]%>
+  <%= link_to '/auth/logout', id: "sc-signout" do %>
+    <%= image_tag "btn-disconnect-s.png" %>
+  <% end %>
+<% else %>
+  <%= link_to '/auth/soundcloud', id: "sc-signin" do %>
+    <%= image_tag "btn-connect-sc-s.png" %>
+  <% end %>
+<% end %>
 
 <%= yield %>
 
