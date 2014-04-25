@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
   def logout
     @current_user = session[:user_id] = nil
     redirect_to :root
+    # render 'users/index.html.erb'
   end
 
   protected
