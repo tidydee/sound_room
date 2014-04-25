@@ -23,21 +23,21 @@
       });
 	};
 
-	// $('.track').click(playTrack(document.getElementByClass('track').getAttribute('data-track-id')));
-	
 
-
-	// $('.track').on('click', function(e){
-	// 	console.log('init');
-	// 	playTrack(e.data('track-id'))
-	// });
     
    function playTrack(id) {
    	console.log(id);
     SC.whenStreamingReady(function() {
+     	
      	var sound = SC.stream(id, { autoPlay: false }, function(sound){
+     		console.log(sound);
       	sound.play();
     	});
+
+     	$('#pause').click(function(e){
+     			sound.pause();
+     	});
+
   	});
 	}
 
@@ -51,6 +51,12 @@
 <div id="play">
 
 	Play
+
+</div>
+
+<div id="pause">
+
+	Pause
 
 </div>
 
