@@ -1,5 +1,7 @@
 <h1>User's Page</h1>
 
+
+
 <% if current_user %>
   Logged in as <%=current_user[:soundcloud_username]%>
   <%= link_to 'logout','/auth/logout' %>

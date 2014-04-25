@@ -33,6 +33,8 @@ gem 'faker'
 gem 'omniauth'
 gem 'omniauth-soundcloud', '~> 1.0.0'
 
+gem 'soundcloud'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

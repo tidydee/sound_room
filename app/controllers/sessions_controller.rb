@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     session[:user_id] = @current_user.id
     if @current_user
       redirect_to :root
+      
     else
       redirect_to [:new, :registration]
     end
