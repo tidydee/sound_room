@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     @current_user = User.authenticate_via_soundcloud auth_hash_params
     session[:user_id] = @current_user.id
     if @current_user
-      redirect_to :root
+      redirect_to :users
 
     else
       redirect_to [:new, :registration]
