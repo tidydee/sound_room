@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   	# @gsc = GetSoundCloud.new(3206)
     @users = User.all
     @room = Room.new
-    @room = Room.all
+    @rooms = Room.all
   end
 
   def create
