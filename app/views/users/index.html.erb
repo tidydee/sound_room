@@ -67,3 +67,27 @@
 
 </div>
 
+<!--  -->
+
+<!-- Create a new room -->
+<h1>Create New Room</h1>
+<%= form_for @room do |r| %>
+    <%= r.label :name %>
+    <%= r.text_field :name %><br />
+    <%= r.submit%>
+  <%end%>
+
+  <!-- List of my rooms -->
+<h2>List of my Rooms</h2>
+<% Room.all.each do |room| %>
+  <%= link_to room.name, room_path(room) %><br />
+<% end %>
+
+
+
+
+
+
+
+
+

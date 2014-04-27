@@ -13,11 +13,17 @@ class RoomsController < ApplicationController
     @songs = @room.songs
   end
 
+  def destroy
+    @room = Room.find(params[:id])
+    @room.destroy
+    redirect_to users_path 
+  end
+
   def create
     @room = Room.new(room_params)
 
     if @room.save
-      redirect_to rooms_path, notice: "#{@room.name} was submitted successfully!"
+      redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
     else
       render :new
     end

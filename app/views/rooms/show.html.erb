@@ -1,5 +1,7 @@
 <h1> <%= @room.name %> </h1>
 
+<%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+
 
 <div>
 <h2>Room's Playlist</h2>

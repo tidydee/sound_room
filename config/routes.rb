@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :songs
   
   resources :rooms do
-    resources :songs, only: [:create]
+    resources :songs, only: [:create, :destroy]
   end
 
   end
