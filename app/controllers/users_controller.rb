@@ -4,6 +4,26 @@ class UsersController < ApplicationController
   def index
   	# @gsc = GetSoundCloud.new(3206)
     @users = User.all
+    @room = Room.new
+    @room = Room.all
+  end
+
+  def create
+    @room = Room.new(room_params)
+
+    if @room.save
+      redirect_to rooms_path, notice: "#{@room.name} was submitted successfully!"
+    else
+      render :new
+    end
+  end
+
+  protected
+
+  def room_params
+    params.require(:room).permit(
+      :name
+    )
   end
 
 end

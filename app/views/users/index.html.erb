@@ -67,3 +67,18 @@
 
 </div>
 
+<!-- Create a new room -->
+<h1>Create New Room</h1>
+<%= form_for @room do |r| %>
+    <%= r.label :name %>
+    <%= r.text_field :name %><br />
+    <%= r.submit%>
+  <%end%>
+
+<!-- List of my rooms -->
+<h2>List of my Rooms</h2>
+
+
+
+
+
