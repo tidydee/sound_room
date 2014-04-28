@@ -41,6 +41,8 @@ gem 'soundcloud'
 # Use unicorn as the app server
 # gem 'unicorn'
 
+gem 'foundation-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
