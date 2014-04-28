@@ -10,20 +10,20 @@
 
 
 	function getUserFavoriteTracks() {
-		SC.get('/users/3206/favorites', function(favorites) {
-				for (var i=0; i<favorites.length; i++) {
-					var trackTitle = favorites[i].title;
-					var trackId = favorites[i].id;
-					var trackStreamUrl = favorites[i].stream_url;
-					$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+">"+trackTitle+"</p>")
-				}
-				$('.track').click(function(e) {
-					console.log('this click?');
-					playTrack($(this).data('track-id'));
-				});	
-      });
+		var soundcloud_id =  <%= current_user.soundcloud_user_id %>
+		SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
+			for (var i=0; i<favorites.length; i++) {
+				var trackTitle = favorites[i].title;
+				var trackId = favorites[i].id;
+				var trackStreamUrl = favorites[i].stream_url;
+				$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+">"+trackTitle+"</p>")
+			}
+			$('.track').click(function(e) {
+				console.log('this click?');
+				playTrack($(this).data('track-id'));
+			});	
+    });
 	};
-
 
     
    function playTrack(id) {
@@ -44,6 +44,8 @@
 
 	getUserFavoriteTracks();
 
+
+
 </script>
 
 
@@ -61,15 +63,13 @@
 
 </div>
 
+
 <div id="favorite_tracks">
 
-	<!-- document.write("<p>"+ +"</p>") -->
 
 </div>
 
-<!--  -->
 
-<!-- Create a new room -->
 <h1>Create New Room</h1>
 <%= form_for @room do |r| %>
     <%= r.label :name %>
