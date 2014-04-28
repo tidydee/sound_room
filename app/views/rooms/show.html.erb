@@ -3,15 +3,15 @@
 <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
 
 
-<div>
+
 <h2>Room's Playlist</h2>
  
-<h3>Add a new song to the playlist</h3>
-<% @songs.each do |song| %>
-  <%= song.url %><br />
-<% end %>
-</div>
-<br />
+<% if current_user %>
+
+  <h3>Add a new song to the playlist</h3>
+  <% @songs.each do |song| %>
+    <%= song.url %><br />
+  <% end %><br />
 
   <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;">
     <ol>  
@@ -24,6 +24,8 @@
       <li>www.url07.com <button>Add</button></li>
     </ol>    
   </div>
+
+<% end %>
 
  
 

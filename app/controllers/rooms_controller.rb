@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
     else
-      render :new
+      render "users/index"
     end
   end
 

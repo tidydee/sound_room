@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
+before_filter :authorize?
 
+  def authorize?
+    if current_user
+    else
+      flash[:error] = "You must be signed to access Dashboard!"
+      redirect_to :root
+    end
+  end
 
   def index
   	# @gsc = GetSoundCloud.new(3206)

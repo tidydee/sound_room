@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    has_many :songs
+  has_many :songs
 
   class << self
     def authenticate_via_soundcloud(auth)

@@ -67,14 +67,30 @@
 
 </div>
 
-<!--  -->
-
+<!-- Room Create Error Handling -->
+<div>
+<%= form_for @room do |f| %>
+  <div class="error-message">
+    <% if @room.errors.any? %>
+      <div>
+        <div class="error-message-header"> 
+          <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
+        </div>
+  </div>
+      <ul>
+        <% @room.errors.full_messages.each do |msg| %>
+          <li class="error-message-body"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <%end%>
+</div>
 <!-- Create a new room -->
 <h1>Create New Room</h1>
-<%= form_for @room do |r| %>
-    <%= r.label :name %>
-    <%= r.text_field :name %><br />
-    <%= r.submit%>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %><br />
+    <%= f.submit%>
   <%end%>
 
   <!-- List of my rooms -->
