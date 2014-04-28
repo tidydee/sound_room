@@ -1,6 +1,10 @@
 
-<script src="http://connect.soundcloud.com/sdk.js"></script>
-<script src="https://w.soundcloud.com/player/api.js"></script>
+<head>
+  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.jplayer.min.js"></script> -->
+	<script src="http://connect.soundcloud.com/sdk.js"></script>
+	<script src="https://w.soundcloud.com/player/api.js"></script>
+</head>
 
 <script>
 	
@@ -16,7 +20,7 @@
 				var trackTitle = favorites[i].title;
 				var trackId = favorites[i].id;
 				var trackStreamUrl = favorites[i].stream_url;
-				$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+">"+trackTitle+"</p>")
+				$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+" data-track-order="+i+">"+trackTitle+"</p>")
 			}
 			$('.track').click(function(e) {
 				console.log('this click?');
@@ -32,13 +36,18 @@
      
 	     	var sound = SC.stream(id, { autoPlay: false }, function(sound){
      		console.log(sound);
-      	sound.play();
+      	sound.play({
+      		onfinish: function(){
+      			alert('track_finished');
+      		}
+      	});
     	});
-
      	$('#pause').click(function(e){
      			sound.pause();
      	});
-
+     	$('#play').click(function(e){
+     			sound.resume();
+     	});
   	});
 	}
 
@@ -51,16 +60,22 @@
 
 
 <h1>User's Page</h1>
-<div id="play">
 
-	Play
+
+<div id="player">
 
 </div>
 
+<div id="play">
+	<emp>Play</emp>
+</div>
+
 <div id="pause">
+	<emp>Pause</emp>
+</div>
 
-	Pause
-
+<div id="stop">
+	<emp>Stop</emp>
 </div>
 
 
