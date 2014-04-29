@@ -1,10 +1,6 @@
 
-<head>
-  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="/js/jquery.jplayer.min.js"></script> -->
-	<script src="http://connect.soundcloud.com/sdk.js"></script>
-	<script src="https://w.soundcloud.com/player/api.js"></script>
-</head>
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script src="https://w.soundcloud.com/player/api.js"></script>
 
 <script>
 	
@@ -16,40 +12,75 @@
 	function getUserFavoriteTracks() {
 		var soundcloud_id =  <%= current_user.soundcloud_user_id %>
 		SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
+			var urls = [];
 			for (var i=0; i<favorites.length; i++) {
 				var trackTitle = favorites[i].title;
 				var trackId = favorites[i].id;
-				var trackStreamUrl = favorites[i].stream_url;
-				$('#favorite_tracks').append("<p class='track' data-track-id="+trackId+" data-track-order="+i+">"+trackTitle+"</p>")
+				var trackUrl = favorites[i].permalink_url;
+				// var trackStreamUrl = favorites[i].stream_url;
+				
+				// $('#favorite_tracks').append("<p class='track' data-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+">"+trackTitle+"</p>");
+				urls.push(trackUrl);
 			}
+
+			startPlayer(urls);
+
 			$('.track').click(function(e) {
 				console.log('this click?');
-				playTrack($(this).data('track-id'));
+				console.log($(this).data('track-url'));
 			});	
     });
 	};
 
     
-   function playTrack(id) {
-   	console.log(id);
-    SC.whenStreamingReady(function() {
+   // function playTrack(id) {
+   // 	console.log(id);
+   //  SC.whenStreamingReady(function() {
      
-	     	var sound = SC.stream(id, { autoPlay: false }, function(sound){
-     		console.log(sound);
-      	sound.play({
-      		onfinish: function(){
-      			alert('track_finished');
-      		}
-      	});
-    	});
-     	$('#pause').click(function(e){
-     			sound.pause();
-     	});
-     	$('#play').click(function(e){
-     			sound.resume();
-     	});
-  	});
+	  //    	var sound = SC.stream(id, { autoPlay: false }, function(sound){
+   //   		console.log(sound);
+   //    	sound.play(
+   //    	{
+   //    		onfinish: function(){
+   //    			alert('track_finished');
+   //    		}
+   //    	}
+   //    	);
+   //  	});
+   //   	$('#pause').click(function(e){
+   //   			sound.pause();
+   //   	});
+   //   	$('#play').click(function(e){
+   //   			sound.resume();
+   //   	});
+  	// });
+	// }
+
+
+  (function() {
+      var script = document.createElement("script");
+      
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = "//sd.toneden.io/production/toneden.loader.js"
+      
+      var entry = document.getElementsByTagName("script")[0];
+      entry.parentNode.insertBefore(script, entry);
+  }());
+  
+  function startPlayer(urls){
+  	console.log(urls);
+	  ToneDenReady = window.ToneDenReady || [];
+	  ToneDenReady.push(function() {
+	      // Modify the dom and urls parameters to position
+	      // your player and select tracks/sets/artists to play.
+	      ToneDen.player.create({
+	          dom: "#player",
+	          urls: urls
+	      });
+	  });
 	}
+
 
 	getUserFavoriteTracks();
 
@@ -59,14 +90,12 @@
 
 
 
-<h1>User's Page</h1>
-
+<h1><%= current_user.soundcloud_username %>'s Page</h1>
 
 <div id="player">
-
 </div>
 
-<div id="play">
+<!-- <div id="play">
 	<emp>Play</emp>
 </div>
 
@@ -77,7 +106,7 @@
 <div id="stop">
 	<emp>Stop</emp>
 </div>
-
+ -->
 
 <div id="favorite_tracks">
 
