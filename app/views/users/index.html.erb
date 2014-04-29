@@ -53,50 +53,61 @@
 
 	getUserFavoriteTracks();
 
-
-
 </script>
 
 
+  <div class="large-9 columns">
+    
+    <h1>User's Page</h1>
 
-<h1>User's Page</h1>
+    <div id="player">
+    </div>
 
+    <div id="play">
+    	<emp>Play</emp>
+    </div>
 
-<div id="player">
+    <div id="pause">
+    	<emp>Pause</emp>
+    </div>
 
-</div>
-
-<div id="play">
-	<emp>Play</emp>
-</div>
-
-<div id="pause">
-	<emp>Pause</emp>
-</div>
-
-<div id="stop">
-	<emp>Stop</emp>
-</div>
-
-
-<div id="favorite_tracks">
+    <div id="stop">
+    	<emp>Stop</emp>
+    </div>
 
 
-</div>
+    <div id="favorite_tracks">
+    </div>
+
+  </div>  
+
+  <aside class="large-3 columns">
+
+      <ul class="side-nav">
+        <h4>Create New Room</h4>
+          <%= form_for @room do |r| %>
+          <%= r.label :name %>
+          <%= r.text_field :name %><br />
+          <%= r.submit%>
+        <%end%>
+      </ul>
+
+  </aside>
+
+    
+
+  <aside class="large-3 columns"> 
+    <h4>List of my Rooms</h4>
+
+    <% Room.all.each do |room| %>
+      <%= link_to room.name, room_path(room) %><br />
+    <% end %>
+
+  </aside>
+
+  
 
 
-<h1>Create New Room</h1>
-<%= form_for @room do |r| %>
-    <%= r.label :name %>
-    <%= r.text_field :name %><br />
-    <%= r.submit%>
-  <%end%>
-
-  <!-- List of my rooms -->
-<h2>List of my Rooms</h2>
-<% Room.all.each do |room| %>
-  <%= link_to room.name, room_path(room) %><br />
-<% end %>
 
 
 

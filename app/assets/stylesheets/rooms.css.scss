@@ -1,3 +1,27 @@
 // Place all the styles related to the Rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$body-bg: url('space-clouds.jpg');
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+// .wrapper {
+//   min-height: 100%;
+//   height: auto !important;
+//   height: 100%;
+//   margin: 0 auto -155px;
+// }
+
+// .footer, .push {
+//   height: 155px; /* .push must be the same height as .footer */
+// }
+  
+h1 {
+  color: white;
+  font-size: 4em;
+}
