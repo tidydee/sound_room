@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 
+  # current_url = request.original_url
   
   def create
     @current_user = User.authenticate_via_soundcloud auth_hash_params

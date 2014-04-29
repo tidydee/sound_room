@@ -21,9 +21,12 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
+    @room.user_id = current_user.id if current_user
 
     if @room.save
-      redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
+      flash[:success] = "Room Successfully Created"
+      redirect_to @room
+      # redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
     else
       render "users/index"
     end

@@ -1,6 +1,9 @@
 <h1> <%= @room.name %> </h1>
 
-<%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+
+<% if @room.user_id == session[:user_id] %>
+  <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+<% end %>
 
 
 
@@ -26,7 +29,7 @@
   </div>
 
 <% else %>
-<h3>Please sign in to add to the playlist.</h3>
+<h5 style='color:white; background-color: orange; width: 100%; border: solid orange 3px;'>Please sign in to add to the playlist.</h5>
 
 <% end %>
 

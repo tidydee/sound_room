@@ -59,7 +59,9 @@
 
 
 
-<h1>User's Page</h1>
+<h1><%= current_user.soundcloud_username%>'s Dashboard</h1>
+<%= request.original_url %>
+<hr>
 
 
 <div id="player">
@@ -78,11 +80,9 @@
 	<emp>Stop</emp>
 </div>
 
+<hr>
 
-<div id="favorite_tracks">
-
-
-</div>
+<div id="favorite_tracks"></div>
 
 <!-- Room Create Error Handling -->
 <div>
@@ -102,6 +102,7 @@
     </div>
   <%end%>
 </div>
+<hr>
 <!-- Create a new room -->
 
 <h1>Create New Room</h1>
@@ -110,13 +111,15 @@
     <%= f.text_field :name %><br />
     <%= f.submit%>
   <%end%>
+  <hr>
 
   <!-- List of my rooms -->
 <h2>List of my Rooms</h2>
 <% Room.all.each do |room| %>
   <%= link_to room.name, room_path(room) %><br />
 <% end %>
-
+<hr>
+ 
 
 
 
