@@ -40,10 +40,15 @@
 
 // We use these to control various global styles
 // $body-bg: #fff;
+$body-bg: rgba(255,255,255,0);
 // $body-font-color: #222;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
+
+// CUSTOM
+// $body-bg: #fff;
+// $body-font-color: #222;
 
 // We use this to control font-smoothing
 // $font-smoothing: antialiased;
@@ -1032,7 +1037,7 @@
 // SWITCH
 //
 
-// $include-html-form-classes: $include-html-classes;
+// $include-html-form-classes: $include-html-classes;p
 
 // Controlling border styles and background colors for the switch container
 // $switch-border-color: scale-color(#fff, $lightness: -20%);
@@ -1097,6 +1102,16 @@
 // These are for controlling the display and margin of tables
 // $table-display: table-cell;
 // $table-margin-bottom: rem-calc(20);
+
+
+//
+// My Styles 
+//
+
+$table-border-style: solid;
+$table-border-size: 3px;
+$table-border-color: #000;
+$table-overflow: scroll;
 
 //
 // TABS

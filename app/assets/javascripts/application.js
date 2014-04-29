@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require jquery.animate-colors-min
+//= require jquery.transit.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
