@@ -84,52 +84,63 @@
 
 	getUserFavoriteTracks();
 
-
-
 </script>
 
 
-
-<h1><%= current_user.soundcloud_username %>'s Page</h1>
-
-<div id="player">
-</div>
-
-<!-- <div id="play">
-	<emp>Play</emp>
-</div>
-
-<div id="pause">
-	<emp>Pause</emp>
-</div>
-
-<div id="stop">
-	<emp>Stop</emp>
-</div>
- -->
-
-<div id="favorite_tracks">
+  <div class="large-9 columns">
+    
+    <h1>User's Page</h1>
 
 
-</div>
+    <h1><%= current_user.soundcloud_username%>'s Dashboard</h1>
+    <div id="player"></div>
 
+    <%= request.original_url %>
+    <hr>
 
-<h1>Create New Room</h1>
-<%= form_for @room do |r| %>
-    <%= r.label :name %>
-    <%= r.text_field :name %><br />
-    <%= r.submit%>
-  <%end%>
+    <div id="favorite_tracks">
+    </div>
 
-  <!-- List of my rooms -->
-<h2>List of my Rooms</h2>
-<% Room.all.each do |room| %>
-  <%= link_to room.name, room_path(room) %><br />
-<% end %>
+  </div>  
 
+  <aside class="large-3 columns">
 
+      <ul class="side-nav">
 
+        <%= form_for @room do |f| %>
+        <!-- Room Create Error Handling -->
+        <div class="error-message">
+          <% if @room.errors.any? %>
+            <div class="error-message-header"> 
+              <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
+            </div>
+            <ul>
+              <% @room.errors.full_messages.each do |msg| %>
+                <li class="error-message-body"><%= msg %></li>
+              <% end %>
+            </ul>  
+          <%end%>
+        </div>
+        <hr>
+        <!-- Create a new room -->
 
+          <h4>Create New Room</h4>
+
+            <%= f.label :name %>
+            <%= f.text_field :name %><br />
+            <%= f.submit%>
+        <%end%>  
+      </ul>
+
+  </aside>
+
+  <aside class="large-3 columns"> 
+    <h4>List of my Rooms</h4>
+      <% @rooms.each do |room| %>
+      <%= link_to room.name, room_path(room) %><br />
+    <% end %>
+
+  </aside>
 
 
 

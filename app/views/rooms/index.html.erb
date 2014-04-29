@@ -1,5 +1,6 @@
 <h1>Rooms Index Page</h1>
 
-<% Room.all.each do |room| %>
+<% @rooms.each do |room| %>
   <%= link_to room.name, room_path(room) %><br />
 <% end %>
+
