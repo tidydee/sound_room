@@ -1,61 +1,54 @@
 <h1> <%= @room.name %> </h1>
 
-<%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+<!-- Only a User who created a room, can Delete a Room -->
+<% if @room.user_id == session[:user_id] %>
+  <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+<% end %>
 
-  <div>
+<div>
+  <% if current_user %>
     <h4>Room's Playlist</h4>
     <p>Add a new song to the playlist</p>
-      <% @songs.each do |song| %>
-        <%= song.url %><br />
-       <% end %>
-  </div>
+    <% @songs.each do |song| %>
+      <%= song.url %><br />
+    <% end %>
+  <% else %>
+    <h5 style='color:white; background-color: orange; width: 100%; border: solid orange 3px;'>Please sign in to add to the playlist.</h5>
+  <% end %><br />
+</div>
 
-  <table>
-    <thead>
-      <tr>
-        <th width="200">Tracks from Soundcloud</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>SoundCloud track</td>
-        <td>
-          <a href="#" class="button tiny">Add</a>
-        </td>
-      </tr>
-      <tr>
-        <td>some other soundCloud track</td>
-        <td>
-          <a href="#" class="button tiny">Add</a>
-        </td>
-      </tr>
-      <tr>
-        <td>This is good trax</td>
-        <td>
-          <a href="#" class="button tiny">Add</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<table>
+  <thead>
+    <tr>
+      <th width="200">Tracks from Soundcloud</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SoundCloud track</td>
+      <td>
+        <a href="#" class="button tiny">Add</a>
+      </td>
+    </tr>
+    <tr>
+      <td>some other soundCloud track</td>
+      <td>
+        <a href="#" class="button tiny">Add</a>
+      </td>
+    </tr>
+    <tr>
+      <td>This is good trax</td>
+      <td>
+        <a href="#" class="button tiny">Add</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
 
- <!--  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;">
-    <ol>  
-      <li>www.url01.com <%=button_to(songs_path(@room), method: "post") %></li>
-      <li>www.url02.com <button>Add</button></li>
-      <li>www.url03.com <button>Add</button></li>
-      <li>www.url04.com <button>Add</button></li>
-      <li>www.url05.com <button>Add</button></li>
-      <li>www.url06.com <button>Add</button></li>
-      <li>www.url07.com <button>Add</button></li>
-    </ol>    
-  </div>
- -->
- 
 
- 
 
 
 
