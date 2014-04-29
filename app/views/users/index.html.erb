@@ -115,16 +115,11 @@
 
   <!-- List of my rooms -->
 <h2>List of my Rooms</h2>
-<% Room.all.each do |room| %>
+<% @rooms.each do |room| %>
   <%= link_to room.name, room_path(room) %><br />
 <% end %>
 <hr>
  
-
-
-
-
-
 
 
 

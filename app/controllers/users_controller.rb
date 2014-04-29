@@ -13,14 +13,20 @@ before_filter :authorize?
   	# @gsc = GetSoundCloud.new(3206)
     @users = User.all
     @room = Room.new
-    @rooms = Room.all
+    @rooms = Room.all.sort_by{ |room| room.name}
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @room = Room.new
+    @rooms = Room.all.sort_by{ |room| room.name}
   end
 
   def create
     @room = Room.new(room_params)
-
+    @room.user_id = current_user.id if current_user
     if @room.save
-      redirect_to rooms_path, notice: "#{@room.name} was submitted successfully!"
+      redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
     else
       render :new
     end

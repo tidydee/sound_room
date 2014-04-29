@@ -7,18 +7,21 @@
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-
+  
 <!-- Nav Bar -->
 
   <div class="row">
     <div class="large-12 columns">
       <div class="nav-bar right">
+      <div class="flash-message"> 
+        <% flash.each do |name, msg| -%>
+          <%= content_tag :div, msg, class: name %>
+        <% end -%>
+      </div>
        <ul class="button-group">
          <li>
           <% if current_user %>
@@ -101,6 +104,7 @@
       </div>
     </div>
   </footer>
-    <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "vendor/modernizr" %>
   </body>
 </html>

@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
 
   def index
-    @rooms = Room.all    
+    @rooms = Room.all.sort_by{ |room| room.name}
   end
 
   def new
@@ -20,15 +20,16 @@ class RoomsController < ApplicationController
   end
 
   def create
+    @rooms = Room.all
     @room = Room.new(room_params)
     @room.user_id = current_user.id if current_user
 
     if @room.save
       flash[:success] = "Room Successfully Created"
       redirect_to @room
-      # redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
+      # redirect_to users_path
     else
-      render "users/index"
+      render "users/show"
     end
   end
 
