@@ -12,7 +12,6 @@
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
 
-
     <style>
 
       html { background-color: rgba(253, 255, 8, .5); } 
@@ -36,10 +35,15 @@
 
     <%= render partial: "/shared/topnav" %>
 
-
   <!-- Main Page Content -->
     <div class="row">
       <div class="large-9 columns" role="content">
+
+        <div class="flash-message"> 
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, class: name %>
+          <% end %>
+        </div>
 
         <%= yield %>
 

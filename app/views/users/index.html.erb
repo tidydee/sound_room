@@ -82,15 +82,16 @@
   </div>  
 
   <aside class="large-3 columns">
+      
+      <hr>
+      <!-- Create a new room -->
 
-      <ul class="side-nav">
-        <h4>Create New Room</h4>
-          <%= form_for @room do |r| %>
-          <%= r.label :name %>
-          <%= r.text_field :name %><br />
-          <%= r.submit%>
-        <%end%>
-      </ul>
+      <h4>Create New Room</h4>
+      <%= form_for @room do |r| %>
+        <%= r.label :name %>
+        <%= r.text_field :name %><br />
+        <%= r.submit%>
+      <%end%>  
 
   </aside>
 
