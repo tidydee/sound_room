@@ -7,9 +7,10 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 
     <style>
@@ -31,9 +32,14 @@
         <div class="gradient two">
         </div>  
       </div>  
+<!-- Nav Bar -->
 
-
-    <%= render partial: "/shared/topnav" %>
+  <%= render partial: "/shared/topnav" %>
+  <div class="flash-message"> 
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: name %>
+    <% end %>
+  </div>
 
   <!-- Main Page Content -->
     <div class="row">
@@ -82,20 +88,20 @@
       </div>
     </div>
 
-     <script>
+  <script>
+     $(document).ready(function () {
 
-       $(document).ready(function () {
+        fadeToggle( $('.gradient.one') );
+        fadeToggle( $('.gradient.two') );
 
-          fadeToggle( $('.gradient.one') );
-          fadeToggle( $('.gradient.two') );
+        function fadeToggle(el, hide) {
+         el.fadeToggle( 60000, null, function() { fadeToggle(el); });
+        }
 
-          function fadeToggle(el, hide) {
-           el.fadeToggle( 60000, null, function() { fadeToggle(el); });
-          }
+      });
+  </script>
 
-        });
-
-      </script>
-
+  </footer>
+    <%= javascript_include_tag "vendor/modernizr" %>
   </body>
 </html>
