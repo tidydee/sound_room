@@ -42,6 +42,7 @@ gem 'soundcloud'
 # gem 'unicorn'
 
 gem 'foundation-rails'
+gem 'pusher'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -25,7 +25,7 @@
   <% end %>  
   </div> <!--large9 column-->
 
-  <div class="large-3 columns chat-wrap">
+  <div class="large-3 columns public-list">
 
     <%= render partial: "/rooms/chatbar" %>
 
@@ -63,6 +63,15 @@
 
   </div>
 </div>
+
+<script>
+      $(function() {     
+        var pusher = new Pusher('55b13e9beb0afef1e1cf')
+        var chatWidget = new PusherChatWidget(pusher, {
+          appendTo: '#pusher_chat_widget'
+        });
+      });
+</script>
 
  <!--  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;"> -->
 

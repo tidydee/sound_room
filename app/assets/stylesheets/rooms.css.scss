@@ -64,6 +64,25 @@ h1 {
 .public-list {
   background-color: rgba(255,255,255,0.3);
   border-radius: 10px;
+  text-align: center;
+  padding-top: 1%;
+  font-size: 1.1em;
+  letter-spacing: .2em;
+  list-style: none;
+}
+
+.public-list ul {
+  list-style-type: none;
+}
+
+.public-list a {
+  font-family: Helvetica;
+  color: #8000FF;
+}
+
+.public-list a:hover {
+  transition: 100ms ease-in;
+  color: #FF0073;
 }
 
 .player-wrap {
@@ -78,4 +97,16 @@ h1 {
 
 .table-overflow {
   overflow-y: scroll;
+}
+
+// ====== CHAT STYLES ======   
+
+.custom-chat-btn {
+  background-color: rgba(255,119,0,1);
+  border-radius: 20px;
+}
+
+.custom-chat-btn:hover {
+  background-color: #BED200;
+  color: #8000FF;
 }
