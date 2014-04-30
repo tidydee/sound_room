@@ -1,9 +1,26 @@
 <h1> <%= @room.name %> </h1>
 
 <!-- Only a User who created a room, can Delete a Room -->
-<% if @room.user_id == session[:user_id] %>
-  <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+<% if current_user %>
+  <% if @room.user_id == session[:user_id] %>
+    <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+  <% end %>
 <% end %>
+
+<%= form_for @room do |f| %>
+  <div class="error-message">
+    <% if @room.errors.any? %>
+      <div class="error-message-header"> 
+        <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
+      </div>
+      <ul>
+        <% @room.errors.full_messages.each do |msg| %>
+          <li class="error-message-body"><%= msg %></li>
+        <% end %>
+      </ul>  
+    <% end %>
+  </div>
+<% end %>  
 
 <div>
   <% if current_user %>
@@ -12,25 +29,10 @@
     <% @songs.each do |song| %>
       <%= song.url %><br />
     <% end %>
-  <% else %>
+  <% else %> 
     <h5 style='color:white; background-color: orange; width: 100%; border: solid orange 3px;'>Please sign in to add to the playlist.</h5>
-  <% end %><br />
-</div>
-
-<br />
-
-  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;">
-    <ol>  
-      <li> randi </li>
-      <li>www.url01.com <%=button_to(songs_path(@room), method: "post") %></li>
-      <li>www.url02.com <button>Add</button></li>
-      <li>www.url03.com <button>Add</button></li>
-      <li>www.url04.com <button>Add</button></li>
-      <li>www.url05.com <button>Add</button></li>
-      <li>www.url06.com <button>Add</button></li>
-      <li>www.url07.com <button>Add</button></li>
-    </ol>    
-  </div>
+  <% end %>
+</div><br />
 
 <table>
   <thead>
@@ -60,6 +62,20 @@
     </tr>
   </tbody>
 </table>
+
+ <!--  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;"> -->
+
+<ol>  
+  <li> randi </li>
+  <li>www.url01.com <%=button_to(songs_path(@room), method: "post") %></li>
+  <li>www.url02.com <button>Add</button></li>
+  <li>www.url03.com <button>Add</button></li>
+  <li>www.url04.com <button>Add</button></li>
+  <li>www.url05.com <button>Add</button></li>
+  <li>www.url06.com <button>Add</button></li>
+  <li>www.url07.com <button>Add</button></li>
+</ol>
+
 
 
 
