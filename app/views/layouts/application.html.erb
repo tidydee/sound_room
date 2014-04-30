@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
-
-
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-
-    <style>
-
-      html { background-color: rgba(253, 255, 8, .5); } 
-      body { margin:0; }
-      .gradient { content: ""; height: 100%; width: 100%; position: fixed; z-index: -100; }
-      .gradient.one { background-image: linear-gradient(to bottom, #5856D6 0%, #C644FC 100%);}
-      .gradient.two { background-image: linear-gradient(to bottom, #C643FC 0%, #FF5F37 100%); display:none; }
-
-    </style>
   </head>
 
   <body>
@@ -32,18 +18,12 @@
         <div class="gradient two">
         </div>  
       </div>  
-<!-- Nav Bar -->
 
   <%= render partial: "/shared/topnav" %>
-  <div class="flash-message"> 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: name %>
-    <% end %>
-  </div>
 
   <!-- Main Page Content -->
     <div class="row">
-      <div class="large-9 columns" role="content">
+      <div class="large-12 columns" role="content">
 
         <div class="flash-message"> 
           <% flash.each do |name, msg| %>
@@ -53,40 +33,16 @@
 
         <%= yield %>
 
-      </div>  
-      <div class="large-3 columns">
-
-        <%= render partial: "/rooms/chatbar" %>
-
-      </div>  
+      </div>    
     </div>
 
-    <div class="push">
-    </div> <!--clearfix helper for footer -->
+  <div class="push">
+  </div> <!--clearfix helper for footer -->
 
   <!-- End Main Content and Sidebar -->
 
   <!-- Footer -->
-    <div class="row footer">
-      <div class="large-12 columns">
-        <hr />
-          <div class="row">
-            <div class="large-6 columns">
-
-               <p>&copy; Copyright no one at all. This Footer should always remain at the bottom</p>
-
-            </div>
-
-            <div class="large-6 columns">
-              <ul class="inline-list right">
-
-                <li><a href="#">Link 1</a></li>
-
-              </ul>
-            </div>
-          </div>
-      </div>
-    </div>
+  <%= render partial: "/shared/footer" %>
 
   <script>
      $(document).ready(function () {
@@ -101,7 +57,7 @@
       });
   </script>
 
-  </footer>
-    <%= javascript_include_tag "vendor/modernizr" %>
+ 
+  <%= javascript_include_tag "vendor/modernizr" %>
   </body>
 </html>

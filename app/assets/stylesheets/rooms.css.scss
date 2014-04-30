@@ -12,6 +12,28 @@ html, body {
   height: 100%;
 }
 
+// ====== BACKGROUND GRADIENT ====== 
+
+html { 
+  background-color: rgba(253, 255, 8, .5); 
+} 
+
+body { 
+  margin:0;
+}
+
+.gradient {
+  content: ""; height: 100%; width: 100%; position: fixed; z-index: -100;
+}
+
+.gradient.one {
+  background-image: linear-gradient(to bottom, #5856D6 0%, #C644FC 100%);
+}
+
+.gradient.two {
+  background-image: linear-gradient(to bottom, #C643FC 0%, #FF5F37 100%); display:none;
+}
+
 // .wrapper {
 //   min-height: 100%;
 //   height: auto !important;
@@ -22,8 +44,38 @@ html, body {
 // .footer, .push {
 //   height: 155px; /* .push must be the same height as .footer */
 // }
-  
+
+// ====== TYPOGRAPHY ======   
+
 h1 {
   color: white;
   font-size: 4em;
+}
+
+.chat-wrap {
+  border: 4px solid black;
+  height: 400px;
+}
+
+.test-wrap {
+
+}
+
+.public-list {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.player-wrap {
+  border: 4px solid black;
+  height: 200px;
+  width: 100%;
+}
+
+.spacer {
+  height: 75px;
+}
+
+.table-overflow {
+  overflow-y: scroll;
 }
