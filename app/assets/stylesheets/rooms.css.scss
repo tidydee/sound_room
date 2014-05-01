@@ -12,10 +12,18 @@ html, body {
   height: 100%;
 }
 
+.curo {
+  height: 50px;
+  width: 50px;
+  top: 20px;
+  border: 10px solid white;
+  margin-right: 2%;  
+}
 // ====== BACKGROUND GRADIENT ====== 
 
 html { 
-  background-color: rgba(253, 255, 8, .5); 
+  background-color: rgba(255,119,0,.5); 
+  // background-color: #FF7700; 
 } 
 
 body { 
@@ -54,6 +62,7 @@ h1 {
 
 .chat-wrap {
   border: 4px solid black;
+  background-color: rgba(255, 255, 255, 0.3);
   height: 400px;
 }
 
@@ -61,13 +70,40 @@ h1 {
 
 }
 
+.top-auth {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 35px 0 35px 0;
+}
+
 .public-list {
-  background-color: rgba(255,255,255,0.3);
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 90px 0 90px 0;
+  text-align: center;
+  padding-top: 1%;
+  font-size: 1.1em;
+  letter-spacing: .2em;
+  list-style: none;
+  border: 1px dotted white;
+}
+
+.public-list ul {
+  list-style-type: none;
+}
+
+.public-list a {
+  font-family: Helvetica;
+  color: #8000FF;
+}
+
+.public-list a:hover {
+  transition: 100ms ease-in;
+  color: #FF0073;
 }
 
 .player-wrap {
-  border: 4px solid black;
+  border: 1px dotted white;
+  padding:2%;
+  border-radius: 90px 0 90px 0;
   height: 200px;
   width: 100%;
 }
@@ -78,4 +114,16 @@ h1 {
 
 .table-overflow {
   overflow-y: scroll;
+}
+
+// ====== CHAT STYLES ======   
+
+.custom-chat-btn {
+  background-color: rgba(255,119,0,1);
+  border-radius: 20px;
+}
+
+.custom-chat-btn:hover {
+  background-color: #BED200;
+  color: #8000FF;
 }

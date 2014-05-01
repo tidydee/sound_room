@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require jquery.animate-colors-min
 //= require jquery.transit.min
+//= require PusherChatWidget
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
