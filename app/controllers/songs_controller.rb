@@ -23,7 +23,7 @@ class SongsController < ApplicationController
   
 
   def create
-    @song = Song.new(params[:trackId])
+    @song = Song.new(params[:soundcloud_track_id])
     # @room.user_id = current_user.id if current_user
     respond_to do |format|
       if @song.save
