@@ -13,15 +13,16 @@
         var trackTitle = favorites[i].title;
         var trackId = favorites[i].id;
         var trackStreamUrl = favorites[i].stream_url;
+        var trackOrder = i;
 
         dataArray.push( trackId );
 
-        $('#favorite_tracks').append("<tr><td class='track' data-track-id="+trackId+" data-track-order="+i+">"+trackTitle+"</td><td><a href='' class='button tiny'>Add</a></td></tr>")
+        $('#favorite_tracks').append("<tr><td class='track'>"+trackTitle+"</td><td><a href='' class='button tiny' id='"+i+"'' data-track-id="+trackId+" data-track-order="+i+">Add</a></td></tr>")
       }
 
-      console.log(dataArray);      
-      console.log(trackId);
-      console.log(trackTitle);
+      // console.log('TrackIDs:' +dataArray);      
+      // console.log('TrackID:' +trackId);
+      // console.log('TrackTitle:' +trackTitle);
       // $ ->
       //   $(".button").click ->
       //     $.ajax({
@@ -34,17 +35,27 @@
       //       error:(data) ->
       //         return false
       //     })
-    
-      $('.button').click(function(){
-        $.ajax({
+
+      $('.button').on('click', function(){
+        var scTrackId = $(this).data('track-id');
+        // console.log(scTrackId);
+        saveToDb(scTrackId);
+      });
+      
+        function saveToDb(scTrackId){
+          // console.log(scTrackId);
+          $.ajax({
           url: "<%= songs_path %>",
-             data: {  soundcloud_track_id: 'trackId', title: "trackTitle"  },
+             data: {  soundcloud_track_id: scTrackId },
           type: "POST",
           success: function(){
             $(this).addClass("done");
           }
         });
-      });
+      }
+    
+      
+      
 
           
       $('.track').click(function(e) {
