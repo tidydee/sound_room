@@ -142,9 +142,9 @@
   <aside class="large-3 columns">
 
       <ul class="side-nav">
-
+        <!-- Create New Room Form-->
         <%= form_for @room do |f| %>
-        <!-- Room Create Error Handling -->
+        <!-- Form Error Handling -->
         <div class="error-message">
           <% if @room.errors.any? %>
             <div class="error-message-header"> 
@@ -158,16 +158,14 @@
           <%end%>
         </div>
         <hr>
-        <!-- Create a new room -->
+        <!-- From Input Fields -->
+        <h4>Create New Room</h4>
 
-          <h4>Create New Room</h4>
-
-            <%= f.label :name %>
-            <%= f.text_field :name %><br />
-            <%= f.submit%>
+          <%= f.label :name %>
+          <%= f.text_field :name %><br />
+          <%= f.submit%>
         <%end%>  
       </ul>
-
   </aside>
 
   <aside class="large-3 columns"> 
