@@ -46,47 +46,51 @@
 
 	function playTrack(id, nextTrackOrder) {
     SC.whenStreamingReady(function() {
-        sound = SC.stream(id, { autoPlay: false }, function(sound){
-        console.log(sound);
-	        sound.play({
-	          onfinish: function(){
-	            alert('track_finished');
-	          }
-	        });
-      	});
+      sound = SC.stream(id, { autoPlay: false }, function(sound){
+      console.log(sound);
+        sound.play({
+          onfinish: function(){
+            console.log('track_finished');
+            skipper();
+          }
+        });
+    	});
 
-      // $('body').on('click','.track', function(e){
-      // 	sound.stop();
-      // }	
       $('.track').click(function(e){
       	sound.stop();
       })
-      
-      $('#skip').click(function(e){
+
+			function skipper(){
       	sound.stop();      	
       	var elements = $(document.getElementsByClassName("track"));
 				var numberOfTracks = elements.length;
 				console.log(numberOfTracks);
 				var subsequentTrack = nextTrackOrder + 1;
-
 				if(nextTrackOrder == numberOfTracks){
 					nextTrackOrder = 0;
 					subsequentTrack = 1;
 				}
-
 				console.log(nextTrackOrder);
 				var nextTrackScId = $(document.getElementById(nextTrackOrder)).data('track-id');
-      	console.log(nextTrackScId);
-
-      	
+      	console.log(nextTrackScId);      	
       	playTrack(nextTrackScId, subsequentTrack);
-      });
+      }
+      $('#skip').click(skipper);
 
       $('#pause').click(function(e){
           sound.pause();
       });
       $('#play').click(function(e){
           sound.resume();
+      });
+      $('#mute').click(function(e){
+          sound.setVolume(0);
+      });
+      $('#med-volume').click(function(e){
+          sound.setVolume(40);
+      });
+      $('#high-volume').click(function(e){
+          sound.setVolume(100);
       });
     });
   }
@@ -121,6 +125,11 @@
 	    <span id="play">Play</span>
 	    <span id="pause">Pause</span>
 	    <span id="skip">Skip</span>
+    </p>
+    <p>
+    	<span id="mute">Mute</span>
+    	<span id="med-volume">Med</span>
+    	<span id="high-volume">High</span>
     </p>
 
     <div id="favorite_tracks">
