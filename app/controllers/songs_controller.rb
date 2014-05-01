@@ -23,8 +23,9 @@ class SongsController < ApplicationController
   
 
   def create
-    @song = Song.new(params[:soundcloud_track_id])
-    # @room.user_id = current_user.id if current_user
+    @song = Song.new({ soundcloud_track_id: params[:soundcloud_track_id] })
+    # binding.pry
+    # # @room.user_id = current_user.id if current_user
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: "Save process completed!" }
