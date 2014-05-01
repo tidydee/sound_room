@@ -10,23 +10,20 @@
 
 # song1 = Song.create([{user_id: 1},{title: 'mojo so dope'}, {artist: 'Kid cudi'}, {duration: 300000}, {url: 'https://soundcloud.com/elephanttribe/kid-cudi-mojo-so-dope-elephant'}, room_id: 1])
 
-require 'populator'
-require 'faker'
+# require 'populator'
+# require 'faker'
 
 
-User.populate(1) do |user|
-	user.email = Faker::Internet.email
-	user.username = Faker::Internet.user_name
-end
+# User.populate(1) do |user|
+# 	user.email = Faker::Internet.email
+# 	user.username = Faker::Internet.user_name
+# end
 
-Song.populate(1) do |song|
-  song.user_id = 1
-  song.title = Faker::Commerce.color
-  song.artist = Faker::Name.first_name
-  song.duration = 200000
-  song.url = Faker::Internet.url
-  song.room_id = 1
-end
-
-
-# Song.create(title:'great_song', url:'www.yahoo.com')
+# Song.populate(1) do |song|
+#   song.user_id = 1
+#   song.title = Faker::Commerce.color
+#   song.artist = Faker::Name.first_name
+#   song.duration = 200000
+#   song.url = Faker::Internet.url
+#   song.room_id = 1
+# end

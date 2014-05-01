@@ -1,34 +1,113 @@
-<div class="row">
+
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script>
+  SC.initialize({
+    client_id: '173c1924dc4e55b0db3b89a45bb71561'
+  });
+
+  function getUserFavoriteTracks() {
+    var soundcloud_id =  <%= current_user.soundcloud_user_id %>
+    SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
+      var dataArray = [];
+      for (var i=0; i<favorites.length; i++) {
+        var trackTitle = favorites[i].title;
+        var trackId = favorites[i].id;
+        var trackStreamUrl = favorites[i].stream_url;
+
+        dataArray.push( trackId );
+
+        $('#favorite_tracks').append("<tr><td class='track' data-track-id="+trackId+" data-track-order="+i+">"+trackTitle+"</td><td><a href='' class='button tiny'>Add</a></td></tr>")
+      }
+
+      console.log(dataArray);      
+      console.log(trackId);
+      console.log(trackTitle);
+      // $ ->
+      //   $(".button").click ->
+      //     $.ajax({
+      //       type: "POST",
+      //       url: "<%= songs_path %>",
+      //       data: { song: { trackId: "Filip", trackTitle: "whatever" } },
+      //       success:(data) ->
+      //         alert data.id
+      //         return false
+      //       error:(data) ->
+      //         return false
+      //     })
+    
+      $('.button').click(function(){
+        $.ajax({
+          url: "<%= songs_path %>",
+             data: {  soundcloud_track_id: 'trackId', title: "trackTitle"  },
+          type: "POST",
+          success: function(){
+            $(this).addClass("done");
+          }
+        });
+      });
+
+          
+      $('.track').click(function(e) {
+        console.log('this click?');
+        playTrack($(this).data('track-id'));
+      }); 
+    });
+  };
+    
+  getUserFavoriteTracks();
+
+
+</script>
+
+<div class="row" data-room-id="<%= @room.id %>">
   <div class="large-9 column">
-  <h1> <%= @room.name %> </h1>
-
-    <!-- Only a User who created a room, can Delete a Room -->
-  <% if current_user %>
-    <% if @room.user_id == session[:user_id] %>
-      <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
-    <% end %>
-  <% end %>
-
-  <%= form_for @room do |f| %>
-    <div class="error-message">
-      <% if @room.errors.any? %>
-        <div class="error-message-header"> 
-          <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
-        </div>
-        <ul>
-          <% @room.errors.full_messages.each do |msg| %>
-            <li class="error-message-body"><%= msg %></li>
-          <% end %>
-        </ul>  
+    <h1> <%= @room.name %> </h1>
+    <span style="color:white;"> <%= request.original_url %> </span>
+      <!-- Only a User who created a room, can Delete a Room -->
+    <% if current_user %>
+      <% if @room.user_id == session[:user_id] %>
+        <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
       <% end %>
-    </div>
-  <% end %>  
+    <% end %>
+    <!-- Tracks from SoundCloud -->
+    
+
+    <table>
+      <thead>
+        <tr>
+          <th width="200">Tracks from Soundcloud</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="favorite_tracks" >
+      
+
+        <!-- My SC Song streams in here -->
+      </tbody>
+
+    </table>
+
+  <div >
+    <h4>Create New Song</h4>
+    <%= form_for @song do |f| %>
+      <%= f.label :title %>
+      <%= f.label :room_id %>
+      <%= f.text_field :title %><br />
+      <%= f.submit%>
+    <% end %>
+  </div> 
+
+
+
+
+
+
   </div> <!--large9 column-->
 
   <div class="large-3 columns public-list">
 
+  <div class="large-3 columns chat-wrap">
     <%= render partial: "/rooms/chatbar" %>
-
   </div>
 
   <div class="large-3">
@@ -39,8 +118,8 @@
         <div id="myModal" class="reveal-modal" data-reveal>
           <%= render partial: "/rooms/addtoplaylist" %>
           <% @songs.each do |song| %>
-          <%= song.url %><br />
-      <% end %>
+            <%= song.url %><br />
+          <% end %>
     <% else %> 
       <div class="large-8 column">
         <div data-alert class="alert-box alert">
@@ -52,15 +131,8 @@
     </div>
   </div><br />
 
-  
   <div class="row player-wrap">
     <h3>Player goes here</h3>
-
-
-
-    </div>
-  </div>
-
   </div>
 </div>
 
@@ -73,18 +145,10 @@
       });
 </script>
 
+
  <!--  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;"> -->
 
-<!-- <ol>  
-  <li> randi </li>
-  <li>www.url01.com <%=button_to(songs_path(@room), method: "post") %></li>
-  <li>www.url02.com <button>Add</button></li>
-  <li>www.url03.com <button>Add</button></li>
-  <li>www.url04.com <button>Add</button></li>
-  <li>www.url05.com <button>Add</button></li>
-  <li>www.url06.com <button>Add</button></li>
-  <li>www.url07.com <button>Add</button></li>
-</ol> -->
+
 
 
 
