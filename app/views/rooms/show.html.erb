@@ -23,18 +23,7 @@
       // console.log('TrackIDs:' +dataArray);      
       // console.log('TrackID:' +trackId);
       // console.log('TrackTitle:' +trackTitle);
-      // $ ->
-      //   $(".button").click ->
-      //     $.ajax({
-      //       type: "POST",
-      //       url: "<%= songs_path %>",
-      //       data: { song: { trackId: "Filip", trackTitle: "whatever" } },
-      //       success:(data) ->
-      //         alert data.id
-      //         return false
-      //       error:(data) ->
-      //         return false
-      //     })
+
 
       $('.button').on('click', function(){
         var scTrackId = $(this).data('track-id');
@@ -43,13 +32,16 @@
       });
       
         function saveToDb(scTrackId){
-          // console.log(scTrackId);
+          console.log(scTrackId);
           $.ajax({
           url: "<%= songs_path %>",
-             data: {  soundcloud_track_id: scTrackId },
+          data: {  soundcloud_track_id: scTrackId },
           type: "POST",
           success: function(){
-            $(this).addClass("done");
+            alert("shit got saved");
+          },
+          error: function (err) {
+            console.log(err);
           }
         });
       }
