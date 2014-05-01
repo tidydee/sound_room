@@ -17,5 +17,6 @@
 //= require jquery.animate-colors-min
 //= require jquery.transit.min
 //= require_tree .
+//= require js-routes
 
 $(function(){ $(document).foundation(); });

@@ -32,8 +32,9 @@ gem 'populator'
 gem 'faker'
 gem 'omniauth'
 gem 'omniauth-soundcloud', '~> 1.0.0'
-
 gem 'soundcloud'
+
+gem "js-routes"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -49,4 +50,3 @@ gem 'foundation-rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'soundcloud'
