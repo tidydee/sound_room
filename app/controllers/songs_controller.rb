@@ -2,23 +2,33 @@ class SongsController < ApplicationController
 
   def index
     @songs = Song.all
+    @song = Song.new
   end
 
   def create
-    @song = Song.new(song_params)
-    @song.user = current_user
-    if @song.save
-      redirect_to room_path(@song.room)
-    else
-      redirect_to room_path(params[:room_id]), notice: "#{@song.title} was NOT submitted successfully!"
+    # Song.new(params[:song])
+
+    @song = Song.new(song_params.merge(user_id: current_user.id))
+    
+    respond_to do |format|
+      if @song.save
+        format.html { redirect_to :root, notice: "Save process completed!" }
+        format.json { render json: @song, status: :created, location: @song }
+      else
+        format.html { 
+          flash.now[:notice]="Save proccess coudn't be completed!" 
+          render :new 
+        }
+        format.json { render json: @song.errors, status: :unprocessable_entity}
+      end
     end
   end
 
   protected
 
   def song_params
-    params.require(:song).permit(
-     :title, :artist, :duration, :url, :room_id
+    params.permit(
+      :soundcloud_track_id, :title, :duration, :room_id
       )
   end
 

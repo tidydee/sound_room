@@ -17,6 +17,10 @@
 //= require jquery.animate-colors-min
 //= require jquery.transit.min
 //= require PusherChatWidget
+//= require raphael-min
+//= require jquery.lazylinepainter-1.4.1.min
+//= require background-spiral
 //= require_tree .
+//= require js-routes
 
 $(function(){ $(document).foundation(); });

@@ -1,7 +1,7 @@
-class RoomsController < ApplicationController
+  class RoomsController < ApplicationController
 
   def index
-    @rooms = Room.all.sort_by{ |room| room.name}
+    @room = Room.all.sort_by{ |room| room.name}
   end
 
   def new
@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     @songs = @room.songs
+    @song = Song.new
   end
 
   def destroy
@@ -20,7 +21,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @rooms = Room.all
+    @room = Room.all
     @room = Room.new(room_params)
     @room.user_id = current_user.id if current_user
 
@@ -37,10 +38,8 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(
-      :name
+      :name, :user_id
     )
   end
-
-
-
+  
 end
