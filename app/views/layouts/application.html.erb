@@ -15,17 +15,13 @@
 
   <body>
     <div id="spiral"></div>
-    <div id="hue" class="wrapper">
-    
-        </div>  
-      </div>  
+    <div id="hue" class="wrapper"></div>  
 
-<!-- Nav Bar -->
 
-  <%= render partial: "/shared/topnav" %>
+    <!-- Nav Bar -->
+    <%= render partial: "/shared/topnav" %>
 
-  <!-- Main Page Content -->
-
+    <!-- Main Page Content -->
     <div class="row">
       <div class="large-12 columns" role="content">
 
@@ -41,68 +37,56 @@
       </div>    
     </div>
 
-  <div class="push">
-  </div> <!--clearfix helper for footer -->
+    <div class="push">
+    </div> <!--clearfix helper for footer -->
+    <!-- End Main Content and Sidebar -->
 
-  <!-- End Main Content and Sidebar -->
-
-  <!-- Footer -->
-
-  <div class="row">
-  </div>
-
+    <!-- Footer -->
+    <div class="row"></div>
 
     <div class="row footer">
       <div class="large-12 columns">
         <hr>
-          <div class="row">
-            <div class="large-6 columns">
-
-               <p>&copy; Copyright no one at all. This Footer should always remain at the bottom</p>
-
-            </div>
-
-            <div class="large-6 columns">
-              <ul class="inline-list right">
-
-                <li><a href="#">Link 1</a></li>
-
-              </ul>
-            </div>
+        <div class="row">
+          <div class="large-6 columns">
+             <p>&copy; Copyright no one at all. This Footer should always remain at the bottom</p>
           </div>
+          <div class="large-6 columns">
+            <ul class="inline-list right">
+              <li><a href="#">Link 1</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
   <%= render partial: "/shared/footer" %>
 
-
   <script>
-     $(document).ready(function () {
-
-        $('.curo').transition({
-          perspective: '100px',
-          rotate3d: '1,1,0,180deg'
-        }); 
-
-        fadeToggle( $('.gradient.one') );
-        fadeToggle( $('.gradient.two') );
-
-        function fadeToggle(el, hide) {
-         el.fadeToggle( 30000, null, function() { fadeToggle(el); });
-        }
-
+    $(document).ready(function () {
+      $('.curo').transition({
+        perspective: '100px',
+        rotate3d: '1,1,0,180deg'
       });
 
-     $('.curo').mouseover(function(){
-        $(this).transition({
-          perspective: '100px',
-          rotateY: '180deg'
-        }); 
-      });
+      fadeToggle( $('.gradient.one') );
+      fadeToggle( $('.gradient.two') );
+
+      function fadeToggle(el, hide) {
+        el.fadeToggle( 30000, null, function() { fadeToggle(el); 
+        });
+      }
+    });
+
+    $('.curo').mouseover(function(){
+      $(this).transition({
+        perspective: '100px',
+        rotateY: '180deg'
+      }); 
+    });
      
   </script>
 
- 
   <%= javascript_include_tag "vendor/modernizr" %>
   </body>
 </html>

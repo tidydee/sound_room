@@ -1,3 +1,74 @@
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script>
+  SC.initialize({
+    client_id: '173c1924dc4e55b0db3b89a45bb71561'
+  });
+
+  function getUserFavoriteTracks() {
+
+    var soundcloud_id = <%= current_user.soundcloud_user_id %>
+    
+    SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
+      for (var i=0; i<favorites.length; i++) {
+        var trackTitle = favorites[i].title.replace("'",'"');
+        var trackId = favorites[i].id;
+        var trackStreamUrl = favorites[i].stream_url;
+        var trackOrder = i;
+        var duration = favorites[i].duration;
+        var trackImage = favorites[i].artwork_url;
+
+        $('#favorite_tracks').append("<tr><td class='track'>"+trackTitle+"</td><td><a href='' class='button button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'>Add</a></td></tr>")
+      }
+
+      $('.button-add').on('click', function(){
+        var scTrackId = $(this).data('track-id');
+        var title = $(this).data('title');
+        var duration = $(this).data('duration');
+        var roomId = $('[data-room-id]').data('room-id');
+        // console.log(scTrackId);
+        saveToDb(scTrackId, title, duration, roomId);
+      });
+      
+      function saveToDb(scTrackId, title, duration, roomId){
+        console.log(scTrackId);
+        $.ajax({
+          url: "<%= songs_path %>",
+          data: {  
+            soundcloud_track_id: scTrackId,
+            title: title,
+            duration: duration,
+            room_id: roomId
+            },
+          type: "POST",
+          success: function(){
+            alert("shit got saved");
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+      }
+              
+      $('.track').click(function(e) {
+        console.log('this click?');
+        playTrack($(this).data('track-id'));
+      }); 
+    });
+  };
+    
+  getUserFavoriteTracks();
+</script>
+<script>
+
+      $(function() {     
+        console.log('hey');
+        var pusher = new Pusher('55b13e9beb0afef1e1cf');
+        var chatWidget = new PusherChatWidget(pusher, {
+          appendTo: '#pusher_chat_widget'
+        });
+      });
+
+</script>
 
 <div id="main">
   <div class="row">
@@ -63,80 +134,13 @@
     </div>
   </div>
 
-<script src="http://connect.soundcloud.com/sdk.js"></script>
-<script>
-  SC.initialize({
-    client_id: '173c1924dc4e55b0db3b89a45bb71561'
-  });
-
-  function getUserFavoriteTracks() {
-
-    var soundcloud_id = <%= current_user.soundcloud_user_id %>
-    
-    SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
-      for (var i=0; i<favorites.length; i++) {
-        var trackTitle = favorites[i].title.replace("'",'"');
-        var trackId = favorites[i].id;
-        var trackStreamUrl = favorites[i].stream_url;
-        var trackOrder = i;
-        var duration = favorites[i].duration;
-        var trackImage = favorites[i].artwork_url;
-
-        $('#favorite_tracks').append("<tr><td class='track'>"+trackTitle+"</td><td><a href='' class='button tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'>Add</a></td></tr>")
-      }
-
-      $('.button').on('click', function(){
-        var scTrackId = $(this).data('track-id');
-        var title = $(this).data('title');
-        var duration = $(this).data('duration');
-        var roomId = $('[data-room-id]').data('room-id');
-        // console.log(scTrackId);
-        saveToDb(scTrackId, title, duration, roomId);
-      });
-      
-      function saveToDb(scTrackId, title, duration, roomId){
-        console.log(scTrackId);
-        $.ajax({
-          url: "<%= songs_path %>",
-          data: {  
-            soundcloud_track_id: scTrackId,
-            title: title,
-            duration: duration,
-            room_id: roomId
-            },
-          type: "POST",
-          success: function(){
-            alert("shit got saved");
-          },
-          error: function (err) {
-            console.log(err);
-          }
-        });
-      }
-              
-      $('.track').click(function(e) {
-        console.log('this click?');
-        playTrack($(this).data('track-id'));
-      }); 
-    });
-  };
-    
-  getUserFavoriteTracks();
-</script>
 
 <div class="row" data-room-id="<%= @room.id %>">
   <div class="large-9 column">
     <h1> <%= @room.name %> </h1>
     <span style="color:white;"> <%= request.original_url %> </span>
-      <!-- Only a User who created a room, can Delete a Room -->
-    <% if current_user %>
-      <% if @room.user_id == session[:user_id] %>
-        <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
-      <% end %>
-    <% end %>
-    <!-- Tracks from SoundCloud -->
     
-
+    <!-- Tracks from SoundCloud -->
     <table>
       <thead>
         <tr>
@@ -188,26 +192,7 @@
   </div>
 </div>
 
-<script>
-
-      $(function() {     
-        console.log('hey');
-        var pusher = new Pusher('55b13e9beb0afef1e1cf');
-        var chatWidget = new PusherChatWidget(pusher, {
-          appendTo: '#pusher_chat_widget'
-        });
-      });
-
-</script>
 
 
  <!--  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;"> -->
-
-
-
-
-
-
-
-
 
