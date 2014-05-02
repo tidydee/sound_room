@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
+
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
@@ -13,10 +14,9 @@
   </head>
 
   <body>
-
-    <div class="wrapper">
-      <div class="gradient one">
-        <div class="gradient two">
+    <div id="spiral"></div>
+    <div id="hue" class="wrapper">
+    
         </div>  
       </div>  
 
@@ -25,6 +25,7 @@
   <%= render partial: "/shared/topnav" %>
 
   <!-- Main Page Content -->
+
     <div class="row">
       <div class="large-12 columns" role="content">
 
@@ -33,6 +34,7 @@
             <%= content_tag :div, msg, class: name %>
           <% end %>
         </div>
+        <div id="spiral2"></div>
 
         <%= yield %>
 
@@ -45,6 +47,10 @@
   <!-- End Main Content and Sidebar -->
 
   <!-- Footer -->
+
+  <div class="row">
+  </div>
+
 
     <div class="row footer">
       <div class="large-12 columns">
