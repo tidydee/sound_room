@@ -6,10 +6,10 @@ class SongsController < ApplicationController
   end
 
   def create
-    # @song = Song.new(params[:song])
-    @song = Song.new({ soundcloud_track_id: params[:soundcloud_track_id] })
-    # binding.pry
-    # @room.user_id = current_user.id if current_user
+    # Song.new(params[:song])
+
+    @song = Song.new(song_params.merge(user_id: current_user.id))
+    
     respond_to do |format|
       if @song.save
         # format.html { redirect_to :root, notice: "Save process completed!" }
@@ -27,8 +27,8 @@ class SongsController < ApplicationController
   protected
 
   def song_params
-    params.require(:song).permit(
-     :title, :artist, :duration, :url, :room_id, :trackId
+    params.permit(
+      :soundcloud_track_id, :title, :duration, :room_id
       )
   end
 

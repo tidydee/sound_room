@@ -8,34 +8,36 @@
   function getUserFavoriteTracks() {
     var soundcloud_id =  <%= current_user.soundcloud_user_id %>
     SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
-      var dataArray = [];
       for (var i=0; i<favorites.length; i++) {
-        var trackTitle = favorites[i].title;
+        var trackTitle = favorites[i].title.replace("'",'"');
         var trackId = favorites[i].id;
         var trackStreamUrl = favorites[i].stream_url;
         var trackOrder = i;
+        var duration = favorites[i].duration;
+        var trackImage = favorites[i].artwork_url;
 
-        dataArray.push( trackId );
-
-        $('#favorite_tracks').append("<tr><td class='track'>"+trackTitle+"</td><td><a href='' class='button tiny' id='"+i+"'' data-track-id="+trackId+" data-track-order="+i+">Add</a></td></tr>")
+        $('#favorite_tracks').append("<tr><td class='track'>"+trackTitle+"</td><td><a href='' class='button tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'>Add</a></td></tr>")
       }
-
-      // console.log('TrackIDs:' +dataArray);      
-      // console.log('TrackID:' +trackId);
-      // console.log('TrackTitle:' +trackTitle);
-
 
       $('.button').on('click', function(){
         var scTrackId = $(this).data('track-id');
+        var title = $(this).data('title');
+        var duration = $(this).data('duration');
+        var roomId = $('[data-room-id]').data('room-id');
         // console.log(scTrackId);
-        saveToDb(scTrackId);
+        saveToDb(scTrackId, title, duration, roomId);
       });
       
-      function saveToDb(scTrackId){
+      function saveToDb(scTrackId, title, duration, roomId){
         console.log(scTrackId);
         $.ajax({
           url: "<%= songs_path %>",
-          data: {  soundcloud_track_id: scTrackId },
+          data: {  
+            soundcloud_track_id: scTrackId,
+            title: title,
+            duration: duration,
+            room_id: roomId
+            },
           type: "POST",
           success: function(){
             alert("shit got saved");
@@ -45,11 +47,7 @@
           }
         });
       }
-    
-      
-      
-
-          
+              
       $('.track').click(function(e) {
         console.log('this click?');
         playTrack($(this).data('track-id'));
@@ -58,8 +56,6 @@
   };
     
   getUserFavoriteTracks();
-
-
 </script>
 
 <div class="row" data-room-id="<%= @room.id %>">
@@ -91,24 +87,9 @@
     </table>
 
   <h1>Song's on this page</h1>
-  <ul id="room-songs">
-    <li><%= @songs %></li>
-  </ul>
-
-  <div >
-    <h4>Create New Song</h4>
-    <%= form_for @song do |f| %>
-      <%= f.label :title %>
-      <%= f.label :room_id %>
-      <%= f.text_field :title %><br />
-      <%= f.submit%>
+    <% @songs.each do |song| %>
+      <%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br />
     <% end %>
-  </div> 
-
-
-
-
-
 
   </div> <!--large9 column-->
 
@@ -123,9 +104,7 @@
       <a href="#" data-reveal-id="myModal">+ songs</a>
         <div id="myModal" class="reveal-modal" data-reveal>
           <%= render partial: "/rooms/addtoplaylist" %>
-          <% @songs.each do |song| %>
-            <%= song.url %><br />
-          <% end %>
+          
     <% else %> 
       <div class="large-8 column">
         <div data-alert class="alert-box alert">
