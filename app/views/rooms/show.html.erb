@@ -6,7 +6,9 @@
   });
 
   function getUserFavoriteTracks() {
-    var soundcloud_id =  <%= current_user.soundcloud_user_id %>
+
+    var soundcloud_id = <%= current_user.soundcloud_user_id %>
+    
     SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
       for (var i=0; i<favorites.length; i++) {
         var trackTitle = favorites[i].title.replace("'",'"');
