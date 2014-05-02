@@ -112,12 +112,17 @@
 
 
   <div class="large-9 columns">
+<<<<<<< HEAD
 
     <h3><%= current_user.soundcloud_username%>'s Dashboard</h3>
    
-
-
     <!-- <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F1848538&show_artwork=true"> </iframe> -->
+
+=======
+    
+    <h2><%= current_user.soundcloud_username%>'s Dashboard</h2>
+>>>>>>> efbd7fa5115f50b2cab9b6a17edb76284a95b82c
+    <div id="player"></div>
 
     <% request.original_url %>
     <hr>
@@ -134,8 +139,6 @@
 
     <div id="favorite_tracks">
     </div>
-
-    
 
   </div>  
 

@@ -18,5 +18,6 @@
 //= require jquery.transit.min
 //= require PusherChatWidget
 //= require_tree .
+//= require js-routes
 
 $(function(){ $(document).foundation(); });
