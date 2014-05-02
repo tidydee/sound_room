@@ -1,4 +1,4 @@
-class RoomsController < ApplicationController
+  class RoomsController < ApplicationController
 
   def index
     @room = Room.all.sort_by{ |room| room.name}
@@ -12,8 +12,6 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @songs = @room.songs
     @song = Song.new
-
-    # @room = Room.all
   end
 
   def destroy
@@ -44,12 +42,4 @@ class RoomsController < ApplicationController
     )
   end
   
-  # def song_params
-  #   params.require(:song).permit(
-  #     :room_id, :id
-  #   )
-  # end
-
-
-
 end
