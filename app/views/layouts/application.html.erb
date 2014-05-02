@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
-
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -12,16 +11,16 @@
   </head>
 
   <body>
-
-    <div class="wrapper">
-      <div class="gradient one">
-        <div class="gradient two">
+    <div id="spiral"></div>
+    <div id="hue" class="wrapper">
+    
         </div>  
       </div>  
 
   <%= render partial: "/shared/topnav" %>
 
   <!-- Main Page Content -->
+
     <div class="row">
       <div class="large-12 columns" role="content">
 
@@ -30,6 +29,7 @@
             <%= content_tag :div, msg, class: name %>
           <% end %>
         </div>
+        <div id="spiral2"></div>
 
         <%= yield %>
 
@@ -42,6 +42,8 @@
   <!-- End Main Content and Sidebar -->
 
   <!-- Footer -->
+  <div class="row">
+  </div>
   <%= render partial: "/shared/footer" %>
 
   <script>
