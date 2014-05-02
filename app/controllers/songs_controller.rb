@@ -12,7 +12,7 @@ class SongsController < ApplicationController
     
     respond_to do |format|
       if @song.save
-        # format.html { redirect_to :root, notice: "Save process completed!" }
+        format.html { redirect_to :root, notice: "Save process completed!" }
         format.json { render json: @song, status: :created, location: @song }
       else
         format.html { 
