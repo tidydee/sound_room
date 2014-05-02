@@ -28,7 +28,14 @@
           var roomId = $('[data-room-id]').data('room-id');
           // console.log(scTrackId);
           saveToDb(scTrackId, title, duration, roomId);
+           // remove the .button-add class
+          // change text to remove
+          // add .button-remove class
         });
+
+        $('.button-remove').on('click', function(e){
+          
+        })
         
         function saveToDb(scTrackId, title, duration, roomId){
           console.log(scTrackId);
