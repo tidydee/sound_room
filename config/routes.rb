@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   # resources :rooms, only: [:index, :create, :show, :destroy]
   
-  resources :rooms 
+  resources :rooms, only: [:index, :create, :show, :destroy]
   # do
   #   resources :songs, only: [:index, :create, :destroy]
   # end
