@@ -3,12 +3,21 @@
 <div class="row spacer"></div>
   <div class="large-4 columns public-list">
     <h3>Public Rooms</h3>
+
     <% @rooms.each do |room| %>
       <div class="public-list-item">
         <span data-tooltip class="has-tip" title="__ tracks in list">
           <%= link_to room.name, room_path(room) %>
         </span>
       </div>
+
+    <% @room.each do |room| %>
+      <span data-tooltip class="has-tip" title="__ tracks in list">
+        <%= link_to room.name, room_path(room) %>
+      </span>
+      <br />
+      <hr />
+
     <% end %>
   </div>
 

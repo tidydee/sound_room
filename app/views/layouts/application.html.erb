@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
+
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -16,6 +19,8 @@
     
         </div>  
       </div>  
+
+<!-- Nav Bar -->
 
   <%= render partial: "/shared/topnav" %>
 
@@ -42,9 +47,34 @@
   <!-- End Main Content and Sidebar -->
 
   <!-- Footer -->
+
   <div class="row">
   </div>
+
+
+    <div class="row footer">
+      <div class="large-12 columns">
+        <hr>
+          <div class="row">
+            <div class="large-6 columns">
+
+               <p>&copy; Copyright no one at all. This Footer should always remain at the bottom</p>
+
+            </div>
+
+            <div class="large-6 columns">
+              <ul class="inline-list right">
+
+                <li><a href="#">Link 1</a></li>
+
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+
   <%= render partial: "/shared/footer" %>
+
 
   <script>
      $(document).ready(function () {

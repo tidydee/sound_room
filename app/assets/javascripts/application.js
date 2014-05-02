@@ -21,5 +21,6 @@
 //= require jquery.lazylinepainter-1.4.1.min
 //= require background-spiral
 //= require_tree .
+//= require js-routes
 
 $(function(){ $(document).foundation(); });
