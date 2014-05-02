@@ -31,9 +31,9 @@
         saveToDb(scTrackId);
       });
       
-        function saveToDb(scTrackId){
-          console.log(scTrackId);
-          $.ajax({
+      function saveToDb(scTrackId){
+        console.log(scTrackId);
+        $.ajax({
           url: "<%= songs_path %>",
           data: {  soundcloud_track_id: scTrackId },
           type: "POST",
@@ -89,6 +89,11 @@
       </tbody>
 
     </table>
+
+  <h1>Song's on this page</h1>
+  <ul id="room-songs">
+    <li><%= @songs %></li>
+  </ul>
 
   <div >
     <h4>Create New Song</h4>
