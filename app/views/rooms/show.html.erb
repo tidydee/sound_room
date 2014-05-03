@@ -25,10 +25,10 @@
 
           var $this = $(this),
               data = {
-                scTrackId: $this.data('track-id'),
+                soundcloud_track_id: $this.data('track-id'),
                 title: $this.data('title'),
                 duration: $this.data('duration'),
-                roomId: $('[data-room-id]').data('room-id')
+                room_id: $('[data-room-id]').data('room-id')
               };
           // var ;
           // var title = $(this).data('title');
@@ -40,9 +40,7 @@
           if ($(this).hasClass('button-add')) {
             $(this).removeClass('button-add').addClass('button-remove');
               $(this).text('Remove');
-              
-              // $(this).attr('href', href.replace('#/',''));
-              // saveToDb(data);
+              saveToDb(data);
           } else {
             $(this).removeClass('button-remove').addClass('button-add');
               $(this).text('Add');
@@ -52,17 +50,17 @@
         // Add Data to DB
         function saveToDb(data){
           console.log('Add Function Works!');
-          // $.ajax({
-          //   url: "<%= songs_path %>",
-          //   data: data,
-          //   type: "POST",
-          //   success: function(){
-          //     alert("shit got saved");
-          //   },
-          //   error: function (err) {
-          //     console.log(err);
-          //   }
-          // });
+          $.ajax({
+            url: "<%= songs_path %>",
+            data: data,
+            type: "POST",
+            success: function(){
+              alert("shit got saved");
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
         }
         // Remove Data to DB
         function removeFromDb(data){
