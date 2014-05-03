@@ -4,7 +4,6 @@
     client_id: '173c1924dc4e55b0db3b89a45bb71561'
   });
 
-
     function getUserFavoriteTracks() {
 
       var soundcloud_id = <%= current_user.soundcloud_user_id if current_user %>
@@ -18,35 +17,40 @@
           var duration = favorites[i].duration;
           var trackImage = favorites[i].artwork_url;
 
-          $('#favorite_tracks').append("<tr><td class='track'>"+trackTitle+"</td><td><a href='' class='button button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'>Add</a></td></tr>")
+          $('#favorite_tracks').append("<tr class='track-row'><td class='track'>"+trackTitle+"</td><td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'>Add</a></td></tr>")
         }
 
-        $('.button-add').on('click', function(){
-          var scTrackId = $(this).data('track-id');
-          var title = $(this).data('title');
-          var duration = $(this).data('duration');
-          var roomId = $('[data-room-id]').data('room-id');
-          // console.log(scTrackId);
-          saveToDb(scTrackId, title, duration, roomId);
-           // remove the .button-add class
-          // change text to remove
-          // add .button-remove class
-        });
+        $('.button-update').on('click', function(e){
+          e.preventDefault();
 
-        $('.button-remove').on('click', function(e){
-          
-        })
-        
-        function saveToDb(scTrackId, title, duration, roomId){
-          console.log(scTrackId);
+          var $this = $(this),
+              data = {
+                scTrackId: $this.data('track-id'),
+                title: $this.data('title'),
+                duration: $this.data('duration'),
+                roomId: $('[data-room-id]').data('room-id')
+              };
+          // var ;
+          // var title = $(this).data('title');
+          // var duration = $(this).data('duration');
+          // var roomId = $('[data-room-id]').data('room-id');
+          // console.log(e);
+          // console.log(this);
+
+          if ($(this).hasClass('button-add')) {
+            $(this).removeClass('button-add').addClass('button-remove');
+              saveToDb(data);
+          } else {
+            $(this).removeClass('button-remove').addClass('button-add');
+              removeFromDb(data);
+          }
+        });
+        // Add Data to DB
+        function saveToDb(data){
+          console.log('Add Function Works!');
           $.ajax({
             url: "<%= songs_path %>",
-            data: {  
-              soundcloud_track_id: scTrackId,
-              title: title,
-              duration: duration,
-              room_id: roomId
-              },
+            data: data,
             type: "POST",
             success: function(){
               alert("shit got saved");
@@ -55,6 +59,21 @@
               console.log(err);
             }
           });
+        }
+        // Remove Data to DB
+        function removeFromDb(data){
+          console.log('REMOVE FUNCTION WORKS');
+          // $.ajax({
+          //   url: "<%= songs_path %>",
+          //   data: data,
+          //   type: "POST",
+          //   success: function(){
+          //     alert("shit got saved");
+          //   },
+          //   error: function (err) {
+          //     console.log(err);
+          //   }
+          //});
         }
                 
         $('.track').click(function(e) {
