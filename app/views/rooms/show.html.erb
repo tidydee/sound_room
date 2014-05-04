@@ -48,6 +48,7 @@
         // Add Data to DB
         function saveToDb(data){
           console.log('Add Function Works!');
+          var $this = $(this);
           $.ajax({
             url: "<%= songs_path %>",
             data: data,
@@ -55,11 +56,8 @@
             type: "POST",
             success: function(data){
               // TODO: need to store the returned db id in the dom for the delete button later  
-              $this.data("id", data.id)
+              $this.data("id", data.id);
             
-
-
-
               alert("shit got saved");
             },
             error: function (err) {
@@ -71,11 +69,12 @@
         function removeFromDb(){
           console.log('REMOVE FUNCTION WORKS');
           // need to dynamically get the song_id from the dom
+          var $this = $(this);
           var song_id = $this.data('id');
           $.ajax({
             url: "<%= songs_path %>/" + song_id,
-            data: {},
-            type: "DELETE",
+            data: {"_method":"delete"},
+            type: "POST",
             success: function(){
               alert("shit got removed!");
             },
@@ -83,7 +82,7 @@
               console.log(err);
             }
           });
-          event.preventDefault();
+          // event.preventDefault();
         }
 
 
@@ -197,35 +196,35 @@
       <%= song.id %><%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br /><a class='button-delete'>Delete</a>
     <% end %>
 
-    <script type="text/javascript">
+    // <script type="text/javascript">
 
 
-      $('.button-delete').on('click', function(e){
-        e.preventDefault();
+    //   $('.button-delete').on('click', function(e){
+    //     e.preventDefault();
 
-        // console.log(song.id);
+    //     // console.log(song.id);
         
-        removeFromDb();
-      });
+    //     removeFromDb();
+    //   });
 
-      function removeFromDb(){
-          console.log('REMOVE FUNCTION WORKS');
-          $.ajax({
-            url: "<%= song_path %>"+ song_id,
-            dataType: "json",
-            data: {'_method':'delete'},
-            type: "POST",
-            success: function(){
-              alert("shit got removed!");
-            },
-            error: function (err) {
-              console.log(err);
-            }
-          });
-          event.preventDefault();
-        }
+    //   function removeFromDb(){
+    //       console.log('REMOVE FUNCTION WORKS');
+    //       $.ajax({
+    //         url: "<%= song_path %>"+ song_id,
+    //         dataType: "json",
+    //         data: {'_method':'delete'},
+    //         type: "POST",
+    //         success: function(){
+    //           alert("shit got removed!");
+    //         },
+    //         error: function (err) {
+    //           console.log(err);
+    //         }
+    //       });
+    //       event.preventDefault();
+    //     }
 
-    </script>
+    // </script>
 
     
 
