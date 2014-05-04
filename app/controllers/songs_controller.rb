@@ -24,6 +24,28 @@ class SongsController < ApplicationController
     end
   end
 
+  def destroy
+    @song = Song.find(params[:id])
+    # @song.destroy
+    respond_to do |format|
+      if @song.destroy
+        format.html { redirect_to :root, notice: "Save process completed!" }
+        format.json { render json: @song, status: :created, location: @song }
+      else
+        format.html { 
+          flash.now[:notice]="Save proccess coudn't be completed!" 
+          render :new 
+        }
+        format.json { render json: @song.errors, status: :unprocessable_entity}
+      end
+    end
+
+
+
+    
+    # redirect_to users_path 
+  end
+
   protected
 
   def song_params
