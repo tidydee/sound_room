@@ -7,44 +7,92 @@
     function getUserFavoriteTracks() {
 
       var soundcloud_id = <%= current_user.soundcloud_user_id if current_user %>
-      
+
+
+
       SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
+        // send array of sound cloud id's to server in ajax
+        // in server check to see if each song exists in database
+        // send back list of song's, whether add or remove
+        // console.log(favorites);
+
+        var data = []
         for (var i=0; i<favorites.length; i++) {
-          var trackTitle = favorites[i].title.replace("'",'"');
-          var trackId = favorites[i].id;
-          var trackStreamUrl = favorites[i].stream_url;
-          var trackOrder = i;
-          var duration = favorites[i].duration;
-          var trackImage = favorites[i].artwork_url;
-
-          $('#favorite_tracks').append("<tr class='track-row'><td class='track'>"+trackTitle+"</td><td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td></tr>")
+          var trackId = favorites[i].id;    
+          data.push(trackId); 
         }
+        console.log("ArrayData:"+data);
 
-        $('.button-update').on('click', function(e){
-          e.preventDefault();
+        var scIdArray = [];
+        $.ajax({
+          dataType: "json",
+          url: window.location.pathname, 
+          type: "GET", 
+          success: function (data) {
+            console.log("DatabaseData:"+data);
+            for (var i=0; i<data.length; i++) {
+              // var dbTrackId = data;
+              // console.log("DatabaseData[i]:"+data[i].soundcloud_track_id);
+              var reccordId = data[i].id;
+              console.log('Reccord Id',reccordId);
 
-          var $this = $(this),
-              data = {
-                soundcloud_track_id: $this.data('track-id'),
-                title: $this.data('title'),
-                duration: $this.data('duration'),
-                room_id: $('[data-room-id]').data('room-id')
-              };
-          // var title = $(this).data('title');
-          // var duration = $(this).data('data-durationtion');
-          // var roomId = $('[data-room-id]').data('room-id');
-          // console.log(e);
-          // console.log(this);
-          if ($(this).hasClass('button-add')) {
-            $(this).removeClass('button-add').addClass('button-remove');
-              $(this).text('Remove');
-              saveToDb(data);
-          } else {
-            $(this).removeClass('button-remove').addClass('button-add');
-              $(this).text('Add');
-              removeFromDb(data);
+              scIdArray.push(data[i].soundcloud_track_id);
+              
+              console.log("data id:", data[i].soundcloud_track_id);
+
+            // create the list item, check to see if add/remove
+            }
+            console.log('scArrayData:', scIdArray);
+            
+            console.log("YOOOOOOO");
+            for (var i=0; i<favorites.length; i++) {
+              var trackTitle = favorites[i].title.replace("'",'"');
+              var trackId = favorites[i].id;
+              var trackStreamUrl = favorites[i].stream_url;
+              var trackOrder = i;
+              var duration = favorites[i].duration;
+              var trackImage = favorites[i].artwork_url;
+              var row1 = "<td class='track'>"+trackTitle+"</td>";
+              var addButton = "<td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
+              var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+reccordId+"'><span class='button-name'>Remove</span></a></td>"
+
+              console.log("soundcloud id: ", trackId, $.inArray(trackId, scIdArray) );
+
+
+              if($.inArray(trackId, scIdArray) !== -1) // check here if song existed
+              {
+                $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
+              }
+              else {
+                $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
+              }
+            }
+
+            $('.button-update').on('click', function(e){
+              e.preventDefault();
+
+              var $this = $(this),
+                  data = {
+                    soundcloud_track_id: $this.data('track-id'),
+                    title: $this.data('title'),
+                    duration: $this.data('duration'),
+                    room_id: $('[data-room-id]').data('room-id')
+                  };
+              
+              if ($(this).hasClass('button-add')) {
+                $(this).removeClass('button-add').addClass('button-remove');
+                  $(this).text('Remove');
+                  saveToDb(data);
+              } else {
+                $(this).removeClass('button-remove').addClass('button-add');
+                  $(this).text('Add');
+                  removeFromDb(data);
+              }
+            });
           }
         });
+
+        
         // Add Data to DB
         function saveToDb(data){
           console.log('Add Function Works!');
@@ -71,6 +119,7 @@
           // need to dynamically get the song_id from the dom
           var $this = $(this);
           var song_id = $this.data('id');
+
           $.ajax({
             url: "<%= songs_path %>/" + song_id,
             data: {"_method":"delete"},
@@ -82,11 +131,8 @@
               console.log(err);
             }
           });
-          // event.preventDefault();
         }
 
-
-                
         $('.track').click(function(e) {
           console.log('this click?');
           playTrack($(this).data('track-id'));
@@ -96,6 +142,7 @@
       
     getUserFavoriteTracks();
   </script>
+
   <script>
 
         $(function() {     
@@ -108,7 +155,7 @@
 
 </script>
 
-<div id="main">
+<div id="main" >
   <div class="row">
     <div class="large-9 column">
     <h1> <%= @room.name %> </h1>
@@ -151,8 +198,9 @@
             <div id="add-to-playlist">
             <%= render partial: "/rooms/addtoplaylist" %>
             <% @songs.each do |song| %>
-            <%= song.image_url %><br />
-        <% end %>
+              <%= song.image_url %>
+              <br />
+            <% end %>
       <% else %> 
         <div class="large-8 column">
           <div data-alert class="alert-box alert">
@@ -193,38 +241,9 @@
 
   <h1>Song's on this page</h1>
     <% @songs.each do |song| %>
-      <%= song.id %><%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br /><a class='button-delete'>Delete</a>
+      <%= song.id %><%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br />
     <% end %>
 
-    // <script type="text/javascript">
-
-
-    //   $('.button-delete').on('click', function(e){
-    //     e.preventDefault();
-
-    //     // console.log(song.id);
-        
-    //     removeFromDb();
-    //   });
-
-    //   function removeFromDb(){
-    //       console.log('REMOVE FUNCTION WORKS');
-    //       $.ajax({
-    //         url: "<%= song_path %>"+ song_id,
-    //         dataType: "json",
-    //         data: {'_method':'delete'},
-    //         type: "POST",
-    //         success: function(){
-    //           alert("shit got removed!");
-    //         },
-    //         error: function (err) {
-    //           console.log(err);
-    //         }
-    //       });
-    //       event.preventDefault();
-    //     }
-
-    // </script>
 
     
 
@@ -232,14 +251,4 @@
 
   </div> <!--large9 column-->
 
-<!--   <div class="large-3 columns public-list">
- -->
-
-
-  
-<!-- </div>
- -->
-
-
- <!--  <div style=" border: solid 2px; height:100px; width:350px; overflow:scroll;"> -->
 
