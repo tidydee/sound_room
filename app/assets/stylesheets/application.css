@@ -14,8 +14,10 @@
  *= require_self
  *= require footer
  *= require foundation_and_overrides
-
+ /*
+ *= require font-awesome
  */
+
 
  .flash-message{
   font-family: Arial, Helvetica, sans-serif;
@@ -34,4 +36,7 @@
   border-bottom: 30px solid white;
   margin-bottom: 12%;
   float: right;
+}
+.dashboard-icon {
+  font-size: 2em;
 }
