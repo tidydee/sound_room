@@ -1,5 +1,6 @@
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 <script>
+  window.playlist = []
   SC.initialize({
     client_id: '173c1924dc4e55b0db3b89a45bb71561'
   });
@@ -22,23 +23,19 @@
         }
         console.log("ArrayData:"+data);
 
-        var scIdArray = [];
         $.ajax({
           dataType: "json",
           url: window.location.pathname, 
           type: "GET", 
           success: function (data) {
-            console.log("DatabaseData:"+data);
+            console.log("DatabaseData:");
             for (var i=0; i<data.length; i++) {
               var reccordId = data[i].id;
               console.log('Reccord Id',reccordId);
-
-              scIdArray.push(data[i].soundcloud_track_id);
-              
               console.log("data id:", data[i].soundcloud_track_id);
-
+              window.playlist.push(data[i].soundcloud_track_id);
             }
-            console.log('scArrayData:', scIdArray);
+            console.log('scArrayData:', window.playlist);
             
             for (var i=0; i<favorites.length; i++) {
               var trackTitle = favorites[i].title.replace("'",'"');
@@ -49,9 +46,9 @@
               var trackImage = favorites[i].artwork_url;
               var row1 = "<td class='track'>"+trackTitle+"</td>";
               
-              console.log("soundcloud id: ", trackId, $.inArray(trackId, scIdArray) );
+              console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
 
-              if($.inArray(trackId, scIdArray) !== -1) // check here if song existed
+              if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
               {
                 var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
 
@@ -83,28 +80,17 @@
               var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
           
               if ($(this).hasClass('button-add')) {
-                $(this).removeClass('button-add').addClass('button-remove');
-                $(this).text('Remove');
-                saveToDb(data);
-                $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
-                              
-
-
-
+                saveToDb(data, image_url, min, sec, userName, this);
               } else {
-                $(this).removeClass('button-remove').addClass('button-add');
-                $(this).text('Add');
-                removeFromDb($this.data('track-id'));
+                removeFromDb($this.data('track-id'), this);
                 // $("p").filter(":contains('Hello')").remove()
-
-                // $('.room-tracks').remove('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+'- courtesy of '+userName+'</p>');
               }
             });
           }
         });
         
         // Add Data to DB
-        function saveToDb(data){
+        function saveToDb(data, image_url, min, sec, userName, button){
           console.log('Add Function Works!');
           var $this = $(this);
           $.ajax({
@@ -112,7 +98,13 @@
             data: data,
             dataType:  'json',
             type: "POST",
-            success: function(data){
+            success: function(data) {
+               $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
+                $(button).removeClass('button-add').addClass('button-remove');
+                $(button).text('Remove');
+
+                window.playlist.push(data.soundcloud_track_id);
+
               // TODO: need to store the returned db id in the dom for the delete button later  
               //$this.data("id", data.trackId);
             
@@ -124,7 +116,7 @@
           });
         }
         // Remove Data to DB
-        function removeFromDb(scID){
+        function removeFromDb(scID, button){
           console.log('REMOVE FUNCTION WORKS');
           // need to dynamically get the song_id from the dom
           // var $this = $(this);
@@ -135,8 +127,13 @@
             url: "<%= songs_path %>/" + scID,
             data: {"_method":"delete"},
             type: "POST",
-            success: function(){
+            success: function(data) {
+              $('p.tracks[data-sc-track-id='+scID+']').remove();
               alert("shit got removed!");
+              $(button).removeClass('button-remove').addClass('button-add');
+              $(button).text('Add');
+              index = window.playlist.indexOf(scID)
+              window.playlist.splice(index, 1);
             },
             error: function (err) {
               console.log(err);
@@ -167,36 +164,47 @@
 </script>
 <script>
 
-function playTrack(id, nextTrackOrder) {
+var currentTrackId = undefined;
+var currentPlaying = false;
+var sound = undefined;
+function playTrack(id) {
     SC.whenStreamingReady(function() {
-      sound = SC.stream(id, { autoPlay: false }, function(sound){
-      console.log(sound);
-        sound.play({
-          onfinish: function(){
-            console.log('track_finished');
-            skipper();
-          }
+      if (id === currentTrackId) {
+        if (currentPlaying) {
+          sound.pause();
+        } else {
+          sound.play();
+        }
+        currentPlaying = !currentPlaying;
+      } else {
+        currentTrackId = id
+        if (sound) {
+          sound.stop();
+        }
+        currentTrackId = id
+        sound = SC.stream(id, { autoPlay: false }, function(sound){
+        console.log(sound);
+          currentPlaying = true;
+          // while (currentPlaying) {
+          //   sound.position;
+          // }
+          sound.play({
+            onfinish: function(){
+              console.log('track_finished');
+              skipper();
+            }
+          });
         });
-      });
-
-      $('.track').click(function(e){
-        sound.stop();
-      })
+      }
 
       function skipper(){
-        sound.stop();       
-        var elements = $(document.getElementsByClassName("track"));
-        var numberOfTracks = elements.length;
-        console.log(numberOfTracks);
-        var subsequentTrack = nextTrackOrder + 1;
-        if(nextTrackOrder == numberOfTracks){
-          nextTrackOrder = 0;
-          subsequentTrack = 1;
+        sound.stop();
+        var nextIndex = window.playlist.indexOf(id) + 1
+        var nextTrackId;
+        if (nextIndex <= window.playlist.length - 1) {
+          nextTrackId = window.playlist[nextIndex];
         }
-        console.log(nextTrackOrder);
-        var nextTrackScId = $(document.getElementById(nextTrackOrder)).data('track-id');
-        console.log(nextTrackScId);       
-        playTrack(nextTrackScId, subsequentTrack);
+        playTrack(nextTrackId);
       }
       $('#skip').click(skipper);
 
@@ -218,16 +226,16 @@ function playTrack(id, nextTrackOrder) {
     });
   }
 
-
-
-  $('body').on('click','.tracks', function(e) {
+$(document).ready(function() {
+  $('.tracks').click(function(e) {
     console.log('this click?');
     var scTrackId = $(this).data('sc-track-id');
     console.log(scTrackId);
     var nextTrackOrder = ($(this).data('track-order')) + 1;
     console.log(nextTrackOrder);
-    playTrack(scTrackId, nextTrackOrder);
+    playTrack(scTrackId);
   });
+});
 
   </script>
 
