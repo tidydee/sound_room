@@ -84,6 +84,7 @@
                 $(this).removeClass('button-add').addClass('button-remove');
                   $(this).text('Remove');
                   saveToDb(data);
+                  $('.room-tracks').append('<p>'+data.title+'</p>');
               } else {
                 $(this).removeClass('button-remove').addClass('button-add');
                   $(this).text('Add');
