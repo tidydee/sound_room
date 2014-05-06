@@ -43,7 +43,7 @@
           	var playingTrackId = nextTrackOrder - 1;
           	$('#'+playingTrackId).removeClass("unselected-songs").addClass("selected-song");
           	console.log(playingTrackId);
-          	alert('song started playing');
+          	// alert('song started playing');
           }
         });
     	});
@@ -62,7 +62,7 @@
 					nextTrackOrder = 0;
 					subsequentTrack = 1;
 				}
-				var nextTrackScId = $(document.getElementById(nextTrackOrder)).data('track-id');
+				var nextTrackScId = $('#'+nextTrackOrder).data('track-id');
       	console.log(nextTrackScId);      	
       	playTrack(nextTrackScId, subsequentTrack);
       }
@@ -113,14 +113,14 @@
     <% request.original_url %>
     <hr>
     <p>
-	    <span id="play">Play</span>
-	    <span id="pause">Pause</span>
-	    <span id="skip">Skip</span>
+	    <div id="play">Play</div>
+	    <div id="pause">Pause</div>
+	    <div id="skip">Skip</div>
     </p>
     <p>
-    	<span id="mute">Mute</span>
-    	<span id="med-volume">Med</span>
-    	<span id="high-volume">High</span>
+    	<div id="mute">Mute</div>
+    	<div id="med-volume">Med</div>
+    	<div id="high-volume">High</div>
     </p>
 
     <div id="favorite_tracks">
@@ -176,8 +176,3 @@
 		} 
 
   </style>
-
-
-
-
-
