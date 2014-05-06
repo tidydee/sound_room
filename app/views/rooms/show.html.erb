@@ -53,17 +53,18 @@
               var duration = favorites[i].duration;
               var trackImage = favorites[i].artwork_url;
               var row1 = "<td class='track'>"+trackTitle+"</td>";
-              var addButton = "<td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
-              var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+reccordId+"'><span class='button-name'>Remove</span></a></td>"
-
+              
               console.log("soundcloud id: ", trackId, $.inArray(trackId, scIdArray) );
-
 
               if($.inArray(trackId, scIdArray) !== -1) // check here if song existed
               {
+                var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
+
                 $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
               }
               else {
+                var addButton = "<td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
+
                 $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
               }
             }
@@ -78,7 +79,7 @@
                     duration: $this.data('duration'),
                     room_id: $('[data-room-id]').data('room-id')
                   };
-              
+              console.log($this);
               if ($(this).hasClass('button-add')) {
                 $(this).removeClass('button-add').addClass('button-remove');
                   $(this).text('Remove');
@@ -86,12 +87,11 @@
               } else {
                 $(this).removeClass('button-remove').addClass('button-add');
                   $(this).text('Add');
-                  removeFromDb(data);
+                  removeFromDb($this.data('id'));
               }
             });
           }
         });
-
         
         // Add Data to DB
         function saveToDb(data){
@@ -104,7 +104,7 @@
             type: "POST",
             success: function(data){
               // TODO: need to store the returned db id in the dom for the delete button later  
-              $this.data("id", data.id);
+              //$this.data("id", data.trackId);
             
               alert("shit got saved");
             },
@@ -114,14 +114,15 @@
           });
         }
         // Remove Data to DB
-        function removeFromDb(){
+        function removeFromDb(scID){
           console.log('REMOVE FUNCTION WORKS');
           // need to dynamically get the song_id from the dom
-          var $this = $(this);
-          var song_id = $this.data('id');
+          // var $this = $(this);
+          // console.log($this);
+          // var sc_track_id = $this.data('id');
 
           $.ajax({
-            url: "<%= songs_path %>/" + song_id,
+            url: "<%= songs_path %>/" + scID,
             data: {"_method":"delete"},
             type: "POST",
             success: function(){

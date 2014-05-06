@@ -5,6 +5,9 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
+  # def show
+  # end
+
   def create
     # Song.new(params[:song])
 
@@ -25,8 +28,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song = Song.find(params[:id])
-    # @song.destroy
+    @song = Song.where(soundcloud_track_id: params[:id]).first
     respond_to do |format|
       if @song.destroy
         format.html { redirect_to :root, notice: "Save process completed!" }
@@ -39,11 +41,6 @@ class SongsController < ApplicationController
         format.json { render json: @song.errors, status: :unprocessable_entity}
       end
     end
-
-
-
-    
-    # redirect_to users_path 
   end
 
   protected
