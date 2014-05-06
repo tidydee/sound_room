@@ -12,6 +12,13 @@
     @room = Room.find(params[:id])
     @songs = @room.songs
     @song = Song.new
+
+    # binding.pry
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @songs }
+    end
   end
 
   def destroy

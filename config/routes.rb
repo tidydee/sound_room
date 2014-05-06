@@ -8,11 +8,11 @@ Rails.application.routes.draw do
 
   resources :users
   
-  resources :songs, only: [:create, :show, :destroy]
+  resources :songs
 
   # resources :rooms, only: [:index, :create, :show, :destroy]
   
-  resources :rooms, only: [:index, :create, :show, :destroy]
+  resources :rooms
   # do
   #   resources :songs, only: [:index, :create, :destroy]
   # end

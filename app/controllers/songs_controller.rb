@@ -5,6 +5,9 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
+  # def show
+  # end
+
   def create
     # Song.new(params[:song])
 
@@ -12,6 +15,22 @@ class SongsController < ApplicationController
     
     respond_to do |format|
       if @song.save
+        format.html { redirect_to :root, notice: "Save process completed!" }
+        format.json { render json: @song, status: :created, location: @song }
+      else
+        format.html { 
+          flash.now[:notice]="Save proccess coudn't be completed!" 
+          render :new 
+        }
+        format.json { render json: @song.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  def destroy
+    @song = Song.where(soundcloud_track_id: params[:id]).first
+    respond_to do |format|
+      if @song.destroy
         format.html { redirect_to :root, notice: "Save process completed!" }
         format.json { render json: @song, status: :created, location: @song }
       else
