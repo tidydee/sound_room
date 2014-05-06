@@ -155,6 +155,68 @@
         });
 
 </script>
+<script>
+
+function playTrack(id, nextTrackOrder) {
+    SC.whenStreamingReady(function() {
+      sound = SC.stream(id, { autoPlay: false }, function(sound){
+      console.log(sound);
+        sound.play({
+          onfinish: function(){
+            console.log('track_finished');
+            skipper();
+          }
+        });
+      });
+
+      $('.track').click(function(e){
+        sound.stop();
+      })
+
+      function skipper(){
+        sound.stop();       
+        var elements = $(document.getElementsByClassName("track"));
+        var numberOfTracks = elements.length;
+        console.log(numberOfTracks);
+        var subsequentTrack = nextTrackOrder + 1;
+        if(nextTrackOrder == numberOfTracks){
+          nextTrackOrder = 0;
+          subsequentTrack = 1;
+        }
+        console.log(nextTrackOrder);
+        var nextTrackScId = $(document.getElementById(nextTrackOrder)).data('track-id');
+        console.log(nextTrackScId);       
+        playTrack(nextTrackScId, subsequentTrack);
+      }
+      $('#skip').click(skipper);
+
+      $('#pause').click(function(e){
+          sound.pause();
+      });
+      $('#play').click(function(e){
+          sound.resume();
+      });
+      $('#mute').click(function(e){
+          sound.setVolume(0);
+      });
+      $('#med-volume').click(function(e){
+          sound.setVolume(40);
+      });
+      $('#high-volume').click(function(e){
+          sound.setVolume(100);
+      });
+    });
+  }
+
+  $('body').on('click','.tracks', function(e) {
+    console.log('this click?');
+    var scTrackId = $(this).data('sc-track-id');
+    console.log(scTrackId);
+    var nextTrackOrder = ($(this).data('track-order')) + 1;
+    console.log(nextTrackOrder);
+    playTrack(scTrackId, nextTrackOrder);
+  });
+  </script>
 
 <div id="main" >
   <div class="row">
@@ -186,8 +248,19 @@
 
     <div class="large-3 columns public-list">
       <%= render partial: "/rooms/chatbar" %>
-        <div class="row player-wrap">
+        
+        <div id="row player-wrap">
           <h3>Player goes here</h3>
+          <p>
+            <span id="play">Play</span>
+            <span id="pause">Pause</span>
+            <span id="skip">Skip</span>
+          </p>
+          <p>
+            <span id="mute">Mute</span>
+            <span id="med-volume">Med</span>
+            <span id="high-volume">High</span>
+          </p>      
         </div>
 
     <div class="row">
@@ -240,16 +313,14 @@
       </table>
     <% end %>
 
-  <h1>Song's on this page</h1>
-    <% @songs.each do |song| %>
-      <%= song.id %><%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br />
-    <% end %>
+  <div class="room-tracks"> 
+	  <h1>Tracks on this page</h1>
+	    <% @songs.each_with_index do |song, index| %>
+	    	<p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - courtesy of <%= song.user.soundcloud_username %> <%= song.duration %> milliseconds </p>
+	    <% end %>
+	</div>    
 
+</div> <!--large9 column-->
 
-    
-
-
-
-  </div> <!--large9 column-->
 
 
