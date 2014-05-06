@@ -24,3 +24,26 @@
   z-index: 2;
   padding-bottom: 5%;
 }
+// Room tabs
+#room-option-tab {
+  background-color: white;
+  padding-bottom: 5%;
+}
+
+#hidden-room {
+  position: relative;
+  float: right;
+  right: -4500px;
+  display: block;
+  visibility: none;
+  top: 40%;
+  width: 500px;
+}
+
+// Dashboard
+
+div.large-9.columns.dashboard {
+  background-color: whitesmoke;
+  border-radius: 30px 30px 0px 0px;
+  height: 100%;
+}

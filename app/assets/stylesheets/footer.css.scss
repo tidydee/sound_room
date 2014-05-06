@@ -1,11 +1,11 @@
 div.footer {
   font-weight: 200;
-  position: fixed;
+  position: relative;
   width: 100%;
   left: 0;
   bottom: 0;
-  background: white;
-  height: 10%;
+  background-color: whitesmoke;
+  height: 15%;
   clear: both;
 }
 
@@ -14,10 +14,49 @@ div.large-12.columns.footer p {
   letter-spacing: 1px;
 }
 
-div.footer {
-  font-weight: 200;
+// =========== BUTTON STYLES ===========
+
+.join-room-btn, 
+.create-room-btn {
+  text-align: center;
+}
+
+.create-room-btn {
+  border-top: 10px solid royalblue;
+}
+
+.join-room-btn {
+  border-top: 10px solid rgb(148, 225, 65);
+}
+
+.link-1,
+.link-2,
+.link-3,
+.create-room-btn,
+.join-room-btn {
+  background-color: whitesmoke;  
+}
+
+
+div.large-1.columns.link-1 {
+  border-top: 10px solid rgb(206, 255, 11);
+}
+
+div.large-1.columns.link-2 {
+  border-top: 10px solid #00FFC2;
+}
+
+div.large-1.columns.link-3 {
+  border-top: 10px solid #6FB3FC;
 }
 
 div.footer p {
   font-weight: 200;
 }
+
+div.footer.fullwidth ul {
+  padding-top: 1%;
+  list-style: none;
+}
+
+
