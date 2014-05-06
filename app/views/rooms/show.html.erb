@@ -79,15 +79,29 @@
                     duration: $this.data('duration'),
                     room_id: $('[data-room-id]').data('room-id')
                   };
-              console.log($this);
+              var image_url = $this.data('track-image');
+              var userName = '?????';
+              var numberOfTracks = $('.room-tracks').children().length;
+              // console.log('NUMBER OF TRACKS: ',numberOfTracks);
+              var min = (((data.duration)/1000)/60) << 0;
+              var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
+          
               if ($(this).hasClass('button-add')) {
                 $(this).removeClass('button-add').addClass('button-remove');
-                  $(this).text('Remove');
-                  saveToDb(data);
+                $(this).text('Remove');
+                saveToDb(data);
+                $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - courtesy of '+userName+'</p>');
+                              
+
+
+
               } else {
                 $(this).removeClass('button-remove').addClass('button-add');
-                  $(this).text('Add');
-                  removeFromDb($this.data('track-id'));
+                $(this).text('Add');
+                removeFromDb($this.data('track-id'));
+                // $("p").filter(":contains('Hello')").remove()
+
+                // $('.room-tracks').remove('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+'- courtesy of '+userName+'</p>');
               }
             });
           }
@@ -218,6 +232,7 @@ function playTrack(id, nextTrackOrder) {
     console.log(nextTrackOrder);
     playTrack(scTrackId, nextTrackOrder);
   });
+
   </script>
 
 <div class="row large-12" style="clear:both">
@@ -294,7 +309,8 @@ function playTrack(id, nextTrackOrder) {
         <div class="room-tracks"> 
           <h3>Tracks on this page</h3>
             <% @songs.each_with_index do |song, index| %>
-              <p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - courtesy of <%= song.user.soundcloud_username %> <%= song.duration %> milliseconds </p>
+              <p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | courtesy of <%= song.user.soundcloud_username %> </p>
+              
             <% end %>
         </div> <!--large9 column-->    
       </div>
