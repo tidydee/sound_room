@@ -31,8 +31,8 @@ class SongsController < ApplicationController
     @song = Song.where(soundcloud_track_id: params[:id]).first
     respond_to do |format|
       if @song.destroy
-        format.html { redirect_to :root, notice: "Save process completed!" }
-        format.json { render json: @song, status: :created, location: @song }
+        # format.html { redirect_to :root, notice: "Save process completed!" }
+        format.json { render json: @song }
       else
         format.html { 
           flash.now[:notice]="Save proccess coudn't be completed!" 

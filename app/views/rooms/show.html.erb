@@ -83,28 +83,17 @@
               var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
           
               if ($(this).hasClass('button-add')) {
-                $(this).removeClass('button-add').addClass('button-remove');
-                $(this).text('Remove');
-                saveToDb(data);
-                $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
-                              
-
-
-
+                saveToDb(data, image_url, min, sec, userName, this);
               } else {
-                $(this).removeClass('button-remove').addClass('button-add');
-                $(this).text('Add');
-                removeFromDb($this.data('track-id'));
+                removeFromDb($this.data('track-id'), this);
                 // $("p").filter(":contains('Hello')").remove()
-
-                // $('.room-tracks').remove('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+'- courtesy of '+userName+'</p>');
               }
             });
           }
         });
         
         // Add Data to DB
-        function saveToDb(data){
+        function saveToDb(data, image_url, min, sec, userName, button){
           console.log('Add Function Works!');
           var $this = $(this);
           $.ajax({
@@ -112,7 +101,11 @@
             data: data,
             dataType:  'json',
             type: "POST",
-            success: function(data){
+            success: function(data) {
+               $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
+                $(button).removeClass('button-add').addClass('button-remove');
+                $(button).text('Remove');
+
               // TODO: need to store the returned db id in the dom for the delete button later  
               //$this.data("id", data.trackId);
             
@@ -124,7 +117,7 @@
           });
         }
         // Remove Data to DB
-        function removeFromDb(scID){
+        function removeFromDb(scID, button){
           console.log('REMOVE FUNCTION WORKS');
           // need to dynamically get the song_id from the dom
           // var $this = $(this);
@@ -135,8 +128,12 @@
             url: "<%= songs_path %>/" + scID,
             data: {"_method":"delete"},
             type: "POST",
-            success: function(){
+            success: function(data) {
+              $('p.tracks[data-sc-track-id='+scID+']').remove();
               alert("shit got removed!");
+              $(button).removeClass('button-remove').addClass('button-add');
+              $(button).text('Add');
+
             },
             error: function (err) {
               console.log(err);
