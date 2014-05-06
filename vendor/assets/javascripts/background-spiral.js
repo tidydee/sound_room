@@ -296,6 +296,7 @@ var pathObj = {
  {
     "svgData": pathObj,
     "strokeWidth": 2,
-    "strokeColor": "#e09b99"
-}).lazylinepainter('paint'); 
+    "strokeColor": "#632666"
+}).lazylinepainter('paint').hide().fadeIn('3000');
+
  });

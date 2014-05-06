@@ -1,16 +1,29 @@
-<div class="row footer">
-  <div class="large-12 columns">
-  <hr />
-    <div class="row">
-      <div class="large-10 columns">
-         <p>&copy; Copyright no one at all. This Footer should always remain at the bottom</p>
-      </div>
-
-      <div class="small-2 columns">
-        <ul class="inline-list right">
-          <li><a href="#">Link 1</a></li>
-        </ul>
-      </div>
-    </div>
+<div class="footer fullwidth">
+  <div class="large-3 columns">
+    <% if current_user %>
+      <%= link_to '/auth/logout', id: "sc-signout" do %>
+        <%= image_tag "btn-disconnect-s.png" %>
+      <% end %>  
+        <p> Logged in as 
+          <%=current_user[:soundcloud_username]%>
+        </p>
+    <% else %>
+      <h6>Log in to share music</h6>
+      <%= link_to '/auth/soundcloud', id: "sc-signin" do %>
+          <%= image_tag "btn-connect-sc-s.png" %>
+      <% end %>
+    <% end %>
   </div>
+
+  <div class="large-7 columns">
+     <p>&copy; Copyright no one at all. This Footer should always remain at the bottom</p>
+  </div>
+
+  <div class="small-2 columns">
+    <ul class="inline-list right">
+      <li><a href="#">Invite</a></li>
+    </ul>
+  </div>
+
 </div>
+

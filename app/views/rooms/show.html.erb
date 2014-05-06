@@ -208,6 +208,9 @@ function playTrack(id, nextTrackOrder) {
     });
   }
 
+<div class="row large-12" style="clear:both">
+  <div class="large-9 column room-content">
+
   $('body').on('click','.tracks', function(e) {
     console.log('this click?');
     var scTrackId = $(this).data('sc-track-id');
@@ -218,12 +221,9 @@ function playTrack(id, nextTrackOrder) {
   });
   </script>
 
-<div id="main" >
-  <div class="row">
-    <div class="large-9 column">
     <h1> <%= @room.name %> </h1>
 
-      <!-- Only a User who created a room, can Delete a Room -->
+    <!-- Only a User who created a room, can Delete a Room -->
     <% if current_user %>
       <% if @room.user_id == session[:user_id] %>
         <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
@@ -244,8 +244,57 @@ function playTrack(id, nextTrackOrder) {
         <% end %>
       </div>
     <% end %>  
-    </div> <!--large9 column-->
+  </div> 
+    
+    <div id="right-window" class="large-3 column">
+        <%= render partial: "/rooms/chatbar" %>
+          <div class="player-wrap">
+            <h3>Player goes here</h3>
+          </div>
 
+<<<<<<< HEAD
+        <div class="playlist">
+          <% if current_user %>
+            <h4>Room's Playlist</h4>
+            <p>Add a new song to the playlist</p>
+            <a href="#" data-reveal-id="myModal">+ songs</a>
+              <div id="myModal" class="reveal-modal" data-reveal>   
+                <div id="add-to-playlist">
+                <%= render partial: "/rooms/addtoplaylist" %>
+                <% @songs.each do |song| %>
+                <%= song.image_url %><br />
+            <% end %>
+          <% else %> 
+            <div class="large-8 column">
+              <div data-alert class="alert-box alert">
+                <p>Please sign in to add to the playlist.</p>
+                <a href="#" class="close">&times;</a>
+              </div>
+            </div>  
+          <% end %>
+              </div>
+            </div> 
+        </div>
+      </div>
+      
+  <div id="hidden">
+    <div class="row" data-room-id="<%= @room.id %>">
+      <div class="large-4 column room-playlist">
+      <!-- <span style="color:white;"> <%= request.original_url %> </span> -->
+      <h3>Song's on this page</h3>
+        <% @songs.each do |song| %>
+          <%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br />
+        <% end %>
+      </div> <!--large9 column-->    
+    </div>
+  </div>  
+</div>
+
+
+<!--   <div class="large-3 columns public-list">
+ -->
+
+=======
     <div class="large-3 columns public-list">
       <%= render partial: "/rooms/chatbar" %>
         
@@ -319,6 +368,7 @@ function playTrack(id, nextTrackOrder) {
 	    	<p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - courtesy of <%= song.user.soundcloud_username %> <%= song.duration %> milliseconds </p>
 	    <% end %>
 	</div>    
+>>>>>>> master
 
 </div> <!--large9 column-->
 

@@ -44,6 +44,7 @@ gem "js-routes"
 
 gem 'foundation-rails'
 gem 'pusher'
+gem 'uuid', '~> 2.3.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
