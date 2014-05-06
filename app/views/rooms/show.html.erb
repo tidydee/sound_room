@@ -79,16 +79,21 @@
                     duration: $this.data('duration'),
                     room_id: $('[data-room-id]').data('room-id')
                   };
+              var image_url = $this.data('track-image');
+              var userName = '?????'    
               console.log($this);
               if ($(this).hasClass('button-add')) {
                 $(this).removeClass('button-add').addClass('button-remove');
-                  $(this).text('Remove');
-                  saveToDb(data);
-                  $('.room-tracks').append('<p>'+data.title+'</p>');
+                $(this).text('Remove');
+                saveToDb(data);
+                $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+'- courtesy of '+userName+'</p>');
+
+              
+
               } else {
                 $(this).removeClass('button-remove').addClass('button-add');
-                  $(this).text('Add');
-                  removeFromDb($this.data('track-id'));
+                $(this).text('Add');
+                removeFromDb($this.data('track-id'));
               }
             });
           }
@@ -219,6 +224,7 @@ function playTrack(id, nextTrackOrder) {
     console.log(nextTrackOrder);
     playTrack(scTrackId, nextTrackOrder);
   });
+
   </script>
 
 <div class="row large-12" style="clear:both">
