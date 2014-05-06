@@ -7,15 +7,14 @@
     function getUserFavoriteTracks() {
 
       var soundcloud_id = <%= current_user.soundcloud_user_id if current_user %>
-
-
-
+      //-------------------- Local Storage Begin ----------------------\\
+      var soundcloud_name = '<%= current_user.soundcloud_username if current_user %>';
+      localStorage.setItem('currentUserName', soundcloud_name);
+      var localUserName = localStorage.getItem('currentUserName');
+      //-------------------- Local Storage End ----------------------\\
+      
       SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
-        // send array of sound cloud id's to server in ajax
-        // in server check to see if each song exists in database
-        // send back list of song's, whether add or remove
-        // console.log(favorites);
-
+  
         var data = []
         for (var i=0; i<favorites.length; i++) {
           var trackId = favorites[i].id;    
@@ -31,8 +30,6 @@
           success: function (data) {
             console.log("DatabaseData:"+data);
             for (var i=0; i<data.length; i++) {
-              // var dbTrackId = data;
-              // console.log("DatabaseData[i]:"+data[i].soundcloud_track_id);
               var reccordId = data[i].id;
               console.log('Reccord Id',reccordId);
 
@@ -40,11 +37,9 @@
               
               console.log("data id:", data[i].soundcloud_track_id);
 
-            // create the list item, check to see if add/remove
             }
             console.log('scArrayData:', scIdArray);
             
-            console.log("YOOOOOOO");
             for (var i=0; i<favorites.length; i++) {
               var trackTitle = favorites[i].title.replace("'",'"');
               var trackId = favorites[i].id;
@@ -80,7 +75,8 @@
                     room_id: $('[data-room-id]').data('room-id')
                   };
               var image_url = $this.data('track-image');
-              var userName = '?????';
+              // Set at TOp of Page with Local Storage
+              var userName = localUserName;
               var numberOfTracks = $('.room-tracks').children().length;
               // console.log('NUMBER OF TRACKS: ',numberOfTracks);
               var min = (((data.duration)/1000)/60) << 0;
@@ -90,7 +86,7 @@
                 $(this).removeClass('button-add').addClass('button-remove');
                 $(this).text('Remove');
                 saveToDb(data);
-                $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - courtesy of '+userName+'</p>');
+                $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
                               
 
 
@@ -309,7 +305,7 @@ function playTrack(id, nextTrackOrder) {
         <div class="room-tracks"> 
           <h3>Tracks on this page</h3>
             <% @songs.each_with_index do |song, index| %>
-              <p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | courtesy of <%= song.user.soundcloud_username %> </p>
+              <p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | added by <%= song.user.soundcloud_username %> </p>
               
             <% end %>
         </div> <!--large9 column-->    
