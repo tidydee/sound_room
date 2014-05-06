@@ -14,10 +14,26 @@ div.large-12.columns.footer p {
   letter-spacing: 1px;
 }
 
+div.large-1.columns.link-1 {
+  border-top: 10px solid rgb(206, 255, 11);
+}
+
+div.large-1.columns.link-2 {
+  border-top: 10px solid #00FFC2;
+}
+
+div.large-1.columns.link-3 {
+  border-top: 10px solid #6FB3FC;
+}
+
 div.footer {
   font-weight: 200;
 }
 
 div.footer p {
   font-weight: 200;
+}
+
+ul.center {
+  list-style: none;
 }

@@ -56,40 +56,38 @@
 </script>
 
 
-    <div class="large-9 columns">
+    <div class="large-9 columns dashboard">
     
     
     <h2><%= current_user.soundcloud_username%>'s Dashboard</h2>
-    <%= request.original_url %>
+    
     <hr>
 
     <div id="player">
     </div>
 
-    <div id="play">
+   <!--  <div id="play">
       <emp>Play</emp> 
     </div>
 
     <div id="pause">
       <emp>Pause</emp>
     </div>
-
-
-
+    
     <div id="stop">
       <emp>Stop</emp>
-    </div>
+    </div> -->
 
 
     <div id="favorite_tracks">
+      <p> Any song that you have liked or favorited on soundcloud appears here. Etsy locavore mumblecore, roof party mixtape trust fund salvia butcher kogi letterpress cardigan. Irony flexitarian trust fund master cleanse. +1 Tonx sriracha quinoa. </p>
     </div>
 
   </div>  
 
-  <aside class="large-3 columns">
+  <aside class="large-3 columns" id="room-option-tab">
 
       <ul class="side-nav">
-
         <%= form_for @room do |f| %>
         <!-- Room Create Error Handling -->
         <div class="error-message">
@@ -115,13 +113,11 @@
         <%end%>  
       </ul>
 
+    
+      <h4>List of my Rooms</h4>
+        <% @rooms.each do |room| %>
+        <%= link_to room.name, room_path(room) %><br />
+      <% end %>
+
+    
   </aside>
-
-  <aside class="large-3 columns"> 
-    <h4>List of my Rooms</h4>
-      <% @rooms.each do |room| %>
-      <%= link_to room.name, room_path(room) %><br />
-    <% end %>
-
-  </aside>
-
