@@ -8,20 +8,6 @@
 	  client_id: '173c1924dc4e55b0db3b89a45bb71561'
 		});
 
-	// var iframeElementID = iframeElement.id;
-	// var widget = SC.Widget(iframeElementID);
-	// var newSoundUrl = 'http://api.soundcloud.com/tracks/129190405'
-
-	// widget.bind(SC.Widget.Events.READY, function() {
- //      // load new widget
- //      widget.bind(SC.Widget.Events.FINISH, function() {
- //        widget.load("http://soundcloud.com/beqa-abzianidze/what-i-might-do-david-august", {
- //          show_artwork: false
- //        });
- //      });
- //    });
-
-
 	function getUserFavoriteTracks() {
 		console.log('inside')
 		var soundcloud_id =  <%= current_user.soundcloud_user_id %>
@@ -35,9 +21,7 @@
 				var trackOrder = i;
 				
 				$('#favorite_tracks').append("<p class='track' id='"+trackOrder+"' data-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+">"+trackTitle+"</p>");
-				// urls.push(trackUrl);
 			}
-			// console.log(urls)
 				
     });
 	}
