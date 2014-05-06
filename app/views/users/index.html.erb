@@ -29,13 +29,21 @@
 	// var playUrl
 
 	function playTrack(id, nextTrackOrder) {
+    $(".track").addClass("unselected-songs");
+
     SC.whenStreamingReady(function() {
       sound = SC.stream(id, { autoPlay: false }, function(sound){
       console.log(sound);
         sound.play({
           onfinish: function(){
-            console.log('track_finished');
+            console.log('track finished');
             skipper();
+          },
+          onplay: function(){
+          	var playingTrackId = nextTrackOrder - 1;
+          	$('#'+playingTrackId).removeClass("unselected-songs").addClass("selected-song");
+          	console.log(playingTrackId);
+          	// alert('song started playing');
           }
         });
     	});
@@ -54,8 +62,7 @@
 					nextTrackOrder = 0;
 					subsequentTrack = 1;
 				}
-				console.log(nextTrackOrder);
-				var nextTrackScId = $(document.getElementById(nextTrackOrder)).data('track-id');
+				var nextTrackScId = $('#'+nextTrackOrder).data('track-id');
       	console.log(nextTrackScId);      	
       	playTrack(nextTrackScId, subsequentTrack);
       }
@@ -106,14 +113,14 @@
     <% request.original_url %>
     <hr>
     <p>
-	    <span id="play">Play</span>
-	    <span id="pause">Pause</span>
-	    <span id="skip">Skip</span>
+	    <div id="play">Play</div>
+	    <div id="pause">Pause</div>
+	    <div id="skip">Skip</div>
     </p>
     <p>
-    	<span id="mute">Mute</span>
-    	<span id="med-volume">Med</span>
-    	<span id="high-volume">High</span>
+    	<div id="mute">Mute</div>
+    	<div id="med-volume">Med</div>
+    	<div id="high-volume">High</div>
     </p>
 
     <div id="favorite_tracks">
@@ -158,7 +165,14 @@
 
   </aside>
 
+  <style>
 
+		.selected-song {
+			color:red;
+		}
 
+		.unselected-songs {
+			color:green;
+		} 
 
-
+  </style>
