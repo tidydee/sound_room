@@ -18,8 +18,11 @@
 //= require jquery.transit.min
 //= require PusherChatWidget
 //= require raphael-min
+//= require layout-animations
 //= require jquery.lazylinepainter-1.4.1.min
+//= require jquery.foggy.min
 //= require background-spiral
+//= require seen.min
 //= require_tree .
 //= require js-routes
 

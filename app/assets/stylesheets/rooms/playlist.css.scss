@@ -1,0 +1,31 @@
+// Place all the styles related to the rooms/songs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* Bring up the playlist */
+
+#hidden {
+  position: relative;
+  float: left;
+  left: -4500px;
+  display: block;
+  visibility: none;
+  top: 40%;
+  width: 500px;
+}
+
+.room-playlist {
+  position: relative;
+  top: 100;
+  background: rgba(0, 0, 0, 0.87);
+  padding: 1%;
+  border: 1px solid rgb(133, 133, 133);
+  width: 500px;
+  font-size: 1em;
+  color: rgb(172, 172, 172);
+}
+
+.room-playlist h3 {
+  color: rgba(255,119,0,1);
+}

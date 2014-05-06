@@ -1,29 +1,18 @@
-  
-<div class="row">
+<nav class="top-bar gradient two" data-topbar>
+</nav>
+
+
+<div class="row fullwidth">
   <div class="large-12 column">
     <div class="panel right top-auth">
-
-      <% if current_user %>
-        <h6> Logged in as 
-          <%=current_user[:soundcloud_username]%>
-        </h6>
-        <%= link_to '/auth/logout', id: "sc-signout" do %>
-          <%= image_tag "btn-disconnect-s.png" %>
-        <% end %>
-      <% else %>
-        <h6>Log in to share music</h6>
-        <%= link_to '/auth/soundcloud', id: "sc-signin" do %>
-          <%= image_tag "btn-connect-sc-s.png" %>
-        <% end %>
-      <% end %>
+      <div class="small-1 column curo"></div>
     </div> 
   </div>
-  <div class="small-1 column curo">
-  </div>
+  
   <div id="" class="">
+    <div class="small-1 column curo">
+    </div>
     <h1>CuroBeats</h1>
   </div>
-
-  <hr />
 
 </div>
