@@ -26,13 +26,10 @@ $(document).ready(function () {
     $('#songs-on-page-tab').click(function(){
       var hidden = $("#hidden");
       if (hidden.hasClass('visible')){
-        console.log("1")
-        hidden.animate({"left":"-500px"}, "slow").removeClass('visible');
+        hidden.animate({"left":"-750px"}, "slow").removeClass('visible');
       } else {
-        console.log("2")
         hidden.animate({"left":"75px"}, "slow").addClass('visible');
       }
-      console.log(hidden)
     });
 
 });
