@@ -12,6 +12,27 @@ html, body {
   height: 100%;
 }
 
+html { 
+  // background-color: rgba(65,0,92, 1); 
+  background-image: linear-gradient(to bottom, #C643FC 0%, #FF5F37 100%);
+  // background-color: #FF7700; 
+} 
+
+body { 
+  margin:0;
+}
+
+div.row.large-12 {
+clear: both;
+}
+
+.fullwidth {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
 .curo {
   height: 50px;
   width: 50px;
@@ -21,22 +42,15 @@ html, body {
 }
 // ====== BACKGROUND GRADIENT ====== 
 
-html { 
-  background-color: rgba(56, 48, 40, 0.63); 
-  // background-color: #FF7700; 
-} 
-
-body { 
-  margin:0;
-}
 
 .gradient {
-  content: ""; height: 100%; width: 100%; position: fixed; z-index: -100;
+  content: ""; height: 50%; width: 100%; position: fixed; z-index: -100;
+  border-bottom: 3px solid white;
 }
 
-.gradient.one {
-  background-image: linear-gradient(to bottom, #5856D6 0%, #C644FC 100%);
-}
+// .gradient.one {
+//   background-image: linear-gradient(to bottom, #5856D6 0%, #C644FC 100%);
+// }
 
 .gradient.two {
   background-image: linear-gradient(to bottom, #C643FC 0%, #FF5F37 100%); display:none;
@@ -60,12 +74,13 @@ h1 {
   font-size: 4em;
 }
 
-h3 {
-  font-weight: 200;
+h2 {
+  color: #FF7700;
+  font-size: 2em;
 }
 
-.chat {
-  height: 400px;
+h3 {
+  font-weight: 200;
 }
 
 .test-wrap {
@@ -94,6 +109,10 @@ hr {
 //   margin-bottom: 30px;
 // }
 
+.room-content {
+  position: relative;
+}
+
 
 .top-auth {
   background-color: rgba(255, 255, 255, 0.3);
@@ -113,11 +132,16 @@ div.public-list-item:hover {
 
 
 .public-list {
-  background-color: rgba(255, 255, 255, 0.3);
+  // background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255,255,255,0.5);
   padding-top: 1%;
   list-style: none;
   border-top: 30px solid white;
   border-bottom: 30px solid white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-bottom: 12%;
 }
 
 .public-list ul {
@@ -136,20 +160,14 @@ div.public-list-item:hover {
   color: #FF0073;
 }
 
-
-.player-wrap {
-  border: 1px dotted white;
-  padding:2%;
-  height: 200px;
-  width: 100%;
-}
-
 .spacer {
   height: 75px;
 }
 
 .table-overflow {
   overflow-y: scroll;
+  width: 100%;
+  max-width: 900px;
 }
 
 // ====== BACKGROUND STYLES ======   
@@ -159,6 +177,7 @@ div.public-list-item:hover {
   z-index: -10;
   position: fixed;
   background-repeat: normal;
+  opacity: 1;
 }
 
 #spiral2 {
@@ -166,36 +185,5 @@ div.public-list-item:hover {
     left:1%;
     z-index: -10;
     position: fixed;
-}
-
-// ====== CHAT STYLES ======   
-
-.custom-chat-btn {
-  background-color: rgba(255,119,0,1);
-  border-radius: 20px;
-}
-
-.custom-chat-btn:hover {
-  background-color: #BED200;
-  color: #8000FF;
-}
-
-// ====== FOOTER STYLES ======  
-
-div.large-12.columns.footer p {
-  font-weight: 100;
-  letter-spacing: 1px;
-}
-
-div.footer {
-  font-weight: 200;
-}
-
-div.footer p {
-  font-weight: 200;
-}
-
-div.add-to-playlist {
-  
 }
 

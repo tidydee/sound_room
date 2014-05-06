@@ -1,0 +1,58 @@
+
+div.public-list-item:hover {
+  background-color: rgba(39, 39, 39, 0.07);
+}
+
+
+#right-window {
+  /*// background-color: rgba(255, 255, 255, 0.3);*/
+  background-color: rgba(255,255,255,0.5);
+  padding-top: 1%;
+  list-style: none;
+  border-top: 30px solid white;
+  border-bottom: 30px solid white;
+  margin-bottom: 12%;
+  float: right;
+}
+
+#right-window ul {
+  list-style-type: none;
+}
+
+#right-window a {
+  font-family: Helvetica;
+  color: #000000;
+  letter-spacing: 1px;
+  line-height: 50px;
+}
+
+#right-window a:hover {
+  transition: 100ms ease-in;
+  color: #FF0073;
+}
+
+
+.sidebar-chat {
+  height: 60%;
+  max-height: 250px;
+}
+.custom-chat-btn {
+  background-color: rgba(255,119,0,1);
+  border-radius: 20px;
+}
+
+.custom-chat-btn:hover {
+  background-color: #BED200;
+  color: #8000FF;
+}
+
+.player-wrap {
+  border: 1px dotted white;
+  padding:2%;
+  /*height: 60%;*/
+  width: 100%;
+  clear: both;
+}
+
+
+

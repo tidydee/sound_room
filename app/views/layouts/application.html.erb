@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "SoundRoom" %></title>
 
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"></script>
 
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -14,24 +15,20 @@
   </head>
 
   <body>
-    <div id="spiral"></div>
-    <div id="hue" class="wrapper"></div>  
-
-
+    
     <!-- Nav Bar -->
     <%= render partial: "/shared/topnav" %>
 
     <!-- Main Page Content -->
-    <div class="row">
-      <div class="large-12 columns" role="content">
+    <div class="row column fullwidth wrap">
 
+      <div class="large-12 column" role="content">
         <div class="flash-message"> 
           <% flash.each do |name, msg| %>
             <%= content_tag :div, msg, class: name %>
           <% end %>
         </div>
-        <div id="spiral2"></div>
-
+        
         <%= yield %>
 
       </div>    
@@ -42,34 +39,10 @@
     <!-- End Main Content and Sidebar -->
 
     <!-- Footer -->
-    <div class="row"></div>
+    <div class="row fullwidth"></div>
 
   <%= render partial: "/shared/footer" %>
 
-  <script>
-    $(document).ready(function () {
-      $('.curo').transition({
-        perspective: '100px',
-        rotate3d: '1,1,0,180deg'
-      });
-
-      fadeToggle( $('.gradient.one') );
-      fadeToggle( $('.gradient.two') );
-
-      function fadeToggle(el, hide) {
-        el.fadeToggle( 30000, null, function() { fadeToggle(el); 
-        });
-      }
-    });
-
-    $('.curo').mouseover(function(){
-      $(this).transition({
-        perspective: '100px',
-        rotateY: '180deg'
-      }); 
-    });
-     
-  </script>
 
   <%= javascript_include_tag "vendor/modernizr" %>
   </body>

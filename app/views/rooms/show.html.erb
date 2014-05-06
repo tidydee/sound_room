@@ -70,12 +70,11 @@
 
 </script>
 
-<div id="main">
-  <div class="row">
-    <div class="large-9 column">
+<div class="row large-12" style="clear:both">
+  <div class="large-9 column room-content">
     <h1> <%= @room.name %> </h1>
 
-      <!-- Only a User who created a room, can Delete a Room -->
+    <!-- Only a User who created a room, can Delete a Room -->
     <% if current_user %>
       <% if @room.user_id == session[:user_id] %>
         <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
@@ -96,69 +95,51 @@
         <% end %>
       </div>
     <% end %>  
-    </div> <!--large9 column-->
-
-    <div class="large-3 columns public-list">
-      <%= render partial: "/rooms/chatbar" %>
-        <div class="row player-wrap">
-          <h3>Player goes here</h3>
-        </div>
-
-    <div class="row">
-      <% if current_user %>
-        <h4>Room's Playlist</h4>
-        <p>Add a new song to the playlist</p>
-        <a href="#" data-reveal-id="myModal">+ songs</a>
-          <div id="myModal" class="reveal-modal" data-reveal>   
-            <div id="add-to-playlist">
-            <%= render partial: "/rooms/addtoplaylist" %>
-            <% @songs.each do |song| %>
-            <%= song.image_url %><br />
-        <% end %>
-      <% else %> 
-        <div class="large-8 column">
-          <div data-alert class="alert-box alert">
-            <p>Please sign in to add to the playlist.</p>
-            <a href="#" class="close">&times;</a>
+  </div> 
+    
+    <div id="right-window" class="large-3 column">
+        <%= render partial: "/rooms/chatbar" %>
+          <div class="player-wrap">
+            <h3>Player goes here</h3>
           </div>
-        </div>  
-      <% end %>
+
+        <div class="playlist">
+          <% if current_user %>
+            <h4>Room's Playlist</h4>
+            <p>Add a new song to the playlist</p>
+            <a href="#" data-reveal-id="myModal">+ songs</a>
+              <div id="myModal" class="reveal-modal" data-reveal>   
+                <div id="add-to-playlist">
+                <%= render partial: "/rooms/addtoplaylist" %>
+                <% @songs.each do |song| %>
+                <%= song.image_url %><br />
+            <% end %>
+          <% else %> 
+            <div class="large-8 column">
+              <div data-alert class="alert-box alert">
+                <p>Please sign in to add to the playlist.</p>
+                <a href="#" class="close">&times;</a>
+              </div>
+            </div>  
+          <% end %>
+              </div>
+            </div> 
+        </div>
       </div>
-    </div> <!-- side chat bar -->
-
-  <!--     </div> -->
-    </div><br />
-
-    
-    
-  </div>
-
-
-<div class="row" data-room-id="<%= @room.id %>">
-  <div class="large-9 column">
-    <span style="color:white;"> <%= request.original_url %> </span>
-    
-    <!-- Tracks from SoundCloud -->
-    <table>
-      <thead>
-        <tr>
-          <th width="200">Tracks from Soundcloud</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="favorite_tracks" >
       
-        <!-- My SC Song streams in here -->
-      </tbody>
+  <div id="hidden">
+    <div class="row" data-room-id="<%= @room.id %>">
+      <div class="large-4 column room-playlist">
+      <!-- <span style="color:white;"> <%= request.original_url %> </span> -->
+      <h3>Song's on this page</h3>
+        <% @songs.each do |song| %>
+          <%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br />
+        <% end %>
+      </div> <!--large9 column-->    
+    </div>
+  </div>  
+</div>
 
-    </table>
-
-  <h1>Song's on this page</h1>
-    <% @songs.each do |song| %>
-      <%= song.user.soundcloud_username %> <%= song.title %> <%= song.duration %> <%= song.image_url %><%= song.soundcloud_track_id %><br />
-    <% end %>
-
-  </div> <!--large9 column-->
 
 <!--   <div class="large-3 columns public-list">
  -->

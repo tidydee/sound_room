@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require footer
  *= require foundation_and_overrides
 
  */
@@ -22,3 +23,15 @@
   margin-top: 10px;
   color: orange; 
  }
+
+ #public-rooms {
+  /*// background-color: rgba(255, 255, 255, 0.3);*/
+  background-color: rgba(255, 255, 255, 0.89);
+  padding-top: 1%;
+  width: 40%;
+  list-style: none;
+  border-top: 30px solid white;
+  border-bottom: 30px solid white;
+  margin-bottom: 12%;
+  float: right;
+}
