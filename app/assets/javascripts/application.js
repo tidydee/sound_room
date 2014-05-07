@@ -24,7 +24,7 @@
 //= require background-spiral
 //= require seen.min
 //= require_tree .
-//= require self
+//= require_self
 //= require js-routes
 
 $(function(){ $(document).foundation(); });
