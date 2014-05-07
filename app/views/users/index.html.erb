@@ -26,8 +26,6 @@
     });
 	}
 
-
-
 	$('body').on('click','.tracks', function(e) {
 		console.log('this click?');
 		var scTrackId = $(this).data('sc-track-id');
@@ -37,8 +35,6 @@
 	
 	getUserFavoriteTracks();
 });
-	
-
 
 </script>
 
@@ -48,6 +44,9 @@
     <h2><%= current_user.soundcloud_username %>'s Dashboard</h2>
 
     <div id="player"></div>
+    <div id="progressBarBackground">
+			<div class="progressBar"></div>
+		</div>
 
     <% request.original_url %>
     <hr>
@@ -106,8 +105,21 @@
 
   <style>
 
-		p.tracks.selected-song {
-			color:red;
-		}
+	p.tracks.selected-song {
+		color:red;
+	}
+
+	.progressBar {
+		background-color: #FFF;
+		height: 15px;
+	}
+
+	#progressBarBackground{
+		background-color: #333333;
+		height: 15px;
+		margin-top: 10px;
+		position: relative;
+		width: 100%;
+	}
 
   </style>

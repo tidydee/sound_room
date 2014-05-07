@@ -36,7 +36,10 @@ function playTrack(id) {
             var playingTrackElement = $('p.tracks[data-sc-track-id='+id+']');
             playingTrackElement.addClass("selected-song");
             console.log(playingTrackElement);
-            }
+            },
+            whileplaying: function() {
+              $(".progressBar").css('width', ((this.position/this.duration) * 100) + '%');
+            },
           });
         });
       }
