@@ -1,3 +1,19 @@
 // Place all the styles related to the pusher controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.pusher-chat-widget-messages {
+  height: 200px;
+  border: 2px solid rgba(0, 0, 0, 0.09);
+  overflow-y: auto;
+}
+
+a.screen-name {
+  font-size: 1em;
+  color: blue;
+}
+
+a.timestamp {
+  font-size: x-small;
+}

@@ -31,10 +31,12 @@
 }
 
 div#songs-on-page-tab {
+  background-color: rgba(239, 239, 246, 0.28);
   font-size: 1em;
+  cursor: pointer;
   color: white;
   float: left;
-  padding: 1%;
+  padding: 12px;
   border: 1px solid white;
   border-radius: 9px;
   line-height: 1em;
