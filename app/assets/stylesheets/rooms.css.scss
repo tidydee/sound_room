@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$body-bg: url('space-clouds.jpg');
+$body-bg: url('soundRoom1_large.jpg');
 
 * {
   margin: 0;
@@ -13,8 +13,15 @@ html, body {
 }
 
 html { 
-  // background-color: rgba(65,0,92, 1); 
+  background-color: rgba(65,0,92, 1); 
   background-image: linear-gradient(to bottom, #C643FC 0%, #FF5F37 100%);
+  // background-image: $body-bg;
+  // background-repeat:no-repeat;
+  //   -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+
   // background-color: #FF7700; 
 } 
 

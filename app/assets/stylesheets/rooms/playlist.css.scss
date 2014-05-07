@@ -17,11 +17,12 @@
 
 .room-playlist {
   position: relative;
-  top: 100;
   background: rgba(0, 0, 0, 0.87);
   padding: 1%;
   border: 1px solid rgb(133, 133, 133);
   width: 100%;
+  height: 80%;
+  top: 20px;
   font-size: 1em;
   color: rgb(172, 172, 172);
 }
@@ -40,4 +41,17 @@ div#songs-on-page-tab {
   border: 1px solid white;
   border-radius: 9px;
   line-height: 1em;
+  margin-top: 2%;
 }
+
+div#songs-on-page-tab:hover {
+  background-color: rgba(21, 21, 33, 0.28);
+  transition: background-color 300ms ease-out;
+}
+
+@media screen and (min-width: 400px) and (max-width: 1025px){
+  #songs-on-page-tab {
+    width: 100%;
+    text-align: center;
+    }
+  }
