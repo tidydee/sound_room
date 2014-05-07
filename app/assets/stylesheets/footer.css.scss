@@ -34,20 +34,42 @@ div.large-12.columns.footer p {
 .link-3,
 .create-room-btn,
 .join-room-btn {
-  background-color: whitesmoke;  
+  background-color: whitesmoke; 
+  text-align: center;
+ 
 }
 
 
-div.large-1.columns.link-1 {
+.link-1 {
   border-top: 10px solid rgb(206, 255, 11);
 }
 
-div.large-1.columns.link-2 {
+.link-2 {
   border-top: 10px solid #00FFC2;
 }
 
-div.large-1.columns.link-3 {
+.link-3 {
   border-top: 10px solid #6FB3FC;
+}
+
+.link-1:hover {
+  border-top: 10px solid #FFFD0B;
+  transition: 200ms ease-in;
+}
+
+.link-2:hover {
+  border-color: #FFA600;;
+  transition: 200ms ease-in;
+}
+
+.link-3:hover {
+  border-color: #FD00FF;
+  transition: 200ms ease-in;
+}
+
+.join-room-btn:hover {
+  border-color: #FF0000;
+  transition: 200ms ease-in;
 }
 
 div.footer p {
@@ -59,4 +81,10 @@ div.footer.fullwidth ul {
   list-style: none;
 }
 
+// =========== Login Auth Button ===========
+
+.auth {
+  padding-top: 12px;
+  text-align: center;
+}
 
