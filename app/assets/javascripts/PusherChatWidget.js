@@ -163,7 +163,7 @@ PusherChatWidget._createHTML = function(appendTo) {
   var html = '' +
   '<div class="pusher-chat-widget">' +
     '<div class="large-12 columns">' +
-      '<label for="nickname">Chat</label>' +
+      '<label for="nickname"><h4>Chat</h4></label>' +
       '<input type="text" placeholder="Name" name="nickname" />' +
     '</div>' +
     '<div class="pusher-chat-widget-messages">' +
@@ -173,7 +173,7 @@ PusherChatWidget._createHTML = function(appendTo) {
     '</div>' +
     '<div class="large-12 columns">' +
       '<textarea name="message" placeholder="Type your message here" ></textarea>' +
-      '<button class="button tiny custom-chat-btn">Send</button>' +
+      '<button class="button tiny manage-songs-btn">Send</button>' +
     '</div>' +
   '</div>';
   var widget = $(html);

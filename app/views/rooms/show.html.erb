@@ -219,7 +219,8 @@ $(document).ready(function() {
           <% if current_user %>
             <h4>Room's Playlist</h4>
             <p>Add a new song to the playlist</p>
-            <a href="#" data-reveal-id="myModal">+ songs</a>
+
+            <a href="#" data-reveal-id="myModal">manage playlist</a>
               <div id="myModal" class="reveal-modal sc-custom-modal" data-reveal>   
                 <div id="add-to-playlist" class="sc-table-add">
                 <%= render partial: "/rooms/addtoplaylist" %>
@@ -239,7 +240,7 @@ $(document).ready(function() {
         </div>
       </div>
       
-<div id="songs-on-page-tab"> Songs On Page </div>      
+<div id="songs-on-page-tab"> Songs in group</div>      
   <div id="hidden">
     <div class="row" data-room-id="<%= @room.id %>">
       <div class="large-4 column room-playlist">

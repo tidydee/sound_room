@@ -11,7 +11,7 @@ div.public-list-item:hover {
   list-style: none;
   border-top: 30px solid white;
   border-bottom: 30px solid white;
-  margin-bottom: 12%;
+  margin-bottom: 1%;
   float: right;
 }
 
@@ -21,16 +21,13 @@ div.public-list-item:hover {
 
 #right-window a {
   font-family: Helvetica;
-  color: #000000;
-  letter-spacing: 1px;
-  line-height: 50px;
+  font-weight: 200;
 }
 
 #right-window a:hover {
   transition: 100ms ease-in;
-  color: #FF0073;
+  color: rgb(42, 15, 15);
 }
-
 
 .sidebar-chat {
   height: 60%;
@@ -54,5 +51,26 @@ div.public-list-item:hover {
   clear: both;
 }
 
+.manage-songs-btn {
+  background-color: rgba(239, 239, 246, 0.28);
+  padding: 12px;
+  color: white;
+  border-radius: 9px;
+  font-size: 1em;
+  border: white 1px solid;
+  line-height: 20px;
+  color: white;
+  margin-top: 1%;
+}
+
+.manage-songs-btn:hover {
+  background-color: rgba(21, 21, 33, 0.28);
+}
+
+/* ================= PLAYLIST =============== */
+
+.playlist {
+  height: 140px;
+}
 
 

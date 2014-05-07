@@ -56,7 +56,7 @@
 </script>
 
 
-    <div class="large-9 columns dashboard">
+    <div id="dashboard" class="large-9 columns">
     
     
     <h2><%= current_user.soundcloud_username%>'s Dashboard</h2>
@@ -78,9 +78,30 @@
       <emp>Stop</emp>
     </div> -->
 
-
-    <div id="favorite_tracks">
       <p> Any song that you have liked or favorited on soundcloud appears here. Etsy locavore mumblecore, roof party mixtape trust fund salvia butcher kogi letterpress cardigan. Irony flexitarian trust fund master cleanse. +1 Tonx sriracha quinoa. </p>
+ 
+
+
+    <div id="favorite-track-section">
+      <h3>Favourite tracks</h3>
+        <div id="player"></div>
+          <% request.original_url %>
+          <hr>
+          <p>
+            <div id="play"><i class="fa fa-play"></i></div>
+            <div id="pause"><i class="fa fa-pause"></i></div>
+            <div id="skip"><i class="fa fa-fast-forward"></i></div>
+          </p>
+          <p>
+            <div id="mute">Mute</div>
+            <div id="med-volume">Med</div>
+            <div id="high-volume">High</div>
+          </p>
+      <div id="favorite-track-table">
+        <div id="favorite_tracks">
+          
+        </div>
+      </div>
     </div>
 
   </div>  
@@ -102,11 +123,10 @@
             </ul>  
           <%end%>
         </div>
-        <hr>
+        
         <!-- Create a new room -->
 
           <h4>Create New Room</h4>
-
             <%= f.label :name %>
             <%= f.text_field :name %><br />
             <%= f.submit%>
