@@ -51,6 +51,11 @@ div.public-list-item:hover {
   clear: both;
 }
 
+#player-functions {
+  letter-spacing: 2em;
+  margin-left: 25%;
+}
+
 .manage-songs-btn {
   background-color: rgba(239, 239, 246, 0.28);
   padding: 12px;

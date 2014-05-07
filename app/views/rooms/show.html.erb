@@ -203,16 +203,17 @@ $(document).ready(function() {
         <%= render partial: "/rooms/chatbar" %>
         <div class="player-wrap">
             <h3>Player goes here</h3>
-          <p>
-            <span id="play">Play</span>
-            <span id="pause">Pause</span>
-            <span id="skip">Skip</span>
+          <div id="player-functions"><p>
+            <span id="play"><i class="fa fa-play"></i></span>
+            <span id="pause"><i class="fa fa-pause"></i></span>
+            <span id="skip"><i class="fa fa-fast-forward"></i></span>
           </p>
           <p>
             <span id="mute">Mute</span>
             <span id="med-volume">Med</span>
             <span id="high-volume">High</span>
-          </p>      
+          </p>
+          </div>      
         </div>
 
         <div class="playlist">
@@ -220,7 +221,7 @@ $(document).ready(function() {
             <h4>Room's Playlist</h4>
             <p>Add a new song to the playlist</p>
 
-            <a href="#" data-reveal-id="myModal">manage playlist</a>
+            <a href="#" data-reveal-id="myModal" class="manage-songs-btn">manage playlist</a>
               <div id="myModal" class="reveal-modal sc-custom-modal" data-reveal>   
                 <div id="add-to-playlist" class="sc-table-add">
                 <%= render partial: "/rooms/addtoplaylist" %>
