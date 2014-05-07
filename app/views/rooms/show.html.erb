@@ -1,268 +1,113 @@
-<script src="http://connect.soundcloud.com/sdk.js"></script>
-<script>
-  window.playlist = []
-  favourites = []
-  SC.initialize({
-    client_id: '173c1924dc4e55b0db3b89a45bb71561'
-  });
+<<<<<<< HEAD
 
-    function getUserFavoriteTracks() {
-
-      var soundcloud_id = <%= current_user.soundcloud_user_id if current_user %>
-      //-------------------- Local Storage Begin ----------------------\\
-      var soundcloud_name = '<%= current_user.soundcloud_username if current_user %>';
-      localStorage.setItem('currentUserName', soundcloud_name);
-      var localUserName = localStorage.getItem('currentUserName');
-      //-------------------- Local Storage End ----------------------\\
-      
-      SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
-  
-        var data = []
-        for (var i=0; i<favorites.length; i++) {
-          var trackId = favorites[i].id;    
-          data.push(trackId); 
-        }
-        console.log("ArrayData:"+data);
-
-        $.ajax({
-          dataType: "json",
-          url: window.location.pathname, 
-          type: "GET", 
-          success: function (data) {
-            window.playlist = data;
-            console.log("DatabaseData:" + data);
-            console.log('scArrayData:', window.playlist);
-            
-            trackIds = [];
-            for (var i=0; i<window.playlist.length; i++) {
-              songInfo = window.playlist[i];
-              trackIds.push(songInfo.soundcloud_track_id);
-            };
-            console.log(trackIds);
-            for (var i=0; i<favorites.length; i++) {
-              var trackTitle = favorites[i].title.replace("'",'"');
-              var trackId = favorites[i].id;
-              var trackStreamUrl = favorites[i].stream_url;
-              var trackOrder = i;
-              var duration = favorites[i].duration;
-              var trackImage = favorites[i].artwork_url;
-              console.log('TRACK IMAGE: ', trackImage);
-              var row1 = "<td class='track'>"+trackTitle+"</td>";
-              
-              console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
-
-              if(trackIds.indexOf(trackId) !== -1) // check here if song existed
-              {
-                console.log(trackIds.indexOf(trackId));
-                console.log("remove");
-                var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
-
-                $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
-              }
-              else {
-                console.log("add");
-                var addButton = "<td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
-
-                $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
-              }
-            }
-
-            $('.button-update').on('click', function(e){
-              e.preventDefault();
-
-              var trackIndex = $(this).data('track-order');
-              var songInfo = favorites[trackIndex];
-              var image_url = songInfo.artwork_url;
-              songInfo.image_url = image_url
-              songInfo.soundcloud_track_id = songInfo.id
-              // Set at TOp of Page with Local Storage
-              var userName = localUserName;
-              var numberOfTracks = $('.room-tracks').children().length;
-              // console.log('NUMBER OF TRACKS: ',numberOfTracks);
-              var min = (((data.duration)/1000)/60) << 0;
-              var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
-          
-              songInfo.room_id = <%= @room.id %>
-              if ($(this).hasClass('button-add')) {
-                saveToDb(songInfo, image_url, min, sec, userName, this);
-              } else {
-                removeFromDb($(this).data('track-id'), this);
-                // $("p").filter(":contains('Hello')").remove()
-              }
-            });
-          }
-        });
-        
-        // Add Data to DB
-        function saveToDb(data, image_url, min, sec, userName, button){
-          console.log('Add Function Works!');
-          var $this = $(this);
-          $.ajax({
-            url: "<%= songs_path %>",
-            data: data,
-            dataType:  'json',
-            type: "POST",
-            success: function(data) {
-               $('.room-tracks').append('<p class="tracks" data-track-index='+window.playlist.length+' data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
-                $(button).removeClass('button-add').addClass('button-remove');
-                $(button).text('Remove');
-
-                window.playlist.push(data.soundcloud_track_id);
-              // alert("shit got saved");
-            },
-            error: function (err) {
-              console.log(err);
-            }
-          });
-        }
-
-        function removeFromDb(scID, button){
-          console.log('REMOVE FUNCTION WORKS');
-
-          $.ajax({
-            url: "<%= songs_path %>/" + scID,
-            data: {"_method":"delete"},
-            type: "POST",
-            success: function(data) {
-              $('p.tracks[data-sc-track-id='+scID+']').remove();
-              // alert("shit got removed!");
-              $(button).removeClass('button-remove').addClass('button-add');
-              $(button).text('Add');
-              index = window.playlist.indexOf(scID)
-              window.playlist.splice(index, 1);
-            },
-            error: function (err) {
-              console.log(err);
-            }
-          });
-        }
-
-        $('.track').click(function(e) {
-          console.log('this click?');
-          playTrack($(this).data('track-id'));
-        }); 
-      });
-    };
-      
-    getUserFavoriteTracks();
-  </script>
-
-  <script>
-
-        $(function() {     
-          console.log('hey');
-          var pusher = new Pusher('55b13e9beb0afef1e1cf');
-          var chatWidget = new PusherChatWidget(pusher, {
-            appendTo: '#pusher_chat_widget'
-          });
-        });
-
-</script>
-<script>
-
-
-
-$(document).ready(function() {
-  $('.tracks').click(function(e) {
-    console.log('this click?');
-    var scTrackId = $(this).data('sc-track-id')
-    playTrack(scTrackId);
-  });
-});
-
-  </script>
+<div id='scuserid' data-scid= '<%= current_user.soundcloud_user_id if current_user %>' > <h1><%= current_user.soundcloud_user_id if current_user %></h1></div>
+<div id='scusername' data-scusername='<%= current_user.soundcloud_username if current_user %>' ></div>
 
 <div class="row large-12" style="clear:both">
-  <div class="large-9 column room-content">
-    <h1> <%= @room.name %> </h1>
+	<div class="large-9 column room-content">
+		<h1> <%= @room.name %> </h1>
 
-    <!-- Only a User who created a room, can Delete a Room -->
-    <% if current_user %>
-      <% if @room.user_id == session[:user_id] %>
-        <%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
-      <% end %>
-    <% end %>
+		<!-- Only a User who created a room, can Delete a Room -->
+		<% if current_user %>
+			<% if @room.user_id == session[:user_id] %>
+				<%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+			<% end %>
+		<% end %>
 
-    <%= form_for @room do |f| %>
-      <div class="error-message">
-        <% if @room.errors.any? %>
-          <div class="error-message-header"> 
-            <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
-          </div>
-          <ul>
-            <% @room.errors.full_messages.each do |msg| %>
-              <li class="error-message-body"><%= msg %></li>
-            <% end %>
-          </ul>  
-        <% end %>
-      </div>
-    <% end %>  
-  </div> 
-    
-    <div id="right-window" class="large-3 column">
-        <%= render partial: "/rooms/chatbar" %>
-        <div class="player-wrap">
-            <h3>Player goes here</h3>
-          <div id="player-functions"><p>
-            <span id="play"><i class="fa fa-play"></i></span>
-            <span id="pause"><i class="fa fa-pause"></i></span>
-            <span id="skip"><i class="fa fa-fast-forward"></i></span>
-          </p>
-          <p>
-            <span id="mute">Mute</span>
-            <span id="med-volume">Med</span>
-            <span id="high-volume">High</span>
-          </p>
-          </div>      
-        </div>
+		<%= form_for @room do |f| %>
+			<div class="error-message">
+				<% if @room.errors.any? %>
+					<div class="error-message-header"> 
+						<%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
+					</div>
+					<ul>
+						<% @room.errors.full_messages.each do |msg| %>
+							<li class="error-message-body"><%= msg %></li>
+						<% end %>
+					</ul>  
+				<% end %>
+			</div>
+		<% end %>  
+	</div> 
+		
+		<div id="right-window" class="large-3 column">
+				<%= render partial: "/rooms/chatbar" %>
+				<div class="player-wrap">
+					<div id="progressBarBackground">
+							<div class="progressBar"></div>
+					</div>
+					<h3>Player goes here</h3>
+					<p>
+						<span id="play">Play</span>
+						<span id="pause">Pause</span>
+						<span id="skip">Skip</span>
+					</p>
+					<p>
+						<span id="mute">Mute</span>
+						<span id="med-volume">Med</span>
+						<span id="high-volume">High</span>
+					</p>      
+				</div>
 
-        <div class="playlist">
-          <% if current_user %>
-            <h4>Room's Playlist</h4>
-            <p>Add a new song to the playlist</p>
-
-            <a href="#" data-reveal-id="myModal" class="manage-songs-btn">manage playlist</a>
-              <div id="myModal" class="reveal-modal sc-custom-modal" data-reveal>   
-                <div id="add-to-playlist" class="sc-table-add">
-                <%= render partial: "/rooms/addtoplaylist" %>
-                <% @songs.each do |song| %>
-                <%= song.image_url %><br />
-            <% end %>
-          <% else %> 
-            <div class="large-8 column">
-              <div data-alert class="alert-box alert">
-                <p>Please sign in to add to the playlist.</p>
-                <a href="#" class="close">&times;</a>
-              </div>
-            </div>  
-          <% end %>
-              </div>
-            </div> 
-        </div>
-      </div>
-      
-<div id="songs-on-page-tab"> Songs in group</div>      
-  <div id="hidden">
-    <div class="row" data-room-id="<%= @room.id %>">
-      <div class="large-4 column room-playlist">
-        <div class="room-tracks"> 
-          <h3><%= @room.name %>'s Playlist</h3>
-            <% @songs.each_with_index do |song, index| %>
-              <p class="tracks" id="<%= index %>" data-track-index= "<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.image_url %><%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | added by <%= song.user.soundcloud_username %> </p>
-              
-            <% end %>
-        </div> <!--large9 column-->    
-      </div>
-    </div>  
-  </div>
+				<div class="playlist">
+					<% if current_user %>
+						<h4>Room's Playlist</h4>
+						<p>Add a new song to the playlist</p>
+						<a href="#" data-reveal-id="myModal">+ songs</a>
+							<div id="myModal" class="reveal-modal" data-reveal>   
+								<div id="add-to-playlist">
+								<%= render partial: "/rooms/addtoplaylist" %>
+								<% @songs.each do |song| %>
+								<%= song.image_url %><br />
+						<% end %>
+					<% else %> 
+						<div class="large-8 column">
+							<div data-alert class="alert-box alert">
+								<p>Please sign in to add to the playlist.</p>
+								<a href="#" class="close">&times;</a>
+							</div>
+						</div>  
+					<% end %>
+							</div>
+						</div> 
+				</div>
+			</div>
+			
+<div id="songs-on-page-tab"> Songs On Page </div>      
+	<div id="hidden">
+		<div class="row" data-room-id="<%= @room.id %>">
+			<div class="large-4 column room-playlist">
+				<div class="room-tracks"> 
+					<h3>Tracks on this page</h3>
+					<% @songs.each_with_index do |song, index| %>
+						<p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | added by <%= song.user.soundcloud_username %> </p>
+						
+						<% end %>
+				</div> <!--large9 column-->    
+			</div>
+		</div>  
+	</div>
 </div> <!--large9 column-->
 
 <style>
 
-  p.tracks.selected-song {
-    color:red;
-  }
+	p.tracks.selected-song {
+		color:red;
+	}
+
+	.progressBar {
+		background-color: #FFF;
+		height: 15px;
+	}
+
+	#progressBarBackground{
+		background-color: #333333;
+		height: 15px;
+		margin-top: 10px;
+		position: relative;
+		width: 100%;
+	}
  
 
-  </style>
+	</style>
 

@@ -4,6 +4,7 @@
 
 <script>
 	$(document).ready(function() {
+		window.playlist = []
 		SC.initialize({
 	  client_id: '173c1924dc4e55b0db3b89a45bb71561'
 		});
@@ -19,14 +20,13 @@
 				var trackUrl = favorites[i].permalink_url;
 				var trackStreamUrl = favorites[i].stream_url;
 				var trackOrder = i;
+				window.playlist.push(trackId);
 				
 				$('#favorite_tracks').append("<p class='tracks' id='"+trackOrder+"' data-sc-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+">"+trackTitle+"</p>");
 			}
-				
+			console.log('scArrayData:'+ window.playlist);
     });
 	}
-
-
 
 	$('body').on('click','.tracks', function(e) {
 		console.log('this click?');
@@ -37,8 +37,6 @@
 	
 	getUserFavoriteTracks();
 });
-	
-
 
 </script>
 
@@ -48,6 +46,9 @@
     <h2><%= current_user.soundcloud_username %>'s Dashboard</h2>
 
     <div id="player"></div>
+    <div id="progressBarBackground">
+			<div class="progressBar"></div>
+		</div>
 
     <% request.original_url %>
     <hr>
@@ -106,8 +107,21 @@
 
   <style>
 
-		p.tracks.selected-song {
-			color:red;
-		}
+	p.tracks.selected-song {
+		color:red;
+	}
+
+	.progressBar {
+		background-color: #FFF;
+		height: 15px;
+	}
+
+	#progressBarBackground{
+		background-color: #333333;
+		height: 15px;
+		margin-top: 10px;
+		position: relative;
+		width: 100%;
+	}
 
   </style>
