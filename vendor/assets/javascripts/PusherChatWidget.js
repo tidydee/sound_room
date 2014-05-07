@@ -168,7 +168,7 @@ PusherChatWidget._createHTML = function(appendTo) {
     '</div>' +
     '<div class="pusher-chat-widget-messages">' +
       '<ul class="activity-stream">' +
-        '<li class="waiting">No chat messages available</li>' +
+        '<li class="waiting">Start the communication and type some chatz</li>' +
       '</ul>' +
     '</div>' +
     '<div class="large-12 columns">' +

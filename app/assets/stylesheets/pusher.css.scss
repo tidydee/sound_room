@@ -11,7 +11,13 @@
 
 a.screen-name {
   font-size: 1em;
-  color: blue;
+  color: #5D5C5C;
+  letter-spacing: .2em;
+  font-weight: 600;
+}
+
+div.text {
+  letter-spacing: .1em;
 }
 
 a.timestamp {

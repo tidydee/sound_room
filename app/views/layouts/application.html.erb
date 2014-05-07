@@ -8,6 +8,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"></script>
 
+     <script src="seen.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"></script>
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -15,14 +17,17 @@
   </head>
 
   <body>
-    
     <!-- Nav Bar -->
-    <%= render partial: "/shared/topnav" %>
+  <div class="header">
+    <div class="small-1 column curo">
+    </div>
+    <h1>CuroBeats</h1>
+  </div>
 
     <!-- Main Page Content -->
     <div class="row column fullwidth wrap">
 
-      <div class="large-12 column" role="content">
+      <div class="row column" role="content">
         <div class="flash-message"> 
           <% flash.each do |name, msg| %>
             <%= content_tag :div, msg, class: name %>
@@ -40,10 +45,38 @@
 
     <!-- Footer -->
     <div class="row fullwidth"></div>
-
+    <canvas class="ball" width="500" height="500" id="seen-canvas"></canvas>
   <%= render partial: "/shared/footer" %>
 
 
   <%= javascript_include_tag "vendor/modernizr" %>
+  <script type="text/coffeescript">
+        width  = 500
+        height = 500
+
+        
+        shape = seen.Shapes.sphere(2).scale(height * 0.4)
+        seen.Colors.randomSurfaces2(shape)
+
+       
+        scene = new seen.Scene
+          model    : seen.Models.default().add(shape)
+          viewport : seen.Viewports.center(width, height)
+
+       
+        context = seen.Context('seen-canvas', scene).render()
+
+       
+        context.animate()
+          .onBefore((t, dt) -> shape.rotx(dt*1e-4).roty(0.7*dt*1e-4))
+          .start()
+
+        dragger = new seen.Drag('seen-canvas', {inertia : true})
+        dragger.on('drag.rotate', (e) ->
+          xform = seen.Quaternion.xyToTransform(e.offsetRelative...)
+          shape.transform(xform)
+          context.render()
+        )
+    </script>
   </body>
 </html>
