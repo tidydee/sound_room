@@ -4,6 +4,7 @@
 
 <script>
 	$(document).ready(function() {
+		window.playlist = []
 		SC.initialize({
 	  client_id: '173c1924dc4e55b0db3b89a45bb71561'
 		});
@@ -19,10 +20,11 @@
 				var trackUrl = favorites[i].permalink_url;
 				var trackStreamUrl = favorites[i].stream_url;
 				var trackOrder = i;
+				window.playlist.push(trackId);
 				
 				$('#favorite_tracks').append("<p class='tracks' id='"+trackOrder+"' data-sc-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+">"+trackTitle+"</p>");
 			}
-				
+			console.log('scArrayData:'+ window.playlist);
     });
 	}
 
