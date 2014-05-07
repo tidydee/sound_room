@@ -1,6 +1,7 @@
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 <script>
   window.playlist = []
+  favourites = []
   SC.initialize({
     client_id: '173c1924dc4e55b0db3b89a45bb71561'
   });
@@ -28,15 +29,16 @@
           url: window.location.pathname, 
           type: "GET", 
           success: function (data) {
-            console.log("DatabaseData:");
-            for (var i=0; i<data.length; i++) {
-              var reccordId = data[i].id;
-              console.log('Reccord Id',reccordId);
-              console.log("data id:", data[i].soundcloud_track_id);
-              window.playlist.push(data[i].soundcloud_track_id);
-            }
+            window.playlist = data;
+            console.log("DatabaseData:" + data);
             console.log('scArrayData:', window.playlist);
             
+            trackIds = [];
+            for (var i=0; i<window.playlist.length; i++) {
+              songInfo = window.playlist[i];
+              trackIds.push(songInfo.soundcloud_track_id);
+            };
+            console.log(trackIds);
             for (var i=0; i<favorites.length; i++) {
               var trackTitle = favorites[i].title.replace("'",'"');
               var trackId = favorites[i].id;
@@ -44,17 +46,21 @@
               var trackOrder = i;
               var duration = favorites[i].duration;
               var trackImage = favorites[i].artwork_url;
+              console.log('TRACK IMAGE: ', trackImage);
               var row1 = "<td class='track'>"+trackTitle+"</td>";
               
               console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
 
-              if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
+              if(trackIds.indexOf(trackId) !== -1) // check here if song existed
               {
+                console.log(trackIds.indexOf(trackId));
+                console.log("remove");
                 var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
 
                 $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
               }
               else {
+                console.log("add");
                 var addButton = "<td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
 
                 $('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
@@ -64,14 +70,11 @@
             $('.button-update').on('click', function(e){
               e.preventDefault();
 
-              var $this = $(this),
-                  data = {
-                    soundcloud_track_id: $this.data('track-id'),
-                    title: $this.data('title'),
-                    duration: $this.data('duration'),
-                    room_id: $('[data-room-id]').data('room-id')
-                  };
-              var image_url = $this.data('track-image');
+              var trackIndex = $(this).data('track-order');
+              var songInfo = favorites[trackIndex];
+              var image_url = songInfo.artwork_url;
+              songInfo.image_url = image_url
+              songInfo.soundcloud_track_id = songInfo.id
               // Set at TOp of Page with Local Storage
               var userName = localUserName;
               var numberOfTracks = $('.room-tracks').children().length;
@@ -79,10 +82,11 @@
               var min = (((data.duration)/1000)/60) << 0;
               var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
           
+              songInfo.room_id = <%= @room.id %>
               if ($(this).hasClass('button-add')) {
-                saveToDb(data, image_url, min, sec, userName, this);
+                saveToDb(songInfo, image_url, min, sec, userName, this);
               } else {
-                removeFromDb($this.data('track-id'), this);
+                removeFromDb($(this).data('track-id'), this);
                 // $("p").filter(":contains('Hello')").remove()
               }
             });
@@ -99,29 +103,21 @@
             dataType:  'json',
             type: "POST",
             success: function(data) {
-               $('.room-tracks').append('<p class="tracks" data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
+               $('.room-tracks').append('<p class="tracks" data-track-index='+window.playlist.length+' data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
                 $(button).removeClass('button-add').addClass('button-remove');
                 $(button).text('Remove');
 
                 window.playlist.push(data.soundcloud_track_id);
-
-              // TODO: need to store the returned db id in the dom for the delete button later  
-              //$this.data("id", data.trackId);
-            
-              alert("shit got saved");
+              // alert("shit got saved");
             },
             error: function (err) {
               console.log(err);
             }
           });
         }
-        // Remove Data to DB
+
         function removeFromDb(scID, button){
           console.log('REMOVE FUNCTION WORKS');
-          // need to dynamically get the song_id from the dom
-          // var $this = $(this);
-          // console.log($this);
-          // var sc_track_id = $this.data('id');
 
           $.ajax({
             url: "<%= songs_path %>/" + scID,
@@ -129,7 +125,7 @@
             type: "POST",
             success: function(data) {
               $('p.tracks[data-sc-track-id='+scID+']').remove();
-              alert("shit got removed!");
+              // alert("shit got removed!");
               $(button).removeClass('button-remove').addClass('button-add');
               $(button).text('Add');
               index = window.playlist.indexOf(scID)
@@ -164,75 +160,12 @@
 </script>
 <script>
 
-var currentTrackId = undefined;
-var currentPlaying = false;
-var sound = undefined;
-function playTrack(id) {
-    SC.whenStreamingReady(function() {
-      if (id === currentTrackId) {
-        if (currentPlaying) {
-          sound.pause();
-        } else {
-          sound.play();
-        }
-        currentPlaying = !currentPlaying;
-      } else {
-        currentTrackId = id
-        if (sound) {
-          sound.stop();
-        }
-        currentTrackId = id
-        sound = SC.stream(id, { autoPlay: false }, function(sound){
-        console.log(sound);
-          currentPlaying = true;
-          // while (currentPlaying) {
-          //   sound.position;
-          // }
-          sound.play({
-            onfinish: function(){
-              console.log('track_finished');
-              skipper();
-            }
-          });
-        });
-      }
 
-      function skipper(){
-        sound.stop();
-        var nextIndex = window.playlist.indexOf(id) + 1
-        var nextTrackId;
-        if (nextIndex <= window.playlist.length - 1) {
-          nextTrackId = window.playlist[nextIndex];
-        }
-        playTrack(nextTrackId);
-      }
-      $('#skip').click(skipper);
-
-      $('#pause').click(function(e){
-          sound.pause();
-      });
-      $('#play').click(function(e){
-          sound.resume();
-      });
-      $('#mute').click(function(e){
-          sound.setVolume(0);
-      });
-      $('#med-volume').click(function(e){
-          sound.setVolume(40);
-      });
-      $('#high-volume').click(function(e){
-          sound.setVolume(100);
-      });
-    });
-  }
 
 $(document).ready(function() {
   $('.tracks').click(function(e) {
     console.log('this click?');
-    var scTrackId = $(this).data('sc-track-id');
-    console.log(scTrackId);
-    var nextTrackOrder = ($(this).data('track-order')) + 1;
-    console.log(nextTrackOrder);
+    var scTrackId = $(this).data('sc-track-id')
     playTrack(scTrackId);
   });
 });
@@ -286,9 +219,10 @@ $(document).ready(function() {
           <% if current_user %>
             <h4>Room's Playlist</h4>
             <p>Add a new song to the playlist</p>
-            <a href="#" data-reveal-id="myModal" class="manage-songs-btn">manage playlist</a>
-              <div id="myModal" class="reveal-modal" data-reveal>   
-                <div id="add-to-playlist">
+
+            <a href="#" data-reveal-id="myModal">manage playlist</a>
+              <div id="myModal" class="reveal-modal sc-custom-modal" data-reveal>   
+                <div id="add-to-playlist" class="sc-table-add">
                 <%= render partial: "/rooms/addtoplaylist" %>
                 <% @songs.each do |song| %>
                 <%= song.image_url %><br />
@@ -311,9 +245,9 @@ $(document).ready(function() {
     <div class="row" data-room-id="<%= @room.id %>">
       <div class="large-4 column room-playlist">
         <div class="room-tracks"> 
-          <h3>Tracks on this page</h3>
+          <h3><%= @room.name %>'s Playlist</h3>
             <% @songs.each_with_index do |song, index| %>
-              <p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | added by <%= song.user.soundcloud_username %> </p>
+              <p class="tracks" id="<%= index %>" data-track-index= "<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.image_url %><%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | added by <%= song.user.soundcloud_username %> </p>
               
             <% end %>
         </div> <!--large9 column-->    
@@ -322,5 +256,12 @@ $(document).ready(function() {
   </div>
 </div> <!--large9 column-->
 
+<style>
 
+  p.tracks.selected-song {
+    color:red;
+  }
+ 
+
+  </style>
 

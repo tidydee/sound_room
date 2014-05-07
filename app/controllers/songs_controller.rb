@@ -47,7 +47,7 @@ class SongsController < ApplicationController
 
   def song_params
     params.permit(
-      :soundcloud_track_id, :title, :duration, :room_id
+      :soundcloud_track_id, :title, :duration, :room_id, :image_url
       )
   end
 
