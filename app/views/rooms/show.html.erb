@@ -287,8 +287,8 @@ $(document).ready(function() {
             <h4>Room's Playlist</h4>
             <p>Add a new song to the playlist</p>
             <a href="#" data-reveal-id="myModal">+ songs</a>
-              <div id="myModal" class="reveal-modal" data-reveal>   
-                <div id="add-to-playlist">
+              <div id="myModal" class="reveal-modal sc-custom-modal" data-reveal>   
+                <div id="add-to-playlist" class="sc-table-add">
                 <%= render partial: "/rooms/addtoplaylist" %>
                 <% @songs.each do |song| %>
                 <%= song.image_url %><br />
