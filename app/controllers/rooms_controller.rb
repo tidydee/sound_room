@@ -24,7 +24,7 @@
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
-    redirect_to users_path 
+    redirect_to users_path
   end
 
   def create
