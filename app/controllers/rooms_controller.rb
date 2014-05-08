@@ -13,8 +13,6 @@
     @songs = @room.songs
     @song = Song.new
 
-    # binding.pry
-
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @songs }
@@ -32,12 +30,16 @@
     @room = Room.new(room_params)
     @room.user_id = current_user.id if current_user
 
+    @rooms = Room.all
+    @my_rooms = Room.where('user_id = ?',current_user.id)
+    roomid = Song.where('user_id = ?', current_user.id).select('room_id')
+    @rooms_added_to = Room.where(id: roomid)
+
     if @room.save
       flash[:success] = "Room Successfully Created"
       redirect_to @room
-      # redirect_to users_path
     else
-      render "users/show"
+      render "users/index"
     end
   end
 
