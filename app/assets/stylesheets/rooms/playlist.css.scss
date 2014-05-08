@@ -17,7 +17,8 @@
 
 .room-playlist {
   position: relative;
-  background: rgba(0, 0, 0, 0.87);
+  background-color:rgba(246, 246, 246, 0.71);
+  // padding: 12px;
   padding: 1%;
   border: 1px solid rgb(133, 133, 133);
   width: 100%;
@@ -70,11 +71,13 @@ div.tracks {
 }
 
 .room-playlist h3 {
-  color: rgba(255,119,0,1);
+  color: #F37100;
+  font-family: 'Sniglet', cursive;
+  text-shadow: 6px 6px 4px rgba(0,0,0,0.2);
 }
 
 div#songs-on-page-tab {
-  background-color: rgba(239, 239, 246, 0.28);
+  background-color: rgba(21, 21, 33, 0.28);
   font-size: 1em;
   cursor: pointer;
   color: white;
@@ -87,7 +90,7 @@ div#songs-on-page-tab {
 }
 
 div#songs-on-page-tab:hover {
-  background-color: rgba(21, 21, 33, 0.28);
+  background-color: rgba(239, 239, 246, 0.28);
   transition: background-color 300ms ease-out;
 }
 

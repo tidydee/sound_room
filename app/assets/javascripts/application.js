@@ -23,6 +23,7 @@
 //= require jquery.foggy.min
 //= require background-spiral
 //= require seen.min
+//= require seen-ball
 //= require_tree .
 //= require_self
 //= require js-routes

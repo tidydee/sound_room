@@ -103,6 +103,10 @@
   margin-right: 10px;
 }
 
+.pusher-chat-widget ul.activity-stream img {
+  display: none;
+}
+
 .pusher-chat-widget ul.activity-stream li.waiting {
   height: 100%;
   font-weight: bold;
