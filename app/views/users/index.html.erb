@@ -41,39 +41,60 @@
 </script>
 
 
-  <div class="large-9 columns">
+    <div id="dashboard" class="large-9 columns">
+    
+    
+    <h2><%= current_user.soundcloud_username %>Melissa's Dashboard</h2>
+    
 
-    <h2><%= current_user.soundcloud_username %>'s Dashboard</h2>
+    <div id="player">
+    </div>
 
-    <div id="player"></div>
-    <div id="progressBarBackground">
-			<div class="progressBar"></div>
-		</div>
+   <!--  <div id="play">
+      <emp>Play</emp> 
+    </div>
 
-    <% request.original_url %>
-    <hr>
-    <p>
-	    <div id="play">Play</div>
-	    <div id="pause">Pause</div>
-	    <div id="skip">Skip</div>
-    </p>
-    <p>
-    	<div id="mute">Mute</div>
-    	<div id="med-volume">Med</div>
-    	<div id="high-volume">High</div>
-    </p>
+    <div id="pause">
+      <emp>Pause</emp>
+    </div>
+    
+    <div id="stop">
+      <emp>Stop</emp>
+    </div> -->
 
-    <div id="favorite_tracks">
+      <p> Any song that you have liked or favorited on soundcloud appears here. Etsy locavore mumblecore, roof party mixtape trust fund salvia butcher kogi letterpress cardigan. Irony flexitarian trust fund master cleanse. +1 Tonx sriracha quinoa. </p>
+ 
+
+
+    <div id="favorite-track-section">
+      <h3>Favourite tracks</h3>
+        <div id="player"></div>
+          <% request.original_url %>
+          <hr>
+          <p>
+            <div id="play"><i class="fa fa-play"></i></div>
+            <div id="pause"><i class="fa fa-pause"></i></div>
+            <div id="skip"><i class="fa fa-fast-forward"></i></div>
+          </p>
+          <p>
+            <div id="mute">Mute</div>
+            <div id="med-volume">Med</div>
+            <div id="high-volume">High</div>
+          </p>
+      <div id="favorite-track-table">
+        <div id="favorite_tracks">
+          
+        </div>
+      </div>
     </div>
 
   </div>  
 
-  <aside class="large-3 columns">
+  <aside class="large-3 columns" id="room-option-tab">
 
       <ul class="side-nav">
-        <!-- Create New Room Form-->
         <%= form_for @room do |f| %>
-        <!-- Form Error Handling -->
+        <!-- Room Create Error Handling -->
         <div class="error-message">
           <% if @room.errors.any? %>
             <div class="error-message-header"> 
@@ -86,42 +107,21 @@
             </ul>  
           <%end%>
         </div>
-        <hr>
-        <!-- From Input Fields -->
-        <h4>Create New Room</h4>
+        
+        <!-- Create a new room -->
 
-          <%= f.label :name %>
-          <%= f.text_field :name %><br />
-          <%= f.submit%>
+          <h4>Create New Room</h4>
+            <%= f.label :name %>
+            <%= f.text_field :name %><br />
+            <%= f.submit%>
         <%end%>  
       </ul>
+
+    
+      <h4>List of my Rooms</h4>
+        <% @rooms.each do |room| %>
+        <%= link_to room.name, room_path(room) %><br />
+      <% end %>
+
+    
   </aside>
-
-  <aside class="large-3 columns"> 
-    <h4>List of my Rooms</h4>
-      <% @rooms.each do |room| %>
-      <%= link_to room.name, room_path(room) %><br />
-    <% end %>
-
-  </aside>
-
-  <style>
-
-	p.tracks.selected-song {
-		color:red;
-	}
-
-	.progressBar {
-		background-color: #FFF;
-		height: 15px;
-	}
-
-	#progressBarBackground{
-		background-color: #333333;
-		height: 15px;
-		margin-top: 10px;
-		position: relative;
-		width: 100%;
-	}
-
-  </style>

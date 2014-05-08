@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-// require turbolinks
+//= require turbolinks
 //= require jquery.animate-colors-min
 //= require jquery.transit.min
 //= require PusherChatWidget
