@@ -27,7 +27,7 @@
     });
 	}
 
-	$('.tracks').on('click', function(e) {
+	$('body').on('click','.tracks', function(e) {
 		console.log('this click?');
 		var scTrackId = $(this).data('sc-track-id');
 		playTrack(scTrackId);
