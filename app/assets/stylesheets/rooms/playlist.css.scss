@@ -25,6 +25,48 @@
   top: 20px;
   font-size: 1em;
   color: rgb(172, 172, 172);
+  max-height: 500px;
+  overflow: scroll;
+}
+
+div.tracks {
+  height: auto;
+  overflow: auto;
+  margin-bottom: 10px;  
+}
+
+.tracks img {
+  height: auto;
+  margin-right: 8px;
+  float: left;
+}
+
+.tracks p {
+}
+
+.tracks .comment-text {
+  margin-top: 5px;
+  font-size: 0.75em;
+  color: #ff7700;
+  float: left;
+  position: absolute;
+  bottom: 10px;
+}
+
+span.time-style {
+  position: absolute;
+  left: 450px;
+  top: 8px;
+}
+
+h1.name-style {
+  font-size: 1.12em;
+  width: 415px;
+  color: #acacac;
+}
+
+div.tracks {
+  position: relative;
 }
 
 .room-playlist h3 {
