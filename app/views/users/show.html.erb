@@ -29,28 +29,6 @@
     });
   };
 
-    
-   function playTrack(id) {
-    console.log(id);
-    SC.whenStreamingReady(function() {
-     
-        var sound = SC.stream(id, { autoPlay: false }, function(sound){
-        console.log(sound);
-        sound.play({
-          onfinish: function(){
-            alert('track_finished');
-          }
-        });
-      });
-      $('#pause').click(function(e){
-          sound.pause();
-      });
-      $('#play').click(function(e){
-          sound.resume();
-      });
-    });
-  }
-
   getUserFavoriteTracks();
 
 </script>

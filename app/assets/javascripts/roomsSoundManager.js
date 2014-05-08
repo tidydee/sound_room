@@ -33,6 +33,7 @@ function handleSound(){
     currentPlaying = true;
 
     var trueDuration = undefined;
+    $(".progressBar").css('width', (0) + '%');
     sound.play({
       onfinish: function(){
         console.log('track_finished');
@@ -51,7 +52,6 @@ function handleSound(){
           $(".progressBar").css('width', ((this.position/this.duration) * 100) + '%');
         }
         else {
-          $(".progressBar").css('width', (0) + '%');
           trueDuration = this.duration
         }
       }
