@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     @current_user = User.authenticate_via_soundcloud auth_hash_params
     session[:user_id] = @current_user.id
     if @current_user
-      redirect_to user_path(@current_user.id), notice: "Welcome back curator!"
+      redirect_to users_path, notice: "Welcome back curator!"
 
     else
       flash.now[:error] = "Invalid Username / Password!"
