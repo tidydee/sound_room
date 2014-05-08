@@ -18,6 +18,7 @@
  *= require font-awesome
  */
 
+@import url(http://fonts.googleapis.com/css?family=Sniglet:400,800);
 
  .flash-message{
   font-family: Arial, Helvetica, sans-serif;
@@ -37,6 +38,34 @@
   margin-bottom: 12%;
   float: right;
 }
+
+.public-rooms a {
+  font-weight: 300;
+}
+
+.public-rooms h3 {
+  font-weight: 300;
+  font-family: 'Sniglet', cursive;
+}
+
+@media screen and (min-width: 400px) and (max-width: 1025px){
+
+  #public-rooms {
+    width: 100%;
+  }
+
+}
+
 .dashboard-icon {
   font-size: 2em;
 }
+/*=========== TOP HEADER ============*/
+
+div.header {
+  margin-left: 2%;
+}
+
+div.header h1 {
+  font-size: 4em;
+}
+

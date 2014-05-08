@@ -19,7 +19,7 @@ $(document).ready(function () {
       }); 
     });
 
-    $('.top').foggy();
+    // $('#background').foggy();
 
 // Bring up the playlist
 

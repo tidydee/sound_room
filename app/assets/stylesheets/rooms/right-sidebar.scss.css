@@ -33,6 +33,12 @@ div.public-list-item:hover {
   height: 60%;
   max-height: 250px;
 }
+/* ======== CHAT IMAGE ==========*/ 
+
+ul.activity-stream img {
+display: none;
+}
+
 .custom-chat-btn {
   background-color: rgba(255,119,0,1);
   border-radius: 20px;
@@ -53,11 +59,11 @@ div.public-list-item:hover {
 
 #player-functions {
   letter-spacing: 2em;
-  margin-left: 25%;
+  margin-left: 20%;
 }
 
 .manage-songs-btn {
-  background-color: rgba(239, 239, 246, 0.28);
+  background-color: rgba(21, 21, 33, 0.28);
   padding: 12px;
   color: white;
   border-radius: 9px;
@@ -66,16 +72,18 @@ div.public-list-item:hover {
   line-height: 20px;
   color: white;
   margin-top: 1%;
+  width: 100%;
 }
 
 .manage-songs-btn:hover {
-  background-color: rgba(21, 21, 33, 0.28);
+  background-color: rgba(239, 239, 246, 0.28);
 }
 
 /* ================= PLAYLIST =============== */
 
 .playlist {
   height: 140px;
+  text-align: center;
 }
 
 
