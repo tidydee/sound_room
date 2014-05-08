@@ -36,24 +36,26 @@
 					<div id="progressBarBackground">
 							<div class="progressBar"></div>
 					</div>
-					<h3>Player goes here</h3>
+					<h3>Sound Control</h3>
+					<div id="player-functions">
 					<p>
-						<span id="play">Play</span>
-						<span id="pause">Pause</span>
-						<span id="skip">Skip</span>
+						<span id="play"><i class="fa fa-play fa-2x"></i></span>
+						<span id="pause"><i class="fa fa-pause fa-2x"></i></span>
+						<span id="skip"><i class="fa fa-fast-forward fa-2x"></i></span>
 					</p>
 					<p>
-						<span id="mute">Mute</span>
-						<span id="med-volume">Med</span>
-						<span id="high-volume">High</span>
-					</p>      
+						<span id="mute"><i class="fa fa-volume-off fa-2x"></i></span>
+						<span id="med-volume"><i class="fa fa-volume-down fa-2x"></i></span>
+						<span id="high-volume"><i class="fa fa-volume-up fa-2x"></i></span>
+					</p>
+					</div>      
 				</div>
 
 				<div class="playlist">
 					<% if current_user %>
 						<h4>Room's Playlist</h4>
 						<p>Add a new song to the playlist</p>
-						<a href="#" data-reveal-id="myModal">+ songs</a>
+						<a href="#" class="manage-songs-btn" data-reveal-id="myModal">manage songs</a>
 							<div id="myModal" class="reveal-modal" data-reveal>   
 								<div id="add-to-playlist">
 								<%= render partial: "/rooms/addtoplaylist" %>
