@@ -104,17 +104,10 @@
 						type: "POST",
 						success: function(data) {
 							// change this to REPLICATE songs from DB
-								$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</div>');
+								$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'> <img src='+image_url+'><div class="track-info"><h1 class="name-style">'+data.title+'</h1><span class="time-style">'+(min+':'+sec)+' min </span> <br><span class="comment-text"> curated by '+userName+'</span></div></div>');
 
 								$(button).removeClass('button-add').addClass('button-remove');
 								$(button).text('Remove');
-
-
-							 
-
-
-
-
 
 								window.playlist.push(data.soundcloud_track_id);
 
@@ -131,11 +124,7 @@
 				// Remove Data to DB
 				function removeFromDb(scID, button){
 					console.log('REMOVE FUNCTION WORKS');
-					// need to dynamically get the song_id from the dom
-					// var $this = $(this);
-					// console.log($this);
-					// var sc_track_id = $this.data('id');
-
+		
 					$.ajax({
 						url: "/songs/" + scID,
 						data: {"_method":"delete"},
@@ -163,7 +152,6 @@
 			
 		getUserFavoriteTracks();
 
-
 				$(function() {     
 					console.log('hey');
 					var pusher = new Pusher('55b13e9beb0afef1e1cf');
@@ -176,7 +164,6 @@ function selectSong($this) {
 	$('.tracks').removeClass('selected-song');
 		$(this).addClass('selected-song');
 }
-
 
 $(document).ready(function() {
 	console.log('in jQuery')
