@@ -25,7 +25,49 @@
   height: 80%;
   top: 20px;
   font-size: 1em;
-  color: #261D1D;
+  color: rgb(172, 172, 172);
+  max-height: 500px;
+  overflow: scroll;
+}
+
+div.tracks {
+  height: auto;
+  overflow: auto;
+  margin-bottom: 10px;  
+}
+
+.tracks img {
+  height: auto;
+  margin-right: 8px;
+  float: left;
+}
+
+.tracks p {
+}
+
+.tracks .comment-text {
+  margin-top: 5px;
+  font-size: 0.75em;
+  color: #ff7700;
+  float: left;
+  position: absolute;
+  bottom: 10px;
+}
+
+span.time-style {
+  position: absolute;
+  left: 450px;
+  top: 8px;
+}
+
+h1.name-style {
+  font-size: 1.12em;
+  width: 415px;
+  color: #acacac;
+}
+
+div.tracks {
+  position: relative;
 }
 
 .room-playlist h3 {
@@ -52,9 +94,29 @@ div#songs-on-page-tab:hover {
   transition: background-color 300ms ease-out;
 }
 
+.tracks.selected-song {
+  * {
+    color:red;
+  }
+  }
+
+.progressBar {
+    background-color: #FFF;
+    height: 15px;
+  }
+
+  #progressBarBackground{
+    background-color: #333333;
+    height: 15px;
+    margin-top: 10px;
+    position: relative;
+    width: 100%;
+  }
+
 @media screen and (min-width: 400px) and (max-width: 1025px){
   #songs-on-page-tab {
     width: 100%;
     text-align: center;
     }
   }
+

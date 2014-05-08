@@ -12,6 +12,7 @@ class SongsController < ApplicationController
     # Song.new(params[:song])
 
     @song = Song.new(song_params.merge(user_id: current_user.id))
+    binding.pry
     
     respond_to do |format|
       if @song.save

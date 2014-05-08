@@ -70,6 +70,7 @@
 							var $this = $(this),
 									data = {
 										soundcloud_track_id: $this.data('track-id'),
+										image_url: $this.data('track-image'),
 										title: $this.data('title'),
 										duration: $this.data('duration'),
 										room_id: $('[data-room-id]').data('room-id')
@@ -102,9 +103,18 @@
 						dataType:  'json',
 						type: "POST",
 						success: function(data) {
-							 $('.room-tracks').append('<p class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</p>');
+							// change this to REPLICATE songs from DB
+								$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'>'+data.title+' - '+(min+':'+sec)+' min - added by '+userName+'</div>');
+
 								$(button).removeClass('button-add').addClass('button-remove');
 								$(button).text('Remove');
+
+
+							 
+
+
+
+
 
 								window.playlist.push(data.soundcloud_track_id);
 
@@ -131,7 +141,7 @@
 						data: {"_method":"delete"},
 						type: "POST",
 						success: function(data) {
-							$('p.tracks[data-sc-track-id='+scID+']').remove();
+							$('div.tracks[data-sc-track-id='+scID+']').remove();
 							alert("shit got removed!");
 							$(button).removeClass('button-remove').addClass('button-add');
 							$(button).text('Add');
@@ -162,7 +172,10 @@
 					});
 				});
 
-
+function selectSong($this) {
+	$('.tracks').removeClass('selected-song');
+		$(this).addClass('selected-song');
+}
 
 
 $(document).ready(function() {
@@ -170,6 +183,9 @@ $(document).ready(function() {
 	$('body').on('click', '.tracks', function(e) {
 		console.log('this click?');
 		var scTrackId = $(this).data('sc-track-id')
+
+		selectSong($(this));
+
 		playTrack(scTrackId);
 	});
 });

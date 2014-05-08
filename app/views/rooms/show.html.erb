@@ -78,11 +78,22 @@
 		<div class="row" data-room-id="<%= @room.id %>">
 			<div class="large-4 column room-playlist">
 				<div class="room-tracks"> 
-					<h3>Tracks on this page</h3>
-					<% @songs.each_with_index do |song, index| %>
-						<p class="tracks" id="<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>"> <%= song.title %> - <%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min | added by <%= song.user.soundcloud_username %> </p>
-						
-						<% end %>
+					<h3><%= @room.name %>'s Playlist</h3>
+            
+            <% @songs.each_with_index do |song, index| %>
+              <div class="tracks" id="<%= index %>" data-track-index= "<%= index %>" data-image-url= "<%= song.image_url %>" data-sc-track-id="<%= song.soundcloud_track_id %>" data-track-order="<%= index %>">              
+              
+              <img src="<%= song.image_url %>" >  
+              <div class="track-info">
+                <h1 class="name-style"><%= song.title %></h1>
+                <span class="time-style"><%= Time.at(song.duration / 1000).strftime("%-M:%S") %> min
+                </span> <br>
+                <span class="comment-text">curated by <%= song.user.soundcloud_username %>
+                </span>
+                </div> 
+              </div>  
+            <% end %>
+
 				</div> <!--large9 column-->    
 			</div>
 		</div>  
@@ -90,25 +101,5 @@
 
 </div> <!--large9 column-->
 
-<style>
 
-	p.tracks.selected-song {
-		color:red;
-	}
-
-	.progressBar {
-		background-color: #FFF;
-		height: 15px;
-	}
-
-	#progressBarBackground{
-		background-color: #333333;
-		height: 15px;
-		margin-top: 10px;
-		position: relative;
-		width: 100%;
-	}
- 
-
-	</style>
 
