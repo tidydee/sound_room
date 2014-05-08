@@ -5,6 +5,15 @@
 
 /* Bring up the playlist */
 
+#visible-playlist {
+  position: relative;
+  float: left;
+  // left: -4500px;
+  display: block;
+  top: 40%;
+  width: 650px;
+}
+
 #hidden {
   position: relative;
   float: left;
@@ -21,13 +30,14 @@
   // padding: 12px;
   padding: 1%;
   border: 1px solid rgb(133, 133, 133);
-  width: 100%;
+  width: 90%;
   height: 80%;
   top: 20px;
   font-size: 1em;
   color: rgb(172, 172, 172);
   max-height: 500px;
-  overflow: scroll;
+  overflow: auto;
+  margin: 0 7% 7% 5%;
 }
 
 div.tracks {

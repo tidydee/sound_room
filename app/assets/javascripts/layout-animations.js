@@ -24,11 +24,11 @@ $(document).ready(function () {
 // Bring up the playlist
 
     $('#songs-on-page-tab').click(function(){
-      var hidden = $("#hidden");
-      if (hidden.hasClass('visible')){
-        hidden.animate({"left":"-850px"}, "slow").removeClass('visible');
+      var visiblePlaylist = $("#visible-playlist");
+      if (visiblePlaylist.hasClass('visible')){
+        visiblePlaylist.animate({"left":"-850px"}, "slow").removeClass('visible');
       } else {
-        hidden.animate({"left":"0px"}, "fast").addClass('visible');
+        visiblePlaylist.animate({"left":"0px"}, "fast").addClass('visible');
       }
     });
 
