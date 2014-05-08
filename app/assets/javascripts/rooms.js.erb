@@ -165,7 +165,7 @@ function selectSong($this) {
 
 $(document).ready(function() {
 	console.log('in jQuery')
-	$('body').on('click', '.tracks', function(e) {
+	$('.tracks').on('click', function(e) {
 		console.log('this click?');
 		var scTrackId = $(this).data('sc-track-id')
 

@@ -22,7 +22,7 @@ function playTrack(id) {
       currentTrackId = id;
       handleSound();  
     }
-  }
+  })
 } 
 
 
@@ -32,21 +32,28 @@ function handleSound(){
     console.log(sound);
     currentPlaying = true;
 
+    var trueDuration = undefined;
     sound.play({
       onfinish: function(){
         console.log('track_finished');
-        var playingTrackElement = $('.tracks[data-sc-track-id='+id+']');
+        var playingTrackElement = $('.tracks[data-sc-track-id='+currentTrackId+']');
         playingTrackElement.addClass("selected-song");
         skipper(sound);
       },
       onplay: function(){
         console.log('inside onplay');
-        var playingTrackElement = $('.tracks[data-sc-track-id='+id+']');
+        var playingTrackElement = $('.tracks[data-sc-track-id='+currentTrackId+']');
         playingTrackElement.addClass("selected-song");
         console.log(playingTrackElement);
       },
       whileplaying: function() {
-        $(".progressBar").css('width', ((this.position/this.duration) * 100) + '%');
+        if (this.duration === trueDuration) {
+          $(".progressBar").css('width', ((this.position/this.duration) * 100) + '%');
+        }
+        else {
+          $(".progressBar").css('width', (0) + '%');
+          trueDuration = this.duration
+        }
       }
     });
   });
