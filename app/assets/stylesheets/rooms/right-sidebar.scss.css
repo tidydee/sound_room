@@ -55,11 +55,11 @@ display: none;
   /*height: 60%;*/
   width: 100%;
   clear: both;
+  text-align: center;
 }
 
 #player-functions {
-  letter-spacing: 2em;
-  margin-left: 20%;
+  letter-spacing: 1em;
 }
 
 .manage-songs-btn {
@@ -86,4 +86,14 @@ display: none;
   text-align: center;
 }
 
+/* ================= MODAL =============== */
+
+.reveal-modal {
+  border: solid 1px #FF5914;
+  box-shadow: 0 0px 900px rgba(255, 255, 255, 1);
+}
+
+.reveal-modal-bg {
+  background: rgba(1, 33, 46, 0.61);
+}
 
