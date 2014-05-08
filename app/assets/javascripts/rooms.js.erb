@@ -103,7 +103,11 @@
 						dataType:  'json',
 						type: "POST",
 						success: function(data) {
-							// change this to REPLICATE songs from DB
+
+								if (image_url === null){
+									image_url = 'http://i.imgur.com/0Y3XOyg.jpg';
+								} 
+		
 								$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'> <img src='+image_url+'><div class="track-info"><h1 class="name-style">'+data.title+'</h1><span class="time-style">'+(min+':'+sec)+' min </span> <br><span class="comment-text"> curated by '+userName+'</span></div></div>');
 
 								$(button).removeClass('button-add').addClass('button-remove');
