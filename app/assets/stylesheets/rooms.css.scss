@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // $body-bg: url('soundRoom2_large.png');
-$body-bg: url('curo.png');
+$body-bg: url('curo4.png');
 
 * {
   margin: 0;
@@ -14,14 +14,17 @@ html, body {
 }
 
 html { 
+  background-image: linear-gradient(to left, #ff5f37 0%, #B2E7ED 100%);
   // background-color: rgba(65,0,92, 1); 
   // background-image: $body-bg;
   // background-color: #FF7700; 
+
 } 
 
 body { 
   margin:0;
-  background-image: linear-gradient(to left, #ff5f37 0%, #B2E7ED 100%);
+  // background-image: linear-gradient(to left, #ff5f37 0%, #B2E7ED 100%);
+  background-image: $body-bg;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
