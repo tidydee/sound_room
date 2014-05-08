@@ -105,6 +105,31 @@ div#songs-on-page-tab:hover {
   transition: background-color 300ms ease-out;
 }
 
+
+/*======== PLAYER BUTTON FUNCTIONS ==========*/
+
+i.fa.fa-play.fa-2x.play-btn:hover,
+i.fa.fa-pause.fa-2x.pause-btn:hover,
+i.fa.fa-fast-forward.fa-2x.skip-btn:hover {
+  color: white;
+  transition: color 200ms ease-out;
+}
+
+i.fa.fa-volume-off.fa-2x.mute-btn:hover {
+  color: red;
+  transition: color 200ms ease-out;
+}
+
+i.fa.fa-volume-down.fa-2x.med-vol-btn:hover {
+  color: rgb(42, 206, 201);
+  transition: color 200ms ease-out;
+}
+
+i.fa.fa-volume-up.fa-2x.high-vol-btn:hover {
+  color: rgb(64, 182, 10);
+  transition: color 200ms ease-out;
+}
+
 .tracks.selected-song {
   * {
     color:red;
@@ -123,6 +148,7 @@ div#songs-on-page-tab:hover {
     position: relative;
     width: 100%;
   }
+
 
 @media screen and (min-width: 400px) and (max-width: 1025px){
   #songs-on-page-tab {
