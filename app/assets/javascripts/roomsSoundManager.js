@@ -61,7 +61,7 @@ function handleSound(){
 
 function skipper(){
   sound.stop();
-  var nextIndex = window.playlist.indexOf(id) + 1
+  var nextIndex = window.playlist.indexOf(currentTrackId) + 1
   var nextTrackId;
   if (nextIndex <= window.playlist.length - 1) {
     nextTrackId = window.playlist[nextIndex];
