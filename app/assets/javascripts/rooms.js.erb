@@ -24,7 +24,7 @@
 					var trackId = favorites[i].id;    
 					data.push(trackId); 
 				}
-				console.log("ArrayData:"+data);
+				// console.log("ArrayData:"+data);
 
 				$.ajax({
 					dataType: "json",
@@ -34,11 +34,11 @@
 						console.log("DatabaseData:");
 						for (var i=0; i<data.length; i++) {
 							var reccordId = data[i].id;
-							console.log('Reccord Id',reccordId);
-							console.log("data id:", data[i].soundcloud_track_id);
+							// console.log('Reccord Id',reccordId);
+							// console.log("data id:", data[i].soundcloud_track_id);
 							window.playlist.push(data[i].soundcloud_track_id);
 						}
-						console.log('scArrayData:', window.playlist);
+						// console.log('scArrayData:', window.playlist);
 						
 						for (var i=0; i<favorites.length; i++) {
 							var trackTitle = favorites[i].title.replace("'",'"');
@@ -49,7 +49,7 @@
 							var trackImage = favorites[i].artwork_url;
 							var row1 = "<td class='track'>"+trackTitle+"</td>";
 							
-							console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
+							// console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
 
 							if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
 							{
@@ -76,7 +76,7 @@
 										room_id: $('[data-room-id]').data('room-id')
 									};
 							var image_url = $this.data('track-image');
-							// Set at TOp of Page with Local Storage
+							// Username is Set at Top of Page with Local Storage
 							var userName = localUserName;
 							var numberOfTracks = $('.room-tracks').children().length;
 							// console.log('NUMBER OF TRACKS: ',numberOfTracks);
@@ -87,7 +87,6 @@
 								saveToDb(data, image_url, min, sec, userName, this, trackOrder);
 							} else {
 								removeFromDb($this.data('track-id'), this);
-								// $("p").filter(":contains('Hello')").remove()
 							}
 						});
 					}
@@ -112,13 +111,8 @@
 
 								$(button).removeClass('button-add').addClass('button-remove');
 								$(button).text('Remove');
-
-								window.playlist.push(data.soundcloud_track_id);
-
-							// TODO: need to store the returned db id in the dom for the delete button later  
-							//$this.data("id", data.trackId);
-						
-							alert("shit got saved");
+								window.playlist.push(data.soundcloud_track_id)
+							// alert("shit got saved");
 						},
 						error: function (err) {
 							console.log(err);
@@ -135,7 +129,7 @@
 						type: "POST",
 						success: function(data) {
 							$('div.tracks[data-sc-track-id='+scID+']').remove();
-							alert("shit got removed!");
+							// alert("shit got removed!");
 							$(button).removeClass('button-remove').addClass('button-add');
 							$(button).text('Add');
 							index = window.playlist.indexOf(scID)
