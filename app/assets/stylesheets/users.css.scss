@@ -57,73 +57,7 @@
   width: 100%;
   height: 260px;
   margin-left: 5%;
-  margin-top: 5%;
-}
-
-#favorite-track-section h3 {
-  text-align: center;
-  font-family: 'Sniglet', cursive;
-}
-
-@media screen and (min-width: 400px) and (max-width: 1025px){
-
-  #dashboard {
-    max-width: 100%;
-    padding-right: 10%;
-    height: 100%;
-  }
-
-  #room-option-tab {
-    border-radius: 0;
-    border: none;
-    text-align: center;
-  }
-
-  #favorite-track-section {
-  position: relative;
-  width: 100%;
-  height: 260px;
-  margin-left: 5%;
-  margin-top: 0;
-}
-
-  #favorite-track-table {
-    height: 125px;
-    margin-top: 1%;
-  }
-
-}
-/*====== DASHBOARD PLAYER =======*/
-
-div#prev-player-btn-container {
-  text-align: center;
-  letter-spacing: 2em;
-  margin-top: 2%;
-}
-
-/*====== DESCRIPTION =======*/
-
-div.large-3.columns.description h2{
-  font-family: 'Sniglet', cursive;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 10px 10px 0 0;
-  padding-left: 20px;
-  margin-top: -1;
-  border-bottom: rgba(173, 173, 173, 0.12);
-}
-
-div.large-3.columns.description {
-  background-color: white;
-  margin-right: 2%;
-  margin-left: 5%;
-  margin-bottom: 3%;
-  border-radius: 14px;
-  padding: 1%;
-  border: 1px solid rgb(174, 170, 170);
-}
-
-div.large-3.columns.description p {
-  font-size: .8em;
+  margin-top: 1%;
 }
 
 #favorite-track-table {
@@ -141,9 +75,88 @@ div#favorite_tracks p {
   margin: 0;
 }
 
+#favorite-track-section h3 {
+  text-align: center;
+  font-family: 'Sniglet', cursive;
+}
+
+
+
+@media screen and (min-width: 400px) and (max-width: 1025px){
+
+  #dashboard {
+    max-width: 100%;
+    padding-right: 10%;
+    height: 100%;
+  }
+
+  #room-option-tab {
+    // border-radius: 0;
+    // border: none;
+    // text-align: center;
+    display: none;
+  }
+
+  #favorite-track-section {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  margin-left: 5%;
+  margin-top: 0;
+}
+
+  #favorite-track-table {
+    height: 100%;
+    margin-top: 1%;
+  }
+
+}
+/*====== DASHBOARD PLAYER =======*/
+
+div#prev-player-btn-container {
+  text-align: center;
+  letter-spacing: 2em;
+  margin-top: 2%;
+}
+
+/*====== DESCRIPTION =======*/
+
+.description h2{
+  font-family: 'Sniglet', cursive;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px 10px 0 0;
+  padding-left: 20px;
+  margin-top: -1;
+  border-bottom: rgba(173, 173, 173, 0.12);
+}
+
+.description {
+  background-color: rgba(255, 255, 255, 0.74);
+  margin-right: 2%;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  border-radius: 14px;
+  padding: 3%;
+  float: left;
+  border: 1px solid rgb(174, 170, 170);
+}
+
+.description p {
+  font-size: .8em;
+
+}
+
+
+div#favorite_tracks p {
+  margin: 0;
+}
+
 .new-room-create {
   border: 2px solid #000;
 }
 
+.description-wrap {
+  margin: 3% 0 0 0; 
+}
 
 

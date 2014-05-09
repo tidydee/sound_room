@@ -14,13 +14,10 @@
 //= require jquery_ujs
 //= require foundation
 // require turbolinks
-//= require jquery.animate-colors-min
 //= require jquery.transit.min
 //= require PusherChatWidget
 //= require raphael-min
-//= require layout-animations
 //= require jquery.lazylinepainter-1.4.1.min
-//= require background-spiral
 //= require seen.min
 //= require seen-ball
 //= require_tree .

@@ -1,4 +1,4 @@
-<div class="footer fullwidth">
+<div id="footer" class="footer fullwidth">
   <div class="large-3 columns auth">
     <% if current_user %>
       <%= link_to '/auth/logout', id: "sc-signout" do %>
@@ -31,9 +31,9 @@
     </div>
   <% end %>
 
-  <div class="large-2 columns link-3">
+  <div id ="about-btn" class="large-2 columns link-3">
     <ul class="center">
-      <li><a href="#">About</a></li>
+      <li><a class="">About</a></li>
     </ul>
   </div>
 
@@ -42,7 +42,7 @@
       <!-- Rooms List on Nav Bar, Show/Hide on Click -->
       
       <div class="rooms-list-nav hide-class"><h1>Join a Room</h1><%= render partial: "shared/rooms_lists" %></div>
-      <li><a href="#">Join a Room</a></li>
+      <li><a class="join">Join a Room</a></li>
     </ul>
   </div>
 

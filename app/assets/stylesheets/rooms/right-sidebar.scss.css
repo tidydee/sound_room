@@ -9,9 +9,10 @@ div.public-list-item:hover {
   background-color: rgba(255,255,255,0.5);
   padding-top: 1%;
   list-style: none;
-  border-top: 30px solid white;
+  border-top: 10px solid white;
   border-bottom: 30px solid white;
   margin-bottom: 1%;
+  margin-top: -7%;
   float: right;
 }
 
@@ -21,7 +22,8 @@ div.public-list-item:hover {
 
 #right-window a {
   font-family: Helvetica;
-  font-weight: 200;
+  font-weight: 500;
+  font-size: 12px;
 }
 
 #right-window a:hover {

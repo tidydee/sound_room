@@ -40,99 +40,76 @@
 </script>
 
 
-    <div id="dashboard" class="large-9 columns">
-    
-    
-    <h2><%= current_user.soundcloud_username %>'s Dashboard</h2>
-    
+<div id="dashboard" class="large-9 columns">
+  
+  <h2><%= current_user.soundcloud_username %>'s Dashboard</h2>
+  
+  <div id="player">
+  </div>
 
-    <div id="player">
-    </div>
-
-   <!--  <div id="play">
-      <emp>Play</emp> 
-    </div>
-
-    <div id="pause">
-      <emp>Pause</emp>
-    </div>
-    
-    <div id="stop">
-      <emp>Stop</emp>
-    </div> -->
-
-      <div class="large-3 columns description">
-        <h2>Step 1</h2>
-          <p>Tumblr American Apparel wayfarers 3 wolf moon beard. Etsy aesthetic Truffaut readymade, normcore Williamsburg bitters YOLO pour-over organic. </p>
+  <div id="favorite-track-section" class="large-9 column">
+    <h3>Favourite tracks</h3>
+      <div id="player"></div>
+        <% request.original_url %>
+        <hr>
+        <div id="progressBarBackground">
+          <div class="progressBar"></div>
+        </div>
+        <div id="prev-player-btn-container">
+          <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
+          <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
+          <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
+        </div>
+        <div id="prev-player-btn-container">
+          <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
+          <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
+          <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
+        </div>  
+        
+    <div id="favorite-track-table">
+      <div id="favorite_tracks">
+        
       </div>
-
-      <div class="large-3 columns description">
-        <h2>Step 2</h2>
-          <p>Tumblr American Apparel wayfarers 3 wolf moon beard. Etsy aesthetic Truffaut readymade, normcore Williamsburg bitters YOLO pour-over organic. </p>
-      </div>
-
-      <div class="large-3 columns description">
-       <h2>Step 3</h2>
-          <p>Tumblr American Apparel wayfarers 3 wolf moon beard. Etsy aesthetic Truffaut readymade, normcore Williamsburg bitters YOLO pour-over organic. </p>
-      </div>
+    </div>
  
 
-    <div id="favorite-track-section" class="large-9 column">
-      <h3>Favourite tracks</h3>
-        <div id="player"></div>
-          <% request.original_url %>
-          <hr>
-          <div id="progressBarBackground">
-            <div class="progressBar"></div>
-          </div>
-          <div id="prev-player-btn-container">
-            <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
-            <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
-            <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
-          </div>
-          <div id="prev-player-btn-container">
-            <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
-            <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
-            <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
-          </div>  
-          
-      <div id="favorite-track-table">
-        <div id="favorite_tracks">
-          
-        </div>
-      </div>
+  <div class="large-5 columns description-wrap">
+    <div class="description">
+      <h2>What's up?</h2>
+      <p>This page displays all your favorited tracks from soundcloud - if you don't see anything here, head to sound cloud and like some tracks.  </p>
     </div>
+  </div>
+ </div>
+</div>  
 
-  </div>  
+<aside class="large-3 columns" id="room-option-tab">
 
-  <aside class="large-3 columns" id="room-option-tab">
+    <ul class="side-nav">
+      <%= form_for @room do |f| %>
+      <!-- Room Create Error Handling -->
+      <div class="error-message">
+        <% if @room.errors.any? %>
+          <div class="error-message-header"> 
+            <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
+          </div>
+          <ul>
+            <% @room.errors.full_messages.each do |msg| %>
+              <li class="error-message-body"><%= msg %></li>
+            <% end %>
+          </ul>  
+        <%end%>
+      </div>
+      
+      <!-- Create a new room -->
 
-      <ul class="side-nav">
-        <%= form_for @room do |f| %>
-        <!-- Room Create Error Handling -->
-        <div class="error-message">
-          <% if @room.errors.any? %>
-            <div class="error-message-header"> 
-              <%= pluralize(@room.errors.count, "error") %> prevented this room from being created:
-            </div>
-            <ul>
-              <% @room.errors.full_messages.each do |msg| %>
-                <li class="error-message-body"><%= msg %></li>
-              <% end %>
-            </ul>  
-          <%end%>
-        </div>
-        
-        <!-- Create a new room -->
+        <h4>Create New Room</h4>
+          <%= f.label :name %>
+          <%= f.text_field :name %><br />
+          <%= f.submit%>
+      <%end%>  
+    </ul>
 
-          <h4>Create New Room</h4>
-            <%= f.label :name %>
-            <%= f.text_field :name %><br />
-            <%= f.submit%>
-        <%end%>  
-      </ul>
+    <!-- Rooms List -->
+    <%= render partial: "shared/rooms_lists" %>
 
-      <!-- Rooms List -->
-      <%= render partial: "shared/rooms_lists" %>
-
-  </aside>
+</aside>
