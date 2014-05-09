@@ -116,6 +116,8 @@
 								$(button).removeClass('button-add').addClass('button-remove');
 								$(button).text('Remove');
 								window.playlist.push(data.soundcloud_track_id)
+								console.log('playlist:', window.playlist);
+								console.log('this should be in playlist:',data.soundcloud_track_id);
 							// alert("shit got saved");
 						},
 						error: function (err) {
@@ -144,11 +146,6 @@
 						}
 					});
 				}
-
-				$('.track').click(function(e) {
-					console.log('this click?');
-					playTrack($(this).data('track-id'));
-				}); 
 			});
 		};
 			
@@ -169,8 +166,9 @@ function selectSong($this) {
 
 $(document).ready(function() {
 	console.log('in jQuery')
-	$('.tracks').on('click', function(e) {
-		console.log('this click?');
+
+	$('body').on('click', '.tracks', function(e) {
+		console.log('this mofo click?');
 		var scTrackId = $(this).data('sc-track-id')
 
 		selectSong($(this));
