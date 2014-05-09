@@ -79,10 +79,13 @@
 							// Username is Set at Top of Page with Local Storage
 							var userName = localUserName;
 							var numberOfTracks = $('.room-tracks').children().length;
-							// console.log('NUMBER OF TRACKS: ',numberOfTracks);
+
 							var min = (((data.duration)/1000)/60) << 0;
 							// DO Check -> If less than 10 it adds a zero to the front of sec
 							var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
+							if(sec < 10)  {
+          			sec = ('0'+ sec);
+        			}
 					
 							if ($(this).hasClass('button-add')) {
 								saveToDb(data, image_url, min, sec, userName, this, trackOrder);
@@ -113,6 +116,8 @@
 								$(button).removeClass('button-add').addClass('button-remove');
 								$(button).text('Remove');
 								window.playlist.push(data.soundcloud_track_id)
+								console.log('playlist:', window.playlist);
+								console.log('this should be in playlist:',data.soundcloud_track_id);
 							// alert("shit got saved");
 						},
 						error: function (err) {
@@ -141,11 +146,6 @@
 						}
 					});
 				}
-
-				$('.track').click(function(e) {
-					console.log('this click?');
-					playTrack($(this).data('track-id'));
-				}); 
 			});
 		};
 			
@@ -166,8 +166,9 @@ function selectSong($this) {
 
 $(document).ready(function() {
 	console.log('in jQuery')
-	$('.tracks').on('click', function(e) {
-		console.log('this click?');
+
+	$('body').on('click', '.tracks', function(e) {
+		console.log('this mofo click?');
 		var scTrackId = $(this).data('sc-track-id')
 
 		selectSong($(this));

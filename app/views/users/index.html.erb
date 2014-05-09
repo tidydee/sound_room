@@ -19,9 +19,21 @@
 				var trackUrl = favorites[i].permalink_url;
 				var trackStreamUrl = favorites[i].stream_url;
 				var trackOrder = i;
+        var trackImage = favorites[i].artwork_url;
+        var duration = favorites[i].duration;
 				window.playlist.push(trackId);
-				
-				$('#favorite_tracks').append("<p class='tracks' id='"+trackOrder+"' data-sc-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+">"+trackTitle+"</p>");
+        var min = (((duration)/1000)/60) << 0;
+        // DO Check -> If less than 10 it adds a zero to the front of sec
+        var sec = parseFloat(((duration)/1000) % 60).toFixed(0);
+        if(sec < 10)  {
+          sec = ('0'+ sec);
+        }
+          
+        if (trackImage === null){
+          trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
+        } 
+
+				$('#favorite_tracks').append("<div class='tracks' id='"+trackOrder+"' data-sc-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+"><img class='img-style2' src="+trackImage+"><h1 class='name-style2' >"+trackTitle+"</h1><span class='time-style2'> "+(min+':'+sec)+" min </span></div>");
 			}
 			console.log('scArrayData:'+ window.playlist);
     });

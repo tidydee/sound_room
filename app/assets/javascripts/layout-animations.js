@@ -21,6 +21,7 @@ $(document).ready(function () {
     }
 
     $('.curo').mouseover(function(){
+      debugger;
       $(this).transition({
         perspective: '100px',
         rotateY: '+180deg'

@@ -77,6 +77,29 @@ h1.name-style {
   text-shadow: none;
 }
 
+/* CSS Only for User's Index Page START */
+img.img-style2 {
+  padding-left: 5%;
+}
+
+h1.name-style2 {
+  padding-right: 50%;
+  padding-left: 20%;
+  font-size: 1.12em;
+  color: #acacac;
+  text-shadow: none; 
+}
+
+.time-style2 {
+  font-size: 1.12em;
+  color: #acacac;
+  position: absolute;
+  right: 30%;
+  top: 8px; 
+}
+
+/* CSS Only for User's Index Page END */
+
 div.tracks {
   position: relative;
 }
