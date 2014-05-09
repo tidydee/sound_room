@@ -48,6 +48,9 @@ gem 'uuid', '~> 2.3.7'
 gem "font-awesome-rails"
 gem 'raptorize-rails' 
 
+gem 'rails_12factor', group: :production
+gem 'pg', group: :production
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
