@@ -921,10 +921,12 @@ $body-bg: rgba(255,255,255,0);
 
 // We use these to style the reveal close button
 // $reveal-close-font-size: rem-calc(40);
-// $reveal-close-top: rem-calc(8);
-// $reveal-close-side: rem-calc(11);
+ $reveal-close-top: rem-calc(8);
+ $reveal-close-side: rem-calc(11);
 // $reveal-close-color: #aaa;
 // $reveal-close-weight: bold;
+
+// $reveal-close-color: #FF0;
 
 // We use this to set the default radius used throughout the core.
 // $reveal-radius: $global-radius;
