@@ -133,11 +133,6 @@
         <%end%>  
       </ul>
 
-    
-      <h4>List of my Rooms</h4>
-        <% @rooms.each do |room| %>
-        <%= link_to room.name, room_path(room) %><br />
-      <% end %>
-
-    
+      <!-- Rooms List -->
+      <%= render partial: "shared/rooms_lists" %>
   </aside>

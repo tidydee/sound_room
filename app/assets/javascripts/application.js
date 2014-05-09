@@ -26,5 +26,6 @@
 //= require_tree .
 //= require_self
 //= require js-routes
+//= require rooms_list_nav
 
 $(function(){ $(document).foundation(); });
