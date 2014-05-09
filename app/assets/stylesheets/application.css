@@ -18,7 +18,7 @@
  *= require font-awesome
  */
 
-@import url(http://fonts.googleapis.com/css?family=Sniglet:400,800);
+@import url(http://fonts.googleapis.com/css?family=Francois+One|Pacifico);
 
  .flash-message{
   font-family: Arial, Helvetica, sans-serif;
@@ -51,7 +51,7 @@
 
 .public-rooms h3 {
   font-weight: 300;
-  font-family: 'Sniglet', cursive;
+  font-family: 'Francois One', sans-serif;
 }
 
 @media screen and (min-width: 400px) and (max-width: 1025px){
@@ -73,5 +73,7 @@ div.header {
 
 div.header h1 {
   font-size: 4em;
+  font-family: 'Francois One', sans-serif;
+  color: rgb(84, 84, 84);
 }
 

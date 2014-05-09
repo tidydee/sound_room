@@ -100,13 +100,13 @@ clear: both;
 
 h1 {
   color: white;
-  font-family: 'Sniglet', cursive;
+  font-family: 'Pacifico', cursive;
   font-size: 4em;
   text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
 }
 
 h2 {
-  color: #FF7700;
+   color: #646362;
   font-size: 2em;
 }
 
@@ -115,8 +115,13 @@ h3 {
 }
 
 h4 {
-  font-family:'Sniglet', cursive;
+  font-family: 'Francois One', sans-serif;
   font-weight: 200;
+}
+
+
+h1.tag-line {
+  margin-top: 10%;
 }
 
 .test-wrap {

@@ -27,10 +27,9 @@
 // Room tabs
 #room-option-tab {
   margin-top: 4%;
-  border-radius: 0px 90px 90px 0px;
+  border-radius: 0px 30px 30px 0px;
   background-color: rgba(245, 245, 245, 0.6);
   padding-bottom: 2%;
-  border-right: rgb(0, 156, 255) solid 1px;
 }
 
 #hidden-room {
@@ -56,7 +55,7 @@
   position: relative;
   width: 100%;
   height: 260px;
-  margin-left: 5%;
+  margin-left: 2%;
   margin-top: 1%;
 }
 
@@ -77,7 +76,9 @@ div#favorite_tracks p {
 
 #favorite-track-section h3 {
   text-align: center;
-  font-family: 'Sniglet', cursive;
+  font-family: 'Francois One', sans-serif;
+  color: rgb(84, 84, 84);
+
 }
 
 
@@ -122,7 +123,7 @@ div#prev-player-btn-container {
 /*====== DESCRIPTION =======*/
 
 .description h2{
-  font-family: 'Sniglet', cursive;
+  font-family: 'Pacifico', cursive;
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 10px 10px 0 0;
   padding-left: 20px;
@@ -136,7 +137,7 @@ div#prev-player-btn-container {
   margin-left: 1%;
   margin-bottom: 1%;
   border-radius: 14px;
-  padding: 3%;
+  padding: 1%;
   float: left;
   border: 1px solid rgb(174, 170, 170);
 }
@@ -156,7 +157,7 @@ div#favorite_tracks p {
 }
 
 .description-wrap {
-  margin: 3% 0 0 0; 
+  margin: 1% 0 0 0; 
 }
 
 
