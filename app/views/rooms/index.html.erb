@@ -9,10 +9,11 @@
   <div class="public-rooms">
     <h3>Music Rooms</h3>
     <% @room.each do |room| %>
-      <span data-tooltip class="has-tip" title="__ tracks in list">
+      <span data-tooltip class="has-tip" title="<%= Song.where("room_id = ?", room.id).count %> tracks in list">
         <%= link_to room.name, room_path(room) %>
       </span><br /><hr>
     <% end %>
   </div>
   <!-- <div class="large-3 columns"></div> -->
 </div>
+

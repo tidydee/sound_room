@@ -2,7 +2,7 @@
 
   def index
     @room = Room.all.sort_by{ |room| room.name}
-
+  
     if @current_user
       @my_rooms = Room.where('user_id = ?',current_user.id)
       roomid = Song.where('user_id = ?', current_user.id).select('room_id')
