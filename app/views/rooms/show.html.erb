@@ -3,12 +3,12 @@
 
 <div class="large-12" style="clear:both">
 <div class="large-9 column room-content">
-	<h3> <%= @room.name %> </h3>
+	<h3> <%= @room.name %>'s Room </h3>
 
 		<!-- Only a User who created a room, can Delete a Room -->
 		<% if current_user %>
 			<% if @room.user_id == session[:user_id] %>
-				<%= @room.name %> <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %>
+		  <%= link_to "delete", room_path(@room), method: :delete, data: {confirm: "You sure?"} %> this room
 			<% end %>
 		<% end %>
 
