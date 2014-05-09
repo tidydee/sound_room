@@ -38,12 +38,13 @@
 			console.log('scArrayData:'+ window.playlist);
     });
 	}
-
-	$('body').on('click','.tracks', function(e) {
-		console.log('this click?');
-		var scTrackId = $(this).data('sc-track-id');
-		playTrack(scTrackId);
-	});
+  $(document).ready(function(){
+  	$('body').on('click','.tracks', function(e) {
+  		console.log('this USER click?');
+  		var scTrackId = $(this).data('sc-track-id');
+  		playTrack(scTrackId);
+  	});
+   }); 
 
 	getUserFavoriteTracks();
 

@@ -5,8 +5,6 @@
   
     if @current_user
       @my_rooms = Room.where('user_id = ?',current_user.id)
-      roomid = Song.where('user_id = ?', current_user.id).select('room_id')
-      @rooms_added_to = Room.where(id: roomid)
     end
     @rooms = Room.all
   end
@@ -21,8 +19,6 @@
     @song = Song.new
     if current_user
       @my_rooms = Room.where('user_id = ?',current_user.id)
-      roomid = Song.where('user_id = ?', current_user.id).select('room_id')
-      @rooms_added_to = Room.where(id: roomid)
     end
     @rooms = Room.all
 
@@ -45,8 +41,6 @@
 
     @rooms = Room.all
     @my_rooms = Room.where('user_id = ?',current_user.id)
-    roomid = Song.where('user_id = ?', current_user.id).select('room_id')
-    @rooms_added_to = Room.where(id: roomid)
 
     if @room.save
       flash[:success] = "Room Successfully Created"

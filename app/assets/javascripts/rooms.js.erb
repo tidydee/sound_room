@@ -167,8 +167,8 @@ function selectSong($this) {
 $(document).ready(function() {
 	console.log('in jQuery')
 
-	$('body').on('click', '.tracks', function(e) {
-		console.log('this mofo click?');
+	$('.room-playlist').on('click', '.tracks', function(e) {
+		console.log('this ROOM click?');
 		var scTrackId = $(this).data('sc-track-id')
 
 		selectSong($(this));
