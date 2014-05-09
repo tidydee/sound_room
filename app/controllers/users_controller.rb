@@ -14,8 +14,6 @@ before_filter :authorize?
     @room = Room.new
     @rooms = Room.all.sort_by{ |room| room.name}
     @my_rooms = Room.where('user_id = ?',current_user.id)
-    roomid = Song.where('user_id = ?', current_user.id).select('room_id')
-    @rooms_added_to = Room.where(id: roomid)
   end
 
   def show
