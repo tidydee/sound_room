@@ -20,12 +20,12 @@
 //= require raphael-min
 //= require layout-animations
 //= require jquery.lazylinepainter-1.4.1.min
-//= require jquery.foggy.min
 //= require background-spiral
 //= require seen.min
 //= require seen-ball
 //= require_tree .
 //= require_self
 //= require js-routes
+//= require rooms_list_nav
 
 $(function(){ $(document).foundation(); });
