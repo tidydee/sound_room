@@ -253,11 +253,15 @@ div.public-list-item:hover {
 }
 
 .button-add{
-  background-color: #00BA70;
+  background-color: rgb(115, 197, 118);
+  border-radius: 9px;
+  border: 1px solid rgb(93, 124, 94);
 }
 
 .button-remove{
-  background-color: #BA0000;
+  background-color: rgba(186, 0, 0, 0.55);
+  border-radius: 9px;
+  border: 1px solid rgb(93, 124, 94);
 }
 
 .name-style .name-style3 {

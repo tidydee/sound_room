@@ -35,6 +35,14 @@ div.public-list-item:hover {
   height: 60%;
   max-height: 250px;
 }
+
+@media screen and (min-width: 400px) and (max-width: 1025px){
+
+  #right-window {
+    margin-top: 4%;
+  }
+
+}
 /* ======== CHAT IMAGE ==========*/ 
 
 ul.activity-stream img {
@@ -91,7 +99,7 @@ display: none;
 /* ================= MODAL =============== */
 
 .reveal-modal {
-  border: solid 1px #FF5914;
+  border: solid 1px #000000;
   box-shadow: 0 0px 900px rgba(255, 255, 255, 1);
 }
 
