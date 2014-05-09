@@ -2,6 +2,13 @@
 
   def index
     @room = Room.all.sort_by{ |room| room.name}
+
+    if @current_user
+      @my_rooms = Room.where('user_id = ?',current_user.id)
+      roomid = Song.where('user_id = ?', current_user.id).select('room_id')
+      @rooms_added_to = Room.where(id: roomid)
+    end
+    @rooms = Room.all
   end
 
   def new
@@ -12,6 +19,12 @@
     @room = Room.find(params[:id])
     @songs = @room.songs
     @song = Song.new
+    if current_user
+      @my_rooms = Room.where('user_id = ?',current_user.id)
+      roomid = Song.where('user_id = ?', current_user.id).select('room_id')
+      @rooms_added_to = Room.where(id: roomid)
+    end
+    @rooms = Room.all
 
     respond_to do |format|
       format.html { render :show }

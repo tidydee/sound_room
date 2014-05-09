@@ -1,12 +1,14 @@
-<h4>My Rooms</h4>
-  <% @my_rooms.each do |room| %>
-  <%= link_to room.name, room_path(room) %><br />
-<% end %><br>
+<% if @current_user %>
+  <h4>My Rooms</h4>
+    <% @my_rooms.each do |room| %>
+    <%= link_to room.name, room_path(room) %><br />
+  <% end %><br>
 
-<h4>Rooms I Play In</h4>
-  <% @rooms_added_to.each do |room| %>
-  <%= link_to room.name, room_path(room) %><br />
-<% end %><br>
+  <h4>Rooms I Play In</h4>
+    <% @rooms_added_to.each do |room| %>
+    <%= link_to room.name, room_path(room) %><br />
+  <% end %><br>
+<% end %>
 
 <h4>Popular Rooms</h4>
   <% @rooms.each do |room| %>
