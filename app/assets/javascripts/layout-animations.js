@@ -4,6 +4,14 @@ $(document).ready(function () {
       rotate3d: '1,1,0,180deg'
     });
 
+    $(document).ready(function() {
+      var bodyHeight = $("body").height();
+      var vwptHeight = $(window).height();
+      if (vwptHeight > bodyHeight) {
+        $(".footer").css("position","absolute").css("bottom",0);
+      }
+    });
+
     // fadeToggle( $('.gradient.one') );
     fadeToggle( $('.gradient.two') );
 
@@ -16,7 +24,7 @@ $(document).ready(function () {
       debugger;
       $(this).transition({
         perspective: '100px',
-        rotateY: '180deg'
+        rotateY: '+180deg'
       }); 
     });
 

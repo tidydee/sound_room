@@ -29,13 +29,18 @@
 
  #public-rooms {
   /*// background-color: rgba(255, 255, 255, 0.3);*/
-  background-color: rgba(255, 255, 255, 0.89);
+/*  background-color: rgba(255, 255, 255, 0.89);
   padding-top: 1%;
   width: 40%;
   list-style: none;
   border-top: 30px solid white;
   border-bottom: 30px solid white;
-  margin-bottom: 12%;
+  margin-bottom: 2%;*/
+  background-color: rgba(245, 245, 245, 0.6);
+  border-radius: 30px;
+  padding: 2% 3% 2% 4%;
+  margin-bottom: 2%;
+  top: 20;
   float: right;
 }
 

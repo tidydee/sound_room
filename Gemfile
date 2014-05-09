@@ -45,7 +45,8 @@ gem "js-routes"
 gem 'foundation-rails'
 gem 'pusher'
 gem 'uuid', '~> 2.3.7'
-gem "font-awesome-rails" 
+gem "font-awesome-rails"
+gem 'raptorize-rails' 
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
