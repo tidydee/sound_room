@@ -62,25 +62,41 @@
       <emp>Stop</emp>
     </div> -->
 
-      <p> Any song that you have liked or favorited on soundcloud appears here. Etsy locavore mumblecore, roof party mixtape trust fund salvia butcher kogi letterpress cardigan. Irony flexitarian trust fund master cleanse. +1 Tonx sriracha quinoa. </p>
+      <div class="large-3 columns description">
+        <h2>Step 1</h2>
+          <p>Tumblr American Apparel wayfarers 3 wolf moon beard. Etsy aesthetic Truffaut readymade, normcore Williamsburg bitters YOLO pour-over organic. </p>
+      </div>
+
+      <div class="large-3 columns description">
+        <h2>Step 2</h2>
+          <p>Tumblr American Apparel wayfarers 3 wolf moon beard. Etsy aesthetic Truffaut readymade, normcore Williamsburg bitters YOLO pour-over organic. </p>
+      </div>
+
+      <div class="large-3 columns description">
+       <h2>Step 3</h2>
+          <p>Tumblr American Apparel wayfarers 3 wolf moon beard. Etsy aesthetic Truffaut readymade, normcore Williamsburg bitters YOLO pour-over organic. </p>
+      </div>
  
 
-
-    <div id="favorite-track-section">
+    <div id="favorite-track-section" class="large-9 column">
       <h3>Favourite tracks</h3>
         <div id="player"></div>
           <% request.original_url %>
           <hr>
-          <p>
-            <div id="play"><i class="fa fa-play"></i></div>
-            <div id="pause"><i class="fa fa-pause"></i></div>
-            <div id="skip"><i class="fa fa-fast-forward"></i></div>
-          </p>
-          <p>
-            <div id="mute">Mute</div>
-            <div id="med-volume">Med</div>
-            <div id="high-volume">High</div>
-          </p>
+          <div id="progressBarBackground">
+            <div class="progressBar"></div>
+          </div>
+          <div id="prev-player-btn-container">
+            <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
+            <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
+            <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
+          </div>
+          <div id="prev-player-btn-container">
+            <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
+            <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
+            <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
+          </div>  
+          
       <div id="favorite-track-table">
         <div id="favorite_tracks">
           

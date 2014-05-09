@@ -130,11 +130,20 @@ i.fa.fa-volume-up.fa-2x.high-vol-btn:hover {
   transition: color 200ms ease-out;
 }
 
+/*========= Player playing function ======= */
+
 .tracks.selected-song {
   * {
-    color:red;
+    color: red;
+    }
   }
-  }
+
+.tracks.selected-song {
+  color: red;
+}
+
+/*========================================= */
+  
 
 .progressBar {
     background-color: #FFF;
