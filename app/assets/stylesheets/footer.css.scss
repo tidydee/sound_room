@@ -88,3 +88,37 @@ div.footer.fullwidth ul {
   text-align: center;
 }
 
+// =========== Rooms List on Click - Nav Bar ===========
+.rooms-list-nav {
+  width: 100%;
+  min-height: 325px;
+  height: auto;
+  padding: 2%;
+  background-color: white;
+  position: absolute;
+  right: 0px;
+  bottom: 0;
+  text-align: left;
+}
+
+.hide-class {
+  display:  none;
+}
+
+.rooms-list-nav h1 {
+  font-size: 1.25em;
+  color: #FF7700;
+  text-shadow: none;
+  /*background-color: white;*/
+}
+
+.rooms-list-nav h4 {
+  font-size: 1em;
+}
+
+
+
+
+
+
+
