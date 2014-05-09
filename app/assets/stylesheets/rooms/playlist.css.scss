@@ -86,8 +86,10 @@ h1.name-style2 {
   padding-right: 50%;
   padding-left: 20%;
   font-size: 1.12em;
-  color: #acacac;
-  text-shadow: none; 
+  font-weight: 200;
+  color: #5A5454;
+  text-shadow: none;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
 .time-style2 {
@@ -106,8 +108,8 @@ div.tracks {
 
 .room-playlist h3 {
   color: #F37100;
-  font-family: 'Sniglet', cursive;
-  text-shadow: 6px 6px 4px rgba(0,0,0,0.2);
+  // font-family: 'Pacifico', cursive;
+  // text-shadow: 6px 6px 4px rgba(0,0,0,0.2);
 }
 
 div#songs-on-page-tab {

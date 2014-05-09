@@ -1,11 +1,11 @@
 div.footer {
   font-weight: 200;
-  position: relative;
+  position: fixed;
   width: 100%;
   left: 0;
   bottom: 0;
   background-color: whitesmoke;
-  height: 15%;
+  height: 8%;
   clear: both;
 }
 
@@ -13,6 +13,15 @@ div.large-12.columns.footer p {
   font-weight: 100;
   letter-spacing: 1px;
 }
+
+@media screen and (min-width: 400px) and (max-width: 1025px){
+
+  div.footer {
+    position: relative;
+  }
+
+}
+
 
 // =========== BUTTON STYLES ===========
 
@@ -99,6 +108,7 @@ div.footer.fullwidth ul {
   right: 0px;
   bottom: 0;
   text-align: left;
+  z-index: -1;
 }
 
 .hide-class {
