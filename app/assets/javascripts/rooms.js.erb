@@ -47,18 +47,33 @@
 							var trackOrder = i;
 							var duration = favorites[i].duration;
 							var trackImage = favorites[i].artwork_url;
-							var row1 = "<td class='track'>"+trackTitle+"</td>";
+
+							var min = (((duration)/1000)/60) << 0;
+							// DO Check -> If less than 10 it adds a zero to the front of sec
+							var sec = parseFloat(((duration)/1000) % 60).toFixed(0);
+							if(sec < 10)  {
+          			sec = ('0'+ sec);
+        			}
+							
+							if (trackImage === null){
+									trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
+							} 
+							var row1 = "<td class='track'><img class='img-style3' src="+trackImage+"><div class='name-style3'>"+trackTitle+"</div><span class='time-style3'>"+(min+':'+sec)+" min</span> </td>";
+
+							
+
+
 							
 							// console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
 
 							if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
 							{
-								var removeButton = "<td><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
+								var removeButton = "<td valign='top'><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
 
 								$('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
 							}
 							else {
-								var addButton = "<td><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
+								var addButton = "<td valign='top'><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
 
 								$('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
 							}
