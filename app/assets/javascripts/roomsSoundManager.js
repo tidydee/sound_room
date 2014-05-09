@@ -5,8 +5,6 @@ var sound = undefined;
 function playTrack(id) {
   console.log('sound playing');
   SC.whenStreamingReady(function() {
-    // currentTrackId = scId of previously playing song
-    // currentPlaying is true if sound is playing
     if (id === currentTrackId) {
       if (currentPlaying) {
         sound.pause();
@@ -24,8 +22,6 @@ function playTrack(id) {
     }
   })
 } 
-
-
 
 function handleSound(){
   sound = SC.stream(currentTrackId, { autoPlay: false }, function(sound){
@@ -70,6 +66,7 @@ function skipper(){
   }
   playTrack(nextTrackId);
 }
+
 $('#skip').click(skipper);
 
 $('#pause').click(function(e){
@@ -87,5 +84,3 @@ $('#med-volume').click(function(e){
 $('#high-volume').click(function(e){
     sound.setVolume(100);
 });
-  //   });
-  // }
