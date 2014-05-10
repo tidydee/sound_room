@@ -73,8 +73,10 @@ span.time-style {
 h1.name-style {
   font-size: 1.12em;
   width: 415px;
-  color: #acacac;
+  color: #5B5B5B;
   text-shadow: none;
+  font-family: helvetica;
+  font-weight: 100;
 }
 
 .img-style3 {
@@ -82,10 +84,11 @@ h1.name-style {
 }
 
 div#myModal {
-width: 700px;
-margin-right: 600px;
-left: 65%;
-
+  width: 700px;
+  margin-right: 600px;
+  left: 65%;
+  border-radius: 9px;
+  background-color: rgba(143, 186, 183, 0.32);
 }
 
 div.name-style3 {
@@ -94,7 +97,7 @@ div.name-style3 {
   float: left;
   font-size: 1.12em;
   width: 300px;
-  color: #acacac;
+  color: #464646;
   text-shadow: none;
 }
 

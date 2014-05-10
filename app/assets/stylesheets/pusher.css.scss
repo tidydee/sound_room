@@ -6,7 +6,11 @@
 .pusher-chat-widget-messages {
   height: 200px;
   border: 2px solid rgba(0, 0, 0, 0.09);
+  background-color: rgba(223, 223, 223, 0.76);
   overflow-y: auto;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 2%;
 }
 
 a.screen-name {

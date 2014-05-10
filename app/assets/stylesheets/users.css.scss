@@ -54,14 +54,14 @@
 #favorite-track-section {
   position: relative;
   width: 100%;
-  height: 260px;
+  height: 240px;
   margin-left: 2%;
   margin-top: 1%;
 }
 
 #favorite-track-table {
   width: 100%;
-  height: 200px;
+  height: 260px;
   overflow-y: scroll;
   padding: 1%;
   border: 3px solid rgb(236, 236, 236);
@@ -134,7 +134,8 @@ div#prev-player-btn-container {
 .description {
   background-color: rgba(255, 255, 255, 0.74);
   margin-right: 2%;
-  margin-left: 1%;
+  margin-left: 5%;
+  margin-top: 1%;
   margin-bottom: 1%;
   border-radius: 14px;
   padding: 1%;
