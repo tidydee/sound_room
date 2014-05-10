@@ -24,5 +24,10 @@
 //= require_self
 //= require js-routes
 //= require rooms_list_nav
+//= require raptorize
 
 $(function(){ $(document).foundation(); });
+
+$(window).load(function() {
+  $('.raptor').raptorize();
+});
