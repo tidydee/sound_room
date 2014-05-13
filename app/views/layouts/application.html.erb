@@ -1,23 +1,19 @@
 
 <html lang="en">
   <head>
+    <title><%= content_for?(:title) ? yield(:title) : "CuroBeats" %></title>
+    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= content_for?(:title) ? yield(:title) : "CuroBeats" %></title>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Francois+One|Pacifico">
-
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Francois+One|Pacifico">
     <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"></script>
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <script src="http://connect.soundcloud.com/sdk.js"></script>
-   
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-
   <body>
     <!-- Nav Bar -->
   <div class="header">
@@ -25,7 +21,6 @@
     </div>
     <h1>CuroBeats</h1>
   </div>
-
     <!-- Main Page Content -->
     <div class="row column fullwidth wrap">
 
