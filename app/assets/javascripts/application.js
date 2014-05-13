@@ -18,9 +18,8 @@
 //= require PusherChatWidget
 //= require raphael-min
 //= require jquery.lazylinepainter-1.4.1.min
-//= require seen.min
-//= require seen-ball
-//= require_tree .
+
+//= require_directory .
 //= require_self
 //= require js-routes
 //= require rooms_list_nav
