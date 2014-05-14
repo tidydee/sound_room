@@ -1,195 +1,201 @@
+$(document).ready(function() {
+	if ($("#current_room")[0]) {
+		// alert('Got Here!');
+		window.playlist = []
+		console.log("wind PLaylist []: ",playlist );
 
-	window.playlist = []
-	SC.initialize({
-		client_id: '173c1924dc4e55b0db3b89a45bb71561'
-	});
+		SC.initialize({
+			client_id: '173c1924dc4e55b0db3b89a45bb71561'
+		});
 
-		function getUserFavoriteTracks() {
+			function getUserFavoriteTracks() {
 
 
-			var soundcloud_id_string = $('#scuserid').data('scid');
-			console.log('sc id string',soundcloud_id_string);
-			var soundcloud_id = parseFloat(soundcloud_id_string);
-			console.log('sc id:',soundcloud_id);
-			//-------------------- Local Storage Begin ----------------------\\
-		  var soundcloud_name = $('#scusername').data('scusername');
-			localStorage.setItem('currentUserName', soundcloud_name);
-			var localUserName = localStorage.getItem('currentUserName');
-			//-------------------- Local Storage End ----------------------\\
-			
-			SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
+				var soundcloud_id_string = $('#scuserid').data('scid');
+				console.log('sc id string',soundcloud_id_string);
+				var soundcloud_id = parseFloat(soundcloud_id_string);
+				console.log('sc id:',soundcloud_id);
+				//-------------------- Local Storage Begin ----------------------\\
+			  var soundcloud_name = $('#scusername').data('scusername');
+				localStorage.setItem('currentUserName', soundcloud_name);
+				var localUserName = localStorage.getItem('currentUserName');
+				//-------------------- Local Storage End ----------------------\\
 				
-				var data = []
-				for (var i=0; i<favorites.length; i++) {
-					var trackId = favorites[i].id;    
-					data.push(trackId); 
-				}
-				// console.log("ArrayData:"+data);
-
-				$.ajax({
-					dataType: "json",
-					url: window.location.pathname, 
-					type: "GET", 
-					success: function (data) {
-						console.log("DatabaseData:");
-						for (var i=0; i<data.length; i++) {
-							var reccordId = data[i].id;
-							// console.log('Reccord Id',reccordId);
-							// console.log("data id:", data[i].soundcloud_track_id);
-							window.playlist.push(data[i].soundcloud_track_id);
-						}
-						// console.log('scArrayData:', window.playlist);
-						
-						for (var i=0; i<favorites.length; i++) {
-							var trackTitle = favorites[i].title.replace("'",'"');
-							var trackId = favorites[i].id;
-							var trackStreamUrl = favorites[i].stream_url;
-							var trackOrder = i;
-							var duration = favorites[i].duration;
-							var trackImage = favorites[i].artwork_url;
-
-							var min = (((duration)/1000)/60) << 0;
-							// DO Check -> If less than 10 it adds a zero to the front of sec
-							var sec = parseFloat(((duration)/1000) % 60).toFixed(0);
-							if(sec < 10)  {
-          			sec = ('0'+ sec);
-        			}
-							
-							if (trackImage === null){
-									trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
-							} 
-							var row1 = "<td class='track'><img class='img-style3' src="+trackImage+"><div class='name-style3'>"+trackTitle+"</div><span class='time-style3'>"+(min+':'+sec)+" min</span> </td>";
-
-							
-
-
-							
-							// console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
-
-							if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
-							{
-								var removeButton = "<td valign='top'><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
-
-								$('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
-							}
-							else {
-								var addButton = "<td valign='top'><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
-
-								$('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
-							}
-						}
-
-						$('.button-update').on('click', function(e){
-							e.preventDefault();
-
-							var $this = $(this),
-									data = {
-										soundcloud_track_id: $this.data('track-id'),
-										image_url: $this.data('track-image'),
-										title: $this.data('title'),
-										duration: $this.data('duration'),
-										room_id: $('[data-room-id]').data('room-id')
-									};
-							var image_url = $this.data('track-image');
-							// Username is Set at Top of Page with Local Storage
-							var userName = localUserName;
-							var numberOfTracks = $('.room-tracks').children().length;
-
-							var min = (((data.duration)/1000)/60) << 0;
-							// DO Check -> If less than 10 it adds a zero to the front of sec
-							var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
-							if(sec < 10)  {
-          			sec = ('0'+ sec);
-        			}
+				SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
 					
-							if ($(this).hasClass('button-add')) {
-								saveToDb(data, image_url, min, sec, userName, this, trackOrder);
-							} else {
-								removeFromDb($this.data('track-id'), this);
+					var data = []
+					for (var i=0; i<favorites.length; i++) {
+						var trackId = favorites[i].id;    
+						data.push(trackId); 
+					}
+					// console.log("ArrayData:"+data);
+
+					$.ajax({
+						dataType: "json",
+						url: window.location.pathname, 
+						type: "GET", 
+						success: function (data) {
+							console.log("DatabaseData:");
+							for (var i=0; i<data.length; i++) {
+								var reccordId = data[i].id;
+								// console.log('Reccord Id',reccordId);
+								console.log("data id:", data[i].soundcloud_track_id);
+								window.playlist.push(data[i].soundcloud_track_id);
+							}
+							// console.log('scArrayData:', window.playlist);
+							
+							for (var i=0; i<favorites.length; i++) {
+								var trackTitle = favorites[i].title.replace("'",'"');
+								var trackId = favorites[i].id;
+								var trackStreamUrl = favorites[i].stream_url;
+								var trackOrder = i;
+								var duration = favorites[i].duration;
+								var trackImage = favorites[i].artwork_url;
+
+								var min = (((duration)/1000)/60) << 0;
+								// DO Check -> If less than 10 it adds a zero to the front of sec
+								var sec = parseFloat(((duration)/1000) % 60).toFixed(0);
+								if(sec < 10)  {
+	          			sec = ('0'+ sec);
+	        			}
+								
+								if (trackImage === null){
+										trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
+								} 
+								var row1 = "<td class='track'><img class='img-style3' src="+trackImage+"><div class='name-style3'>"+trackTitle+"</div><span class='time-style3'>"+(min+':'+sec)+" min</span> </td>";
+
+								
+
+
+								
+								// console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
+
+								if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
+								{
+										console.log("wind PLaylist []: ",window.playlist );
+									var removeButton = "<td valign='top'><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
+
+									$('#favorite_tracks').append("<tr class='track-row'>"+ row1 + removeButton +"</tr>");
+								}
+								else {
+									var addButton = "<td valign='top'><a href='' class='button button-update button-add tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"'><span class='button-name'>Add</span></a></td>"
+
+									$('#favorite_tracks').append("<tr class='track-row'>"+ row1 + addButton +"</tr>");
+								}
+							}
+
+							$('.button-update').on('click', function(e){
+								e.preventDefault();
+
+								var $this = $(this),
+										data = {
+											soundcloud_track_id: $this.data('track-id'),
+											image_url: $this.data('track-image'),
+											title: $this.data('title'),
+											duration: $this.data('duration'),
+											room_id: $('[data-room-id]').data('room-id')
+										};
+								var image_url = $this.data('track-image');
+								// Username is Set at Top of Page with Local Storage
+								var userName = localUserName;
+								var numberOfTracks = $('.room-tracks').children().length;
+
+								var min = (((data.duration)/1000)/60) << 0;
+								// DO Check -> If less than 10 it adds a zero to the front of sec
+								var sec = parseFloat(((data.duration)/1000) % 60).toFixed(0);
+								if(sec < 10)  {
+	          			sec = ('0'+ sec);
+	        			}
+						
+								if ($(this).hasClass('button-add')) {
+									saveToDb(data, image_url, min, sec, userName, this, trackOrder);
+								} else {
+									removeFromDb($this.data('track-id'), this);
+								}
+							});
+						}
+					});
+					
+					// Add Data to DB
+					function saveToDb(data, image_url, min, sec, userName, button, trackOrder){
+						console.log('Add Function Works!');
+						var $this = $(this);
+						$.ajax({
+							url: "/songs",
+							data: data,
+							dataType:  'json',
+							type: "POST",
+							success: function(data) {
+
+									if (image_url === null){
+										image_url = 'http://i.imgur.com/0Y3XOyg.jpg';
+									} 
+			
+									$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'> <img src='+image_url+'><div class="track-info"><h1 class="name-style">'+data.title+'</h1><span class="time-style">'+(min+':'+sec)+' min </span> <br><span class="comment-text"> curated by '+userName+'</span></div></div>');
+
+									$(button).removeClass('button-add').addClass('button-remove');
+									$(button).text('Remove');
+									window.playlist.push(data.soundcloud_track_id)
+									console.log('playlist:', window.playlist);
+									console.log('this should be in playlist:',data.soundcloud_track_id);
+								// alert("shit got saved");
+							},
+							error: function (err) {
+								console.log(err);
+							}
+						});
+					}
+					// Remove Data to DB
+					function removeFromDb(scID, button){
+						console.log('REMOVE FUNCTION WORKS');
+			
+						$.ajax({
+							url: "/songs/" + scID,
+							data: {"_method":"delete"},
+							type: "POST",
+							success: function(data) {
+								$('div.tracks[data-sc-track-id='+scID+']').remove();
+								// alert("shit got removed!");
+								$(button).removeClass('button-remove').addClass('button-add');
+								$(button).text('Add');
+								index = window.playlist.indexOf(scID)
+								window.playlist.splice(index, 1);
+							},
+							error: function (err) {
+								console.log(err);
 							}
 						});
 					}
 				});
+			};
 				
-				// Add Data to DB
-				function saveToDb(data, image_url, min, sec, userName, button, trackOrder){
-					console.log('Add Function Works!');
-					var $this = $(this);
-					$.ajax({
-						url: "/songs",
-						data: data,
-						dataType:  'json',
-						type: "POST",
-						success: function(data) {
+			getUserFavoriteTracks();
 
-								if (image_url === null){
-									image_url = 'http://i.imgur.com/0Y3XOyg.jpg';
-								} 
-		
-								$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'> <img src='+image_url+'><div class="track-info"><h1 class="name-style">'+data.title+'</h1><span class="time-style">'+(min+':'+sec)+' min </span> <br><span class="comment-text"> curated by '+userName+'</span></div></div>');
-
-								$(button).removeClass('button-add').addClass('button-remove');
-								$(button).text('Remove');
-								window.playlist.push(data.soundcloud_track_id)
-								console.log('playlist:', window.playlist);
-								console.log('this should be in playlist:',data.soundcloud_track_id);
-							// alert("shit got saved");
-						},
-						error: function (err) {
-							console.log(err);
-						}
+					$(function() {     
+						console.log('hey');
+						var pusher = new Pusher('55b13e9beb0afef1e1cf');
+						var chatWidget = new PusherChatWidget(pusher, {
+							appendTo: '#pusher_chat_widget'
+						});
 					});
-				}
-				// Remove Data to DB
-				function removeFromDb(scID, button){
-					console.log('REMOVE FUNCTION WORKS');
-		
-					$.ajax({
-						url: "/songs/" + scID,
-						data: {"_method":"delete"},
-						type: "POST",
-						success: function(data) {
-							$('div.tracks[data-sc-track-id='+scID+']').remove();
-							// alert("shit got removed!");
-							$(button).removeClass('button-remove').addClass('button-add');
-							$(button).text('Add');
-							index = window.playlist.indexOf(scID)
-							window.playlist.splice(index, 1);
-						},
-						error: function (err) {
-							console.log(err);
-						}
-					});
-				}
-			});
-		};
-			
-		getUserFavoriteTracks();
 
-				$(function() {     
-					console.log('hey');
-					var pusher = new Pusher('55b13e9beb0afef1e1cf');
-					var chatWidget = new PusherChatWidget(pusher, {
-						appendTo: '#pusher_chat_widget'
-					});
-				});
+		function selectSong($this) {
+			$('.tracks').removeClass('selected-song');
+				$(this).addClass('selected-song');
+		}
 
-function selectSong($this) {
-	$('.tracks').removeClass('selected-song');
-		$(this).addClass('selected-song');
-}
 
-$(document).ready(function() {
-	console.log('in jQuery')
+		console.log('in jQuery')
 
-	$('.room-playlist').on('click', '.tracks', function(e) {
-		console.log('this ROOM click?');
-		var scTrackId = $(this).data('sc-track-id')
+		$('.room-playlist').on('click', '.tracks', function(e) {
+			console.log('this ROOM click?');
+			var scTrackId = $(this).data('sc-track-id')
 
-		selectSong($(this));
+			selectSong($(this));
 
-		playTrack(scTrackId);
-	});
+			playTrack(scTrackId);
+		});	
+	}
 });
 
 
