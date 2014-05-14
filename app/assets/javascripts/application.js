@@ -18,7 +18,7 @@
 //= require PusherChatWidget
 //= require raphael-min
 //= require jquery.lazylinepainter-1.4.1.min
-
+//= users
 //= require_directory .
 //= require_self
 //= require js-routes
