@@ -3,54 +3,44 @@
 <!-- Current User's SCID Partial BEGIN-->
 <%= render partial: "shared/currentuser_scid" %>
 <!-- Partial END-->
-
-<div id="current_dashboard" class="large-9 columns">
-  
-  <h3><%= current_user.soundcloud_username %>'s Dashboard</h3>
-  
-  <div id="player">
-  </div>
-
-  <div id="favorite-track-section" class="large-9 column">
-    <h3>Favourite tracks</h3>
+<div id="current_dashboard">
+  <div id="dashboard" class="large-9 columns">    
+    <h3><%= current_user.soundcloud_username %>'s Dashboard</h3>
+    <div id="player"></div>
+    <div id="favorite-track-section" class="large-9 column">
+      <h3>Favourite Tracks</h3>
       <div id="player"></div>
-        <% request.original_url %>
-        <hr>
-        <div id="progressBarBackground">
-          <div class="progressBar"></div>
-        </div>
-        <div id="prev-player-btn-container">
-          <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
-          <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
-          <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
-        </div>
-        <div id="prev-player-btn-container">
-          <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
-          <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
-          <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
-        </div>  
-        
-    <div id="favorite-track-table">
-      <div id="favorite_tracks">
-        
+      <hr>
+      <div id="progressBarBackground">
+        <div class="progressBar"></div>
       </div>
-    </div>
- 
-
-  <div class="large-11 columns description-wrap">
-    <div class="description">
-      <h2>What's up?</h2>
-      <p>To contribute to the space you need to have liked some tracks on soundcloud - but it's not required. You can also enjooy existing rooms with their own tracks. </p>
-    </div>
+      <div id="prev-player-btn-container">
+        <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
+        <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
+        <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
+      </div>
+      <div id="prev-player-btn-container">
+        <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
+        <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
+        <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
+      </div>        
+      <div id="favorite-track-table">
+        <div id="favorite_tracks"></div>
+      </div>
+      <div class="large-11 columns description-wrap">
+        <div class="description">
+          <h2>What's up?</h2>
+          <p>To contribute to the space you need to have liked some tracks on soundcloud - but it's not required. You can also enjoy existing rooms with their own tracks.</p>
+        </div>
+      </div>
+   </div>
   </div>
- </div>
-</div>  
+</div>
 
 <aside class="large-3 columns" id="room-option-tab">
-
-    <ul class="side-nav">
-      <%= form_for @room do |f| %>
-      <!-- Room Create Error Handling -->
+  <ul class="side-nav">
+    <%= form_for @room do |f| %>
+      <!-- Error Handling for Creating a Room -->
       <div class="error-message">
         <% if @room.errors.any? %>
           <div class="error-message-header"> 
@@ -63,17 +53,13 @@
           </ul>  
         <%end%>
       </div>
-      
       <!-- Create a new room -->
-
-        <h4>Create New Room</h4>
-          <%= f.label :name %>
-          <%= f.text_field :name %><br />
-          <%= f.submit%>
-      <%end%>  
-    </ul>
-
-    <!-- Rooms List -->
-    <%= render partial: "shared/rooms_lists" %>
-
+      <h4>Create New Room</h4>
+      <%= f.label :name %>
+      <%= f.text_field :name %><br />
+      <%= f.submit%>
+    <%end%>  
+  </ul>
+  <!-- Rooms List -->
+  <%= render partial: "shared/rooms_lists" %>
 </aside>
