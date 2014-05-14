@@ -10,7 +10,6 @@ $(document).ready(function() {
 
 			function getUserFavoriteTracks() {
 
-
 				var soundcloud_id_string = $('#scuserid').data('scid');
 				console.log('sc id string',soundcloud_id_string);
 				var soundcloud_id = parseFloat(soundcloud_id_string);
@@ -22,14 +21,12 @@ $(document).ready(function() {
 				//-------------------- Local Storage End ----------------------\\
 				
 				SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
-					
 					var data = []
 					for (var i=0; i<favorites.length; i++) {
 						var trackId = favorites[i].id;    
 						data.push(trackId); 
 					}
 					// console.log("ArrayData:"+data);
-
 					$.ajax({
 						dataType: "json",
 						url: window.location.pathname, 
@@ -43,7 +40,6 @@ $(document).ready(function() {
 								window.playlist.push(data[i].soundcloud_track_id);
 							}
 							// console.log('scArrayData:', window.playlist);
-							
 							for (var i=0; i<favorites.length; i++) {
 								var trackTitle = favorites[i].title.replace("'",'"');
 								var trackId = favorites[i].id;
@@ -58,16 +54,11 @@ $(document).ready(function() {
 								if(sec < 10)  {
 	          			sec = ('0'+ sec);
 	        			}
-								
+
 								if (trackImage === null){
 										trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
 								} 
 								var row1 = "<td class='track'><img class='img-style3' src="+trackImage+"><div class='name-style3'>"+trackTitle+"</div><span class='time-style3'>"+(min+':'+sec)+" min</span> </td>";
-
-								
-
-
-								
 								// console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
 
 								if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
@@ -115,7 +106,6 @@ $(document).ready(function() {
 							});
 						}
 					});
-					
 					// Add Data to DB
 					function saveToDb(data, image_url, min, sec, userName, button, trackOrder){
 						console.log('Add Function Works!');
@@ -130,7 +120,7 @@ $(document).ready(function() {
 									if (image_url === null){
 										image_url = 'http://i.imgur.com/0Y3XOyg.jpg';
 									} 
-			
+
 									$('.room-tracks').append('<div class="tracks" id='+trackOrder+'  data-sc-track-id='+data.soundcloud_track_id+' data-image-url='+image_url+'> <img src='+image_url+'><div class="track-info"><h1 class="name-style">'+data.title+'</h1><span class="time-style">'+(min+':'+sec)+' min </span> <br><span class="comment-text"> curated by '+userName+'</span></div></div>');
 
 									$(button).removeClass('button-add').addClass('button-remove');
@@ -168,7 +158,7 @@ $(document).ready(function() {
 					}
 				});
 			};
-				
+
 			getUserFavoriteTracks();
 
 					$(function() {     
@@ -183,10 +173,7 @@ $(document).ready(function() {
 			$('.tracks').removeClass('selected-song');
 				$(this).addClass('selected-song');
 		}
-
-
-		console.log('in jQuery')
-
+		// console.log('in jQuery')
 		$('.room-playlist').on('click', '.tracks', function(e) {
 			console.log('this ROOM click?');
 			var scTrackId = $(this).data('sc-track-id')
