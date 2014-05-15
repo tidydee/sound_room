@@ -1,4 +1,3 @@
-
 <html lang="en">
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "CuroBeats" %></title>
@@ -15,34 +14,32 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <!-- Nav Bar -->
+  <!-- Nav Bar Starts -->
   <div class="header">
-    <div class="small-1 column curo">
-    </div>
+    <div class="small-1 column curo"></div>
     <h1>CuroBeats</h1>
   </div>
-    <!-- Main Page Content -->
-    <div class="row column fullwidth wrap">
+  <!-- Nav Bar Ends -->
+  <!-- Main Page Content Starts -->
+  <div class="row column fullwidth wrap">
+    <div role="content">
+      <div class="flash-message"> 
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: name %>
+        <% end %>
+      </div>
 
-      <div role="content">
-        <div class="flash-message"> 
-          <% flash.each do |name, msg| %>
-            <%= content_tag :div, msg, class: name %>
-          <% end %>
-        </div>
-        
-        <%= yield %>
-
-      </div>    
-    </div>
-
-    <div class="push">
-    </div> <!--clearfix helper for footer -->
-    <!-- End Main Content and Sidebar -->
-    <!-- Footer -->
-    <div class="row fullwidth"></div>
-      <%= render partial: "/shared/footer" %>
-      
+      <%= yield %> 
+    </div>    
+  </div>
+  <!-- Main Page Content Ends -->
+  <div class="push"></div> <!--clearfix helper for footer -->
+  <!-- End Main Content and Sidebar -->
+  <!-- Footer Starts -->
+  <div class="row fullwidth"></div>
+  <%= render partial: "/shared/footer" %>
+  
+  <!-- Javascript Loading once Page is done loading -->
   <%= javascript_include_tag "vendor/modernizr" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
