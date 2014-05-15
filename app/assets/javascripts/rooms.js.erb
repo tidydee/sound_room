@@ -33,35 +33,37 @@ $(document).ready(function() {
 						type: "GET", 
 						success: function (data) {
 							console.log("DatabaseData:");
-							for (var i=0; i<data.length; i++) {
+							for (var i = 0; i < data.length; i++) {
 								var reccordId = data[i].id;
 								// console.log('Reccord Id',reccordId);
 								console.log("data id:", data[i].soundcloud_track_id);
 								window.playlist.push(data[i].soundcloud_track_id);
 							}
 							// console.log('scArrayData:', window.playlist);
-							for (var i=0; i<favorites.length; i++) {
-								var trackTitle = favorites[i].title.replace("'",'"');
-								var trackId = favorites[i].id;
-								var trackStreamUrl = favorites[i].stream_url;
-								var trackOrder = i;
-								var duration = favorites[i].duration;
-								var trackImage = favorites[i].artwork_url;
+							for (var i = 0; i<favorites.length; i++) {
+								var trackTitle = favorites[i].title.replace("'",'"'),
+										trackId = favorites[i].id,
+										trackStreamUrl = favorites[i].stream_url,
+										trackOrder = i,
+										
+										duration = favorites[i].duration,
+										trackImage = favorites[i].artwork_url,
 
-								var min = (((duration)/1000)/60) << 0;
+										min = (((duration)/1000)/60) << 0,
 								// DO Check -> If less than 10 it adds a zero to the front of sec
-								var sec = parseFloat(((duration)/1000) % 60).toFixed(0);
-								if(sec < 10)  {
+										sec = parseFloat(((duration)/1000) % 60).toFixed(0);
+
+								if (sec < 10) {
 	          			sec = ('0'+ sec);
 	        			}
 
-								if (trackImage === null){
+								if (trackImage === null) {
 										trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
 								} 
 								var row1 = "<td class='track'><img class='img-style3' src="+trackImage+"><div class='name-style3'>"+trackTitle+"</div><span class='time-style3'>"+(min+':'+sec)+" min</span> </td>";
 								// console.log("soundcloud id: ", trackId, $.inArray(trackId, window.playlist) );
 
-								if($.inArray(trackId, window.playlist) !== -1) // check here if song existed
+								if ($.inArray(trackId, window.playlist) !== -1) // check here if song existed
 								{
 										console.log("wind PLaylist []: ",window.playlist );
 									var removeButton = "<td valign='top'><a href='' class='button button-update button-remove tiny' id='"+i+"' data-track-image='"+trackImage+"' data-duration='"+duration+"' data-title='"+trackTitle+"' data-track-id='"+trackId+"' data-track-order='"+i+"' data-id='"+trackId+"'><span class='button-name'>Remove</span></a></td>"
@@ -75,7 +77,7 @@ $(document).ready(function() {
 								}
 							}
 
-							$('.button-update').on('click', function(e){
+							$('.button-update').on('click', function (e) {
 								e.preventDefault();
 
 								var $this = $(this),
@@ -106,10 +108,13 @@ $(document).ready(function() {
 							});
 						}
 					});
+
+
 					// Add Data to DB
-					function saveToDb(data, image_url, min, sec, userName, button, trackOrder){
+					function saveToDb (data, image_url, min, sec, userName, button, trackOrder) {
 						console.log('Add Function Works!');
 						var $this = $(this);
+						
 						$.ajax({
 							url: "/songs",
 							data: data,
@@ -138,7 +143,7 @@ $(document).ready(function() {
 					// Remove Data to DB
 					function removeFromDb(scID, button){
 						console.log('REMOVE FUNCTION WORKS');
-			
+						var $button = $(button);
 						$.ajax({
 							url: "/songs/" + scID,
 							data: {"_method":"delete"},
@@ -146,8 +151,9 @@ $(document).ready(function() {
 							success: function(data) {
 								$('div.tracks[data-sc-track-id='+scID+']').remove();
 								// alert("shit got removed!");
-								$(button).removeClass('button-remove').addClass('button-add');
-								$(button).text('Add');
+								$button.removeClass('button-remove').addClass('button-add');
+								$button.text('Add');
+								
 								index = window.playlist.indexOf(scID)
 								window.playlist.splice(index, 1);
 							},
