@@ -1,105 +1,46 @@
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
-
-<script>
-	$(document).ready(function() {
-		window.playlist = []
-		SC.initialize({
-	  client_id: '173c1924dc4e55b0db3b89a45bb71561'
-		});
-
-	function getUserFavoriteTracks() {
-		console.log('inside')
-		var soundcloud_id =  <%= current_user.soundcloud_user_id %>
-		SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
-			// var urls = [];
-			for (var i=0; i<favorites.length; i++) {
-				var trackTitle = favorites[i].title;
-				var trackId = favorites[i].id;
-				var trackUrl = favorites[i].permalink_url;
-				var trackStreamUrl = favorites[i].stream_url;
-				var trackOrder = i;
-        var trackImage = favorites[i].artwork_url;
-        var duration = favorites[i].duration;
-				window.playlist.push(trackId);
-        var min = (((duration)/1000)/60) << 0;
-        // DO Check -> If less than 10 it adds a zero to the front of sec
-        var sec = parseFloat(((duration)/1000) % 60).toFixed(0);
-        if(sec < 10)  {
-          sec = ('0'+ sec);
-        }
-          
-        if (trackImage === null){
-          trackImage = 'http://i.imgur.com/0Y3XOyg.jpg';
-        } 
-
-				$('#favorite_tracks').append("<div class='tracks' id='"+trackOrder+"' data-sc-track-id="+trackId+" data-track-order="+i+" data-track-url="+trackUrl+"><img class='img-style2' src="+trackImage+"><h1 class='name-style2' >"+trackTitle+"</h1><span class='time-style2'> "+(min+':'+sec)+" min </span></div>");
-			}
-			console.log('scArrayData:'+ window.playlist);
-    });
-	}
-  $(document).ready(function(){
-  	$('body').on('click','.tracks', function(e) {
-  		console.log('this USER click?');
-  		var scTrackId = $(this).data('sc-track-id');
-  		playTrack(scTrackId);
-  	});
-   }); 
-
-	getUserFavoriteTracks();
-
-});
-
-</script>
-
-
-<div id="dashboard" class="large-9 columns">
-  
-  <h3><%= current_user.soundcloud_username %>'s Dashboard</h3>
-  
-  <div id="player">
-  </div>
-
-  <div id="favorite-track-section" class="large-9 column">
-    <h3>Favourite tracks</h3>
+<!-- Current User's SCID Partial BEGIN-->
+<%= render partial: "shared/currentuser_scid" %>
+<!-- Partial END-->
+<div id="current_dashboard">
+  <div id="dashboard" class="large-9 columns">    
+    <h3><%= current_user.soundcloud_username %>'s Dashboard</h3>
+    <div id="player"></div>
+    <div id="favorite-track-section" class="large-9 column">
+      <h3>Favourite Tracks</h3>
       <div id="player"></div>
-        <% request.original_url %>
-        <hr>
-        <div id="progressBarBackground">
-          <div class="progressBar"></div>
-        </div>
-        <div id="prev-player-btn-container">
-          <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
-          <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
-          <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
-        </div>
-        <div id="prev-player-btn-container">
-          <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
-          <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
-          <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
-        </div>  
-        
-    <div id="favorite-track-table">
-      <div id="favorite_tracks">
-        
+      <hr>
+      <div id="progressBarBackground">
+        <div class="progressBar"></div>
       </div>
-    </div>
- 
-
-  <div class="large-11 columns description-wrap">
-    <div class="description">
-      <h2>What's up?</h2>
-      <p>To contribute to the space you need to have liked some tracks on soundcloud - but it's not required. You can also enjooy existing rooms with their own tracks. </p>
-    </div>
+      <div id="prev-player-btn-container">
+        <span id="play"><i class="fa fa-play fa-2x play-btn"></i></span>
+        <span id="pause"><i class="fa fa-pause fa-2x pause-btn"></i></span>
+        <span id="skip"><i class="fa fa-fast-forward fa-2x skip-btn"></i></span>
+      </div>
+      <div id="prev-player-btn-container">
+        <span id="mute"><i class="fa fa-volume-off fa-2x mute-btn"></i></span>
+        <span id="med-volume"><i class="fa fa-volume-down fa-2x med-vol-btn"></i></span>
+        <span id="high-volume"><i class="fa fa-volume-up fa-2x high-vol-btn"></i></span>
+      </div>        
+      <div id="favorite-track-table">
+        <div id="favorite_tracks"></div>
+      </div>
+      <div class="large-11 columns description-wrap">
+        <div class="description">
+          <h2>What's up?</h2>
+          <p>To contribute to the space you need to have liked some tracks on soundcloud - but it's not required. You can also enjoy existing rooms with their own tracks.</p>
+        </div>
+      </div>
+   </div>
   </div>
- </div>
-</div>  
+</div>
 
 <aside class="large-3 columns" id="room-option-tab">
-
-    <ul class="side-nav">
-      <%= form_for @room do |f| %>
-      <!-- Room Create Error Handling -->
+  <ul class="side-nav">
+    <%= form_for @room do |f| %>
+      <!-- Error Handling for Creating a Room -->
       <div class="error-message">
         <% if @room.errors.any? %>
           <div class="error-message-header"> 
@@ -112,17 +53,13 @@
           </ul>  
         <%end%>
       </div>
-      
       <!-- Create a new room -->
-
-        <h4>Create New Room</h4>
-          <%= f.label :name %>
-          <%= f.text_field :name %><br />
-          <%= f.submit%>
-      <%end%>  
-    </ul>
-
-    <!-- Rooms List -->
-    <%= render partial: "shared/rooms_lists" %>
-
+      <h4>Create New Room</h4>
+      <%= f.label :name %>
+      <%= f.text_field :name %><br />
+      <%= f.submit%>
+    <%end%>  
+  </ul>
+  <!-- Rooms List -->
+  <%= render partial: "shared/rooms_lists" %>
 </aside>
