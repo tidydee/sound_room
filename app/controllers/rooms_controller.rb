@@ -1,4 +1,4 @@
-  class RoomsController < ApplicationController
+class RoomsController < ApplicationController
 
   def index
     @room = Room.all.sort_by{ |room| room.name}
@@ -17,6 +17,7 @@
     @room = Room.find(params[:id])
     @songs = @room.songs
     @song = Song.new
+    
     if current_user
       @my_rooms = Room.where('user_id = ?',current_user.id)
     end
@@ -38,7 +39,6 @@
     @room = Room.all
     @room = Room.new(room_params)
     @room.user_id = current_user.id if current_user
-
     @rooms = Room.all
     @my_rooms = Room.where('user_id = ?',current_user.id)
 
@@ -57,5 +57,4 @@
       :name, :user_id
     )
   end
-  
 end

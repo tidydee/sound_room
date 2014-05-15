@@ -1,13 +1,10 @@
 class SessionsController < ApplicationController
-
-  # current_url = request.original_url
-  
+    
   def create
     @current_user = User.authenticate_via_soundcloud auth_hash_params
     session[:user_id] = @current_user.id
     if @current_user
       redirect_to users_path, notice: "Welcome back curator!"
-
     else
       flash.now[:error] = "Invalid Username / Password!"
       redirect_to [:new, :registration]
@@ -24,5 +21,4 @@ class SessionsController < ApplicationController
   def auth_hash_params
     request.env['omniauth.auth']
   end
-
 end
