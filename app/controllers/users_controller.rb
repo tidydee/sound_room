@@ -25,6 +25,7 @@ before_filter :authorize?
   def create
     @room = Room.new(room_params)
     @room.user_id = current_user.id if current_user
+
     if @room.save
       redirect_to users_path, notice: "#{@room.name} was submitted successfully!"
     else
@@ -39,9 +40,4 @@ before_filter :authorize?
       :name
     )
   end
-
 end
-
-
-
-

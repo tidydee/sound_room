@@ -5,12 +5,7 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
-  # def show
-  # end
-
   def create
-    # Song.new(params[:song])
-
     @song = Song.new(song_params.merge(user_id: current_user.id))
     
     respond_to do |format|
@@ -31,7 +26,7 @@ class SongsController < ApplicationController
     @song = Song.where(soundcloud_track_id: params[:id]).first
     respond_to do |format|
       if @song.destroy
-        # format.html { redirect_to :root, notice: "Save process completed!" }
+        format.html { redirect_to :root, notice: "Save process completed!" }
         format.json { render json: @song }
       else
         format.html { 
@@ -48,9 +43,6 @@ class SongsController < ApplicationController
   def song_params
     params.permit(
       :soundcloud_track_id, :title, :duration, :room_id, :image_url
-      )
+    )
   end
-
 end
-
-
