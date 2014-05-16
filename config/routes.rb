@@ -1,5 +1,4 @@
-Rails.application.routes.draw do
-  
+Rails.application.routes.draw do  
   root to: 'rooms#index'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/soundcloud', as: 'soundcloud_session'

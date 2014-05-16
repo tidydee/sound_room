@@ -24,6 +24,7 @@ class SongsController < ApplicationController
 
   def destroy
     @song = Song.where(soundcloud_track_id: params[:id]).first
+    
     respond_to do |format|
       if @song.destroy
         format.html { redirect_to :root, notice: "Save process completed!" }

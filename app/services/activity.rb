@@ -82,5 +82,4 @@ class Activity
   	
   	return url
   end
-  
 end
