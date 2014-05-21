@@ -14,3 +14,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore all local_env.yml file.
+/config/local_env.yml
+/.env
+

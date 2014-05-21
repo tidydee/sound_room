@@ -1,0 +1,64 @@
+/* TEAM */
+        
+        Backend & UX Developer: Dawid Spamer
+        Contact: ca.linkedin.com/in/dawidspamer
+        From: Vancouver, Canada
+
+        UI & UX Developer: Melissa Hubert
+        Contact: ca.linkedin.com/pub/melissa-hubert/95/466/823
+        From: Vancouver, Canada
+
+        API Integration & Javascript developer: Alishah Mohbat Ali
+        Contact: ca.linkedin.com/pub/alishah-mohbat-ali/29/391/711
+
+/* THANKS */
+        
+        Code Bootcamp: Lighthouse Labs
+        Twitter: @lighthouse_labs
+        Web: http://www.lighthouselabs.ca
+        Contact: lighthouse@lighthouselabs.ca
+
+        Head Instructor & Co-Founder: Khurram Virani
+        Contact: ca.linkedin.com/in/kvirani
+
+        Co-Founder & Head of Marketing: Jeremy Shaki
+        Contact: ca.linkedin.com/pub/jeremy-shaki/8/989/140
+
+        Co-Founder (Lighthouse Labs): Rahul Parmar
+        Contact: ca.linkedin.com/pub/rahul-parmar/7/10b/585
+
+        Co-Founder (Lighthouse Labs): Qaid Damji
+        Contact: ca.linkedin.com/in/qaiddamji 
+
+        TA(1): Aaron Dufall
+        Contact: ca.linkedin.com/pub/aaron-dufall/41/844/73b
+
+        TA(2): Neal O Grady
+        Contact: ca.linkedin.com/pub/neal-o-grady/88/b41/110
+
+        TA(3): Chris Tulip
+        Contact: ca.linkedin.com/in/ctulip
+
+        TA(4): Don Burks
+        Contact: ca.linkedin.com/in/donaldburks
+        
+        TA(5): Jeff Ling
+        Contact: ca.linkedin.com/in/jefftyling
+
+        TA(6): Murat Ayfer
+        Contact: ca.linkedin.com/in/muratayfer
+
+        TA(7): Jessica Johnson
+        Contact: ca.linkedin.com/in/jessicajohnsonresume
+
+        TA(8): Vasili Sviridov
+        Contact: ca.linkedin.com/in/vasilisviridov
+
+/* SITE */
+
+        Last update: 2014/05/15
+        Language: English
+        DOCTYPE: HTML5
+        IDE: Sublime Text3
+        Creative: Adobe Photoshop & Illustrator
+        Technology: Ruby on Rails, Soundcloud API, Javascript, AJAX, HTML, CSS, Pusher, GitHub

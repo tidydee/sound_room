@@ -3,8 +3,9 @@ $(document).ready(function() {
     // alert('Got Here!');
     window.playlist = []
     console.log("wind PLaylist BEFORE PUSH[]: ",playlist );
+  
     SC.initialize({
-      client_id: '173c1924dc4e55b0db3b89a45bb71561'
+      client_id: "<%= ENV['SOUNDCLOUD_CLIENT_ID'] %>"
     });
   
     function getUserFavoriteTracks() {
@@ -14,7 +15,7 @@ $(document).ready(function() {
       var soundcloud_id = parseFloat(soundcloud_id_string);
       // console.log('sc id:',soundcloud_id);
       
-      // var soundcloud_id =  <%= current_user.soundcloud_user_id %>
+      // 
       SC.get('/users/'+soundcloud_id+'/favorites', function(favorites) {
 
       // console.log("data id:", data[i].soundcloud_track_id);

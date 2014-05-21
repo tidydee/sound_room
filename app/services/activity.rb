@@ -15,13 +15,9 @@ class Activity
     @display_name = options["displayName"]
     @image = options['image'];
     
-    if( options['get_gravatar'] &&
-        options['email'] )
-         
+    if( options['get_gravatar'] && options['email'] )     
       @image["url"] = get_gravatar(options['email'])
-      
     end
-    
   end
   
   def getMessage() 
@@ -86,5 +82,4 @@ class Activity
   	
   	return url
   end
-  
 end

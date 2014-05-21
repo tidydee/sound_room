@@ -34,6 +34,8 @@ gem 'omniauth'
 gem 'omniauth-soundcloud', '~> 1.0.0'
 gem 'soundcloud'
 
+gem 'dotenv'
+
 gem "js-routes"
 
 # Use ActiveModel has_secure_password
@@ -46,7 +48,7 @@ gem 'foundation-rails'
 gem 'pusher'
 gem 'uuid', '~> 2.3.7'
 gem "font-awesome-rails"
-gem 'raptorize-rails' 
+gem 'raptorize-rails'
 
 gem 'rails_12factor', group: :production
 gem 'pg', group: :production
