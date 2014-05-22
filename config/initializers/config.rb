@@ -1,5 +1,5 @@
 require 'pusher'
 
-Pusher.app_id = '72660'
-Pusher.key = '55b13e9beb0afef1e1cf'
-Pusher.secret = '9c2031ad075061c40094'
+Pusher.app_id = ENV['PUSHER_APP_ID']
+Pusher.key = ENV['PUSHER_KEY']
+Pusher.secret = ENV['PUSHER_SECRET']
