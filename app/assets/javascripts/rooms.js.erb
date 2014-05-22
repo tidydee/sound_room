@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	if ($("#current_room")[0]) {
 		// alert('Got Here!');
-		window.playlist = []
+		window.playlist = [];
 		// console.log("wind PLaylist []: ",playlist );
 
 		// window.test = "<%= ENV['SOUNDCLOUD_CLIENT_ID'] %>"
@@ -166,11 +166,12 @@ $(document).ready(function() {
 				});
 			};
 
+
 			getUserFavoriteTracks();
 
 					$(function() {     
 						// console.log('hey');
-						var pusher = new Pusher('55b13e9beb0afef1e1cf');
+						var pusher = new Pusher( "<%= ENV['PUSHER_KEY'] %>" );
 						var chatWidget = new PusherChatWidget(pusher, {
 							appendTo: '#pusher_chat_widget'
 						});
