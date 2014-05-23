@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// $body-bg: url('soundRoom2_large.png');
 $body-bg: asset-url('curo4.png');
 
 * {
@@ -24,7 +23,7 @@ html {
 body { 
   margin:0;
   // background-image: linear-gradient(to left, #ff5f37 0%, #B2E7ED 100%);
-  background-image: $body-bg;
+  /*background-image: $body-bg;*/
   // -webkit-background-size: cover;
   // -moz-background-size: cover;
   // -o-background-size: cover;
