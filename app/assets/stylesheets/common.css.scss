@@ -1,0 +1,56 @@
+@import url(http://fonts.googleapis.com/css?family=Francois+One|Pacifico);
+
+ .flash-message{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  margin-top: 10px;
+  color: orange; 
+ }
+
+body{
+  background-image: image-url('curo4.png');
+}
+
+ #public-rooms {
+ 
+  background-color: rgba(245, 245, 245, 0.6);
+  border-radius: 30px;
+  padding: 2% 3% 2% 4%;
+  margin-bottom: 2%;
+  top: 20;
+  float: right;
+}
+
+.public-rooms a {
+  font-weight: 300;
+  font-size: 1.4em;
+}
+
+.public-rooms h3 {
+  font-weight: 300;
+  font-family: 'Francois One', sans-serif;
+}
+
+@media screen and (min-width: 400px) and (max-width: 1025px){
+
+  #public-rooms {
+    width: 100%;
+  }
+
+}
+
+.dashboard-icon {
+  font-size: 2em;
+}
+/*=========== TOP HEADER ============*/
+
+div.header {
+  margin-left: 2%;
+}
+
+div.header h1 {
+  font-size: 4em;
+  font-family: 'Francois One', sans-serif;
+  color: rgb(84, 84, 84);
+}
+

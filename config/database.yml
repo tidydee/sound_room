@@ -27,5 +27,7 @@ test:
 #   sqlite3://myuser:mypass@localhost/full/path/to/somedatabase
 #
 production:
-  url: <%= ENV["DATABASE_URL"] %>
-  adapter: postgresql
+  <<: *default
+  # url: <%= ENV["DATABASE_URL"] %>
+  # adapter: postgresql
+  database: db/development.sqlite3
