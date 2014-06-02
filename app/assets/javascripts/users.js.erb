@@ -5,7 +5,7 @@ $(document).ready(function() {
     console.log("wind PLaylist BEFORE PUSH[]: ",playlist );
   
     SC.initialize({
-      client_id: "d8eeb9848b095ce9d0e77eeb9d6f360a"
+      client_id: "<%= ENV['SOUNDCLOUD_CLIENT_ID'] %>"
     });
   
     function getUserFavoriteTracks() {
